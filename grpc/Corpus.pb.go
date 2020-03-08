@@ -24,94 +24,119 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type EngineType int32
+type LoginType int32
 
 const (
-	EngineType_enginetype EngineType = 0
-	EngineType_chivox     EngineType = 1
-	EngineType_shengtong  EngineType = 2
-	EngineType_unisound   EngineType = 3
+	LoginType_login_type LoginType = 0
+	LoginType_e_mail     LoginType = 1
+	LoginType_code       LoginType = 2
 )
 
-var EngineType_name = map[int32]string{
-	0: "enginetype",
-	1: "chivox",
-	2: "shengtong",
-	3: "unisound",
+var LoginType_name = map[int32]string{
+	0: "login_type",
+	1: "e_mail",
+	2: "code",
 }
 
-var EngineType_value = map[string]int32{
-	"enginetype": 0,
-	"chivox":     1,
-	"shengtong":  2,
-	"unisound":   3,
+var LoginType_value = map[string]int32{
+	"login_type": 0,
+	"e_mail":     1,
+	"code":       2,
 }
 
-func (x EngineType) String() string {
-	return proto.EnumName(EngineType_name, int32(x))
+func (x LoginType) String() string {
+	return proto.EnumName(LoginType_name, int32(x))
 }
 
-func (EngineType) EnumDescriptor() ([]byte, []int) {
+func (LoginType) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{0}
 }
 
-type EvaluateType int32
+type UserType int32
 
 const (
-	EvaluateType_evaluatetype EvaluateType = 0
-	EvaluateType_word         EvaluateType = 1
-	EvaluateType_sentence     EvaluateType = 2
-	EvaluateType_paragraph    EvaluateType = 3
+	UserType_user_type UserType = 0
+	UserType_normal    UserType = 1
+	UserType_vip       UserType = 2
 )
 
-var EvaluateType_name = map[int32]string{
-	0: "evaluatetype",
-	1: "word",
-	2: "sentence",
-	3: "paragraph",
+var UserType_name = map[int32]string{
+	0: "user_type",
+	1: "normal",
+	2: "vip",
 }
 
-var EvaluateType_value = map[string]int32{
-	"evaluatetype": 0,
-	"word":         1,
-	"sentence":     2,
-	"paragraph":    3,
+var UserType_value = map[string]int32{
+	"user_type": 0,
+	"normal":    1,
+	"vip":       2,
 }
 
-func (x EvaluateType) String() string {
-	return proto.EnumName(EvaluateType_name, int32(x))
+func (x UserType) String() string {
+	return proto.EnumName(UserType_name, int32(x))
 }
 
-func (EvaluateType) EnumDescriptor() ([]byte, []int) {
+func (UserType) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{1}
 }
 
-type CorpusType int32
+type AudioType int32
 
 const (
-	CorpusType_corpustype CorpusType = 0
-	CorpusType_interface  CorpusType = 1
-	CorpusType_human      CorpusType = 2
+	AudioType_audio_type AudioType = 0
+	AudioType_Mp3        AudioType = 1
+	AudioType_ACC        AudioType = 2
+	AudioType_WAV        AudioType = 3
 )
 
-var CorpusType_name = map[int32]string{
-	0: "corpustype",
-	1: "interface",
-	2: "human",
+var AudioType_name = map[int32]string{
+	0: "audio_type",
+	1: "Mp3",
+	2: "ACC",
+	3: "WAV",
 }
 
-var CorpusType_value = map[string]int32{
-	"corpustype": 0,
-	"interface":  1,
-	"human":      2,
+var AudioType_value = map[string]int32{
+	"audio_type": 0,
+	"Mp3":        1,
+	"ACC":        2,
+	"WAV":        3,
 }
 
-func (x CorpusType) String() string {
-	return proto.EnumName(CorpusType_name, int32(x))
+func (x AudioType) String() string {
+	return proto.EnumName(AudioType_name, int32(x))
 }
 
-func (CorpusType) EnumDescriptor() ([]byte, []int) {
+func (AudioType) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{2}
+}
+
+type AgeType int32
+
+const (
+	AgeType_middle AgeType = 0
+	AgeType_child  AgeType = 2
+	AgeType_old    AgeType = 3
+)
+
+var AgeType_name = map[int32]string{
+	0: "middle",
+	2: "child",
+	3: "old",
+}
+
+var AgeType_value = map[string]int32{
+	"middle": 0,
+	"child":  2,
+	"old":    3,
+}
+
+func (x AgeType) String() string {
+	return proto.EnumName(AgeType_name, int32(x))
+}
+
+func (AgeType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{3}
 }
 
 type ErrorInfo struct {
@@ -161,4285 +186,2000 @@ func (m *ErrorInfo) GetMsg() string {
 	return ""
 }
 
-type Corpus struct {
-	CorpusId             int64        `protobuf:"zigzag64,1,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	CorpusText           string       `protobuf:"bytes,2,opt,name=corpus_text,json=corpusText,proto3" json:"corpus_text,omitempty"`
-	AudioUrl             string       `protobuf:"bytes,3,opt,name=audio_url,json=audioUrl,proto3" json:"audio_url,omitempty"`
-	EngineType           EngineType   `protobuf:"varint,4,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	EvaluateType         EvaluateType `protobuf:"varint,5,opt,name=evaluate_type,json=evaluateType,proto3,enum=corpus.EvaluateType" json:"evaluate_type,omitempty"`
-	CorpusScore          int32        `protobuf:"varint,6,opt,name=corpus_score,json=corpusScore,proto3" json:"corpus_score,omitempty"`
-	Ct                   int64        `protobuf:"zigzag64,7,opt,name=ct,proto3" json:"ct,omitempty"`
-	CorpusType           CorpusType   `protobuf:"varint,8,opt,name=corpus_type,json=corpusType,proto3,enum=corpus.CorpusType" json:"corpus_type,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `json:"-"`
-	XXX_sizecache        int32        `json:"-"`
+type UserInfo struct {
+	UserId               int64    `protobuf:"zigzag64,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	Phone                string   `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	EMail                string   `protobuf:"bytes,4,opt,name=e_mail,json=eMail,proto3" json:"e_mail,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Corpus) Reset()         { *m = Corpus{} }
-func (m *Corpus) String() string { return proto.CompactTextString(m) }
-func (*Corpus) ProtoMessage()    {}
-func (*Corpus) Descriptor() ([]byte, []int) {
+func (m *UserInfo) Reset()         { *m = UserInfo{} }
+func (m *UserInfo) String() string { return proto.CompactTextString(m) }
+func (*UserInfo) ProtoMessage()    {}
+func (*UserInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{1}
 }
 
-func (m *Corpus) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Corpus.Unmarshal(m, b)
+func (m *UserInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UserInfo.Unmarshal(m, b)
 }
-func (m *Corpus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Corpus.Marshal(b, m, deterministic)
+func (m *UserInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UserInfo.Marshal(b, m, deterministic)
 }
-func (m *Corpus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Corpus.Merge(m, src)
+func (m *UserInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserInfo.Merge(m, src)
 }
-func (m *Corpus) XXX_Size() int {
-	return xxx_messageInfo_Corpus.Size(m)
+func (m *UserInfo) XXX_Size() int {
+	return xxx_messageInfo_UserInfo.Size(m)
 }
-func (m *Corpus) XXX_DiscardUnknown() {
-	xxx_messageInfo_Corpus.DiscardUnknown(m)
+func (m *UserInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_UserInfo.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Corpus proto.InternalMessageInfo
+var xxx_messageInfo_UserInfo proto.InternalMessageInfo
 
-func (m *Corpus) GetCorpusId() int64 {
+func (m *UserInfo) GetUserId() int64 {
 	if m != nil {
-		return m.CorpusId
+		return m.UserId
 	}
 	return 0
 }
 
-func (m *Corpus) GetCorpusText() string {
+func (m *UserInfo) GetUserName() string {
 	if m != nil {
-		return m.CorpusText
+		return m.UserName
 	}
 	return ""
 }
 
-func (m *Corpus) GetAudioUrl() string {
+func (m *UserInfo) GetPhone() string {
 	if m != nil {
-		return m.AudioUrl
+		return m.Phone
 	}
 	return ""
 }
 
-func (m *Corpus) GetEngineType() EngineType {
+func (m *UserInfo) GetEMail() string {
 	if m != nil {
-		return m.EngineType
+		return m.EMail
 	}
-	return EngineType_enginetype
+	return ""
 }
 
-func (m *Corpus) GetEvaluateType() EvaluateType {
-	if m != nil {
-		return m.EvaluateType
-	}
-	return EvaluateType_evaluatetype
-}
-
-func (m *Corpus) GetCorpusScore() int32 {
-	if m != nil {
-		return m.CorpusScore
-	}
-	return 0
-}
-
-func (m *Corpus) GetCt() int64 {
-	if m != nil {
-		return m.Ct
-	}
-	return 0
-}
-
-func (m *Corpus) GetCorpusType() CorpusType {
-	if m != nil {
-		return m.CorpusType
-	}
-	return CorpusType_corpustype
-}
-
-type ReviseCorpus struct {
-	ReviseCorpusId       int64    `protobuf:"zigzag64,1,opt,name=revise_corpus_id,json=reviseCorpusId,proto3" json:"revise_corpus_id,omitempty"`
-	CorpusId             int64    `protobuf:"zigzag64,2,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	ReviseScore          int64    `protobuf:"zigzag64,3,opt,name=revise_score,json=reviseScore,proto3" json:"revise_score,omitempty"`
-	ReviseOperator       string   `protobuf:"bytes,4,opt,name=revise_operator,json=reviseOperator,proto3" json:"revise_operator,omitempty"`
-	Ct                   int64    `protobuf:"zigzag64,5,opt,name=ct,proto3" json:"ct,omitempty"`
+type LoginUserReq struct {
+	EMail                string   `protobuf:"bytes,1,opt,name=e_mail,json=eMail,proto3" json:"e_mail,omitempty"`
+	UserPassword         string   `protobuf:"bytes,2,opt,name=user_password,json=userPassword,proto3" json:"user_password,omitempty"`
+	Phone                string   `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	Code                 int64    `protobuf:"zigzag64,4,opt,name=code,proto3" json:"code,omitempty"`
+	Cookie               string   `protobuf:"bytes,5,opt,name=cookie,proto3" json:"cookie,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ReviseCorpus) Reset()         { *m = ReviseCorpus{} }
-func (m *ReviseCorpus) String() string { return proto.CompactTextString(m) }
-func (*ReviseCorpus) ProtoMessage()    {}
-func (*ReviseCorpus) Descriptor() ([]byte, []int) {
+func (m *LoginUserReq) Reset()         { *m = LoginUserReq{} }
+func (m *LoginUserReq) String() string { return proto.CompactTextString(m) }
+func (*LoginUserReq) ProtoMessage()    {}
+func (*LoginUserReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{2}
 }
 
-func (m *ReviseCorpus) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ReviseCorpus.Unmarshal(m, b)
+func (m *LoginUserReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LoginUserReq.Unmarshal(m, b)
 }
-func (m *ReviseCorpus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ReviseCorpus.Marshal(b, m, deterministic)
+func (m *LoginUserReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LoginUserReq.Marshal(b, m, deterministic)
 }
-func (m *ReviseCorpus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ReviseCorpus.Merge(m, src)
+func (m *LoginUserReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LoginUserReq.Merge(m, src)
 }
-func (m *ReviseCorpus) XXX_Size() int {
-	return xxx_messageInfo_ReviseCorpus.Size(m)
+func (m *LoginUserReq) XXX_Size() int {
+	return xxx_messageInfo_LoginUserReq.Size(m)
 }
-func (m *ReviseCorpus) XXX_DiscardUnknown() {
-	xxx_messageInfo_ReviseCorpus.DiscardUnknown(m)
+func (m *LoginUserReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_LoginUserReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ReviseCorpus proto.InternalMessageInfo
+var xxx_messageInfo_LoginUserReq proto.InternalMessageInfo
 
-func (m *ReviseCorpus) GetReviseCorpusId() int64 {
+func (m *LoginUserReq) GetEMail() string {
 	if m != nil {
-		return m.ReviseCorpusId
-	}
-	return 0
-}
-
-func (m *ReviseCorpus) GetCorpusId() int64 {
-	if m != nil {
-		return m.CorpusId
-	}
-	return 0
-}
-
-func (m *ReviseCorpus) GetReviseScore() int64 {
-	if m != nil {
-		return m.ReviseScore
-	}
-	return 0
-}
-
-func (m *ReviseCorpus) GetReviseOperator() string {
-	if m != nil {
-		return m.ReviseOperator
+		return m.EMail
 	}
 	return ""
 }
 
-func (m *ReviseCorpus) GetCt() int64 {
+func (m *LoginUserReq) GetUserPassword() string {
 	if m != nil {
-		return m.Ct
+		return m.UserPassword
+	}
+	return ""
+}
+
+func (m *LoginUserReq) GetPhone() string {
+	if m != nil {
+		return m.Phone
+	}
+	return ""
+}
+
+func (m *LoginUserReq) GetCode() int64 {
+	if m != nil {
+		return m.Code
 	}
 	return 0
 }
 
-//打分服务添加语音记录
-type AddCorpusReq struct {
-	CorpusText           string       `protobuf:"bytes,1,opt,name=corpus_text,json=corpusText,proto3" json:"corpus_text,omitempty"`
-	AudioUrl             string       `protobuf:"bytes,2,opt,name=audio_url,json=audioUrl,proto3" json:"audio_url,omitempty"`
-	EngineType           EngineType   `protobuf:"varint,3,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	EvaluateType         EvaluateType `protobuf:"varint,4,opt,name=evaluate_type,json=evaluateType,proto3,enum=corpus.EvaluateType" json:"evaluate_type,omitempty"`
-	CorpusScore          int32        `protobuf:"varint,5,opt,name=corpus_score,json=corpusScore,proto3" json:"corpus_score,omitempty"`
-	Ct                   int64        `protobuf:"zigzag64,6,opt,name=ct,proto3" json:"ct,omitempty"`
-	OpUserName           string       `protobuf:"bytes,7,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	CorpusOriginalData   string       `protobuf:"bytes,8,opt,name=corpus_original_data,json=corpusOriginalData,proto3" json:"corpus_original_data,omitempty"`
-	CorpusTransData      string       `protobuf:"bytes,9,opt,name=corpus_trans_data,json=corpusTransData,proto3" json:"corpus_trans_data,omitempty"`
-	CorpusType           CorpusType   `protobuf:"varint,10,opt,name=corpus_type,json=corpusType,proto3,enum=corpus.CorpusType" json:"corpus_type,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `json:"-"`
-	XXX_sizecache        int32        `json:"-"`
+func (m *LoginUserReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
 }
 
-func (m *AddCorpusReq) Reset()         { *m = AddCorpusReq{} }
-func (m *AddCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusReq) ProtoMessage()    {}
-func (*AddCorpusReq) Descriptor() ([]byte, []int) {
+type LoginUserData struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *LoginUserData) Reset()         { *m = LoginUserData{} }
+func (m *LoginUserData) String() string { return proto.CompactTextString(m) }
+func (*LoginUserData) ProtoMessage()    {}
+func (*LoginUserData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{3}
 }
 
-func (m *AddCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusReq.Unmarshal(m, b)
+func (m *LoginUserData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LoginUserData.Unmarshal(m, b)
 }
-func (m *AddCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusReq.Marshal(b, m, deterministic)
+func (m *LoginUserData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LoginUserData.Marshal(b, m, deterministic)
 }
-func (m *AddCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusReq.Merge(m, src)
+func (m *LoginUserData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LoginUserData.Merge(m, src)
 }
-func (m *AddCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusReq.Size(m)
+func (m *LoginUserData) XXX_Size() int {
+	return xxx_messageInfo_LoginUserData.Size(m)
 }
-func (m *AddCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCorpusReq proto.InternalMessageInfo
-
-func (m *AddCorpusReq) GetCorpusText() string {
-	if m != nil {
-		return m.CorpusText
-	}
-	return ""
+func (m *LoginUserData) XXX_DiscardUnknown() {
+	xxx_messageInfo_LoginUserData.DiscardUnknown(m)
 }
 
-func (m *AddCorpusReq) GetAudioUrl() string {
-	if m != nil {
-		return m.AudioUrl
-	}
-	return ""
+var xxx_messageInfo_LoginUserData proto.InternalMessageInfo
+
+type LoginUserRes struct {
+	Errinfo              *ErrorInfo     `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *LoginUserData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *AddCorpusReq) GetEngineType() EngineType {
-	if m != nil {
-		return m.EngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *AddCorpusReq) GetEvaluateType() EvaluateType {
-	if m != nil {
-		return m.EvaluateType
-	}
-	return EvaluateType_evaluatetype
-}
-
-func (m *AddCorpusReq) GetCorpusScore() int32 {
-	if m != nil {
-		return m.CorpusScore
-	}
-	return 0
-}
-
-func (m *AddCorpusReq) GetCt() int64 {
-	if m != nil {
-		return m.Ct
-	}
-	return 0
-}
-
-func (m *AddCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-func (m *AddCorpusReq) GetCorpusOriginalData() string {
-	if m != nil {
-		return m.CorpusOriginalData
-	}
-	return ""
-}
-
-func (m *AddCorpusReq) GetCorpusTransData() string {
-	if m != nil {
-		return m.CorpusTransData
-	}
-	return ""
-}
-
-func (m *AddCorpusReq) GetCorpusType() CorpusType {
-	if m != nil {
-		return m.CorpusType
-	}
-	return CorpusType_corpustype
-}
-
-type AddCorpusData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddCorpusData) Reset()         { *m = AddCorpusData{} }
-func (m *AddCorpusData) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusData) ProtoMessage()    {}
-func (*AddCorpusData) Descriptor() ([]byte, []int) {
+func (m *LoginUserRes) Reset()         { *m = LoginUserRes{} }
+func (m *LoginUserRes) String() string { return proto.CompactTextString(m) }
+func (*LoginUserRes) ProtoMessage()    {}
+func (*LoginUserRes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{4}
 }
 
-func (m *AddCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusData.Unmarshal(m, b)
+func (m *LoginUserRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LoginUserRes.Unmarshal(m, b)
 }
-func (m *AddCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusData.Marshal(b, m, deterministic)
+func (m *LoginUserRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LoginUserRes.Marshal(b, m, deterministic)
 }
-func (m *AddCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusData.Merge(m, src)
+func (m *LoginUserRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LoginUserRes.Merge(m, src)
 }
-func (m *AddCorpusData) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusData.Size(m)
+func (m *LoginUserRes) XXX_Size() int {
+	return xxx_messageInfo_LoginUserRes.Size(m)
 }
-func (m *AddCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusData.DiscardUnknown(m)
+func (m *LoginUserRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_LoginUserRes.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_AddCorpusData proto.InternalMessageInfo
+var xxx_messageInfo_LoginUserRes proto.InternalMessageInfo
 
-func (m *AddCorpusData) GetIsSuccess() bool {
+func (m *LoginUserRes) GetErrinfo() *ErrorInfo {
 	if m != nil {
-		return m.IsSuccess
+		return m.Errinfo
 	}
-	return false
+	return nil
 }
 
-type AddCorpusRes struct {
-	Errinfo              *ErrorInfo     `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
+func (m *LoginUserRes) GetData() *LoginUserData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
 }
 
-func (m *AddCorpusRes) Reset()         { *m = AddCorpusRes{} }
-func (m *AddCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusRes) ProtoMessage()    {}
-func (*AddCorpusRes) Descriptor() ([]byte, []int) {
+type UpdateUserInfoReq struct {
+	UserId               int64    `protobuf:"zigzag64,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	Phone                string   `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	EMail                string   `protobuf:"bytes,4,opt,name=e_mail,json=eMail,proto3" json:"e_mail,omitempty"`
+	Description          string   `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Cookie               string   `protobuf:"bytes,6,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateUserInfoReq) Reset()         { *m = UpdateUserInfoReq{} }
+func (m *UpdateUserInfoReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateUserInfoReq) ProtoMessage()    {}
+func (*UpdateUserInfoReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{5}
 }
 
-func (m *AddCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusRes.Unmarshal(m, b)
+func (m *UpdateUserInfoReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateUserInfoReq.Unmarshal(m, b)
 }
-func (m *AddCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusRes.Marshal(b, m, deterministic)
+func (m *UpdateUserInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateUserInfoReq.Marshal(b, m, deterministic)
 }
-func (m *AddCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusRes.Merge(m, src)
+func (m *UpdateUserInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateUserInfoReq.Merge(m, src)
 }
-func (m *AddCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusRes.Size(m)
+func (m *UpdateUserInfoReq) XXX_Size() int {
+	return xxx_messageInfo_UpdateUserInfoReq.Size(m)
 }
-func (m *AddCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusRes.DiscardUnknown(m)
+func (m *UpdateUserInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateUserInfoReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_AddCorpusRes proto.InternalMessageInfo
+var xxx_messageInfo_UpdateUserInfoReq proto.InternalMessageInfo
 
-func (m *AddCorpusRes) GetErrinfo() *ErrorInfo {
+func (m *UpdateUserInfoReq) GetUserId() int64 {
 	if m != nil {
-		return m.Errinfo
+		return m.UserId
 	}
-	return nil
+	return 0
 }
 
-func (m *AddCorpusRes) GetData() *AddCorpusData {
+func (m *UpdateUserInfoReq) GetUserName() string {
 	if m != nil {
-		return m.Data
+		return m.UserName
 	}
-	return nil
+	return ""
 }
 
-//删除该条记录
-type DelCorpusReq struct {
-	CorpusId             int64    `protobuf:"zigzag64,1,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,2,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
+func (m *UpdateUserInfoReq) GetPhone() string {
+	if m != nil {
+		return m.Phone
+	}
+	return ""
+}
+
+func (m *UpdateUserInfoReq) GetEMail() string {
+	if m != nil {
+		return m.EMail
+	}
+	return ""
+}
+
+func (m *UpdateUserInfoReq) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *UpdateUserInfoReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type UpdateUserInfoData struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *DelCorpusReq) Reset()         { *m = DelCorpusReq{} }
-func (m *DelCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusReq) ProtoMessage()    {}
-func (*DelCorpusReq) Descriptor() ([]byte, []int) {
+func (m *UpdateUserInfoData) Reset()         { *m = UpdateUserInfoData{} }
+func (m *UpdateUserInfoData) String() string { return proto.CompactTextString(m) }
+func (*UpdateUserInfoData) ProtoMessage()    {}
+func (*UpdateUserInfoData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{6}
 }
 
-func (m *DelCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusReq.Unmarshal(m, b)
+func (m *UpdateUserInfoData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateUserInfoData.Unmarshal(m, b)
 }
-func (m *DelCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusReq.Marshal(b, m, deterministic)
+func (m *UpdateUserInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateUserInfoData.Marshal(b, m, deterministic)
 }
-func (m *DelCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusReq.Merge(m, src)
+func (m *UpdateUserInfoData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateUserInfoData.Merge(m, src)
 }
-func (m *DelCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusReq.Size(m)
+func (m *UpdateUserInfoData) XXX_Size() int {
+	return xxx_messageInfo_UpdateUserInfoData.Size(m)
 }
-func (m *DelCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCorpusReq proto.InternalMessageInfo
-
-func (m *DelCorpusReq) GetCorpusId() int64 {
-	if m != nil {
-		return m.CorpusId
-	}
-	return 0
+func (m *UpdateUserInfoData) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateUserInfoData.DiscardUnknown(m)
 }
 
-func (m *DelCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
+var xxx_messageInfo_UpdateUserInfoData proto.InternalMessageInfo
+
+type UpdateUserInfoRes struct {
+	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *UpdateUserInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
 }
 
-type DelCorpusData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelCorpusData) Reset()         { *m = DelCorpusData{} }
-func (m *DelCorpusData) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusData) ProtoMessage()    {}
-func (*DelCorpusData) Descriptor() ([]byte, []int) {
+func (m *UpdateUserInfoRes) Reset()         { *m = UpdateUserInfoRes{} }
+func (m *UpdateUserInfoRes) String() string { return proto.CompactTextString(m) }
+func (*UpdateUserInfoRes) ProtoMessage()    {}
+func (*UpdateUserInfoRes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{7}
 }
 
-func (m *DelCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusData.Unmarshal(m, b)
+func (m *UpdateUserInfoRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateUserInfoRes.Unmarshal(m, b)
 }
-func (m *DelCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusData.Marshal(b, m, deterministic)
+func (m *UpdateUserInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateUserInfoRes.Marshal(b, m, deterministic)
 }
-func (m *DelCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusData.Merge(m, src)
+func (m *UpdateUserInfoRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateUserInfoRes.Merge(m, src)
 }
-func (m *DelCorpusData) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusData.Size(m)
+func (m *UpdateUserInfoRes) XXX_Size() int {
+	return xxx_messageInfo_UpdateUserInfoRes.Size(m)
 }
-func (m *DelCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusData.DiscardUnknown(m)
+func (m *UpdateUserInfoRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateUserInfoRes.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DelCorpusData proto.InternalMessageInfo
+var xxx_messageInfo_UpdateUserInfoRes proto.InternalMessageInfo
 
-func (m *DelCorpusData) GetIsSuccess() bool {
+func (m *UpdateUserInfoRes) GetErrinfo() *ErrorInfo {
 	if m != nil {
-		return m.IsSuccess
+		return m.Errinfo
 	}
-	return false
+	return nil
 }
 
-type DelCorpusRes struct {
-	Errinfo              *ErrorInfo     `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
+func (m *UpdateUserInfoRes) GetData() *UpdateUserInfoData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
 }
 
-func (m *DelCorpusRes) Reset()         { *m = DelCorpusRes{} }
-func (m *DelCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusRes) ProtoMessage()    {}
-func (*DelCorpusRes) Descriptor() ([]byte, []int) {
+type DelUserInfoReq struct {
+	UserId               int64    `protobuf:"zigzag64,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DelUserInfoReq) Reset()         { *m = DelUserInfoReq{} }
+func (m *DelUserInfoReq) String() string { return proto.CompactTextString(m) }
+func (*DelUserInfoReq) ProtoMessage()    {}
+func (*DelUserInfoReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{8}
 }
 
-func (m *DelCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusRes.Unmarshal(m, b)
+func (m *DelUserInfoReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelUserInfoReq.Unmarshal(m, b)
 }
-func (m *DelCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusRes.Marshal(b, m, deterministic)
+func (m *DelUserInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelUserInfoReq.Marshal(b, m, deterministic)
 }
-func (m *DelCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusRes.Merge(m, src)
+func (m *DelUserInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelUserInfoReq.Merge(m, src)
 }
-func (m *DelCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusRes.Size(m)
+func (m *DelUserInfoReq) XXX_Size() int {
+	return xxx_messageInfo_DelUserInfoReq.Size(m)
 }
-func (m *DelCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusRes.DiscardUnknown(m)
+func (m *DelUserInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelUserInfoReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DelCorpusRes proto.InternalMessageInfo
+var xxx_messageInfo_DelUserInfoReq proto.InternalMessageInfo
 
-func (m *DelCorpusRes) GetErrinfo() *ErrorInfo {
+func (m *DelUserInfoReq) GetUserId() int64 {
 	if m != nil {
-		return m.Errinfo
+		return m.UserId
 	}
-	return nil
+	return 0
 }
 
-func (m *DelCorpusRes) GetData() *DelCorpusData {
+func (m *DelUserInfoReq) GetCookie() string {
 	if m != nil {
-		return m.Data
+		return m.Cookie
 	}
-	return nil
+	return ""
 }
 
-//查询列表
-type ListCorpusReq struct {
-	Offset               int64        `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64        `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	EvaluateType         EvaluateType `protobuf:"varint,3,opt,name=evaluate_type,json=evaluateType,proto3,enum=corpus.EvaluateType" json:"evaluate_type,omitempty"`
-	EngineType           EngineType   `protobuf:"varint,4,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	ScoreStart           int64        `protobuf:"zigzag64,5,opt,name=score_start,json=scoreStart,proto3" json:"score_start,omitempty"`
-	ScoreEnd             int64        `protobuf:"zigzag64,6,opt,name=score_end,json=scoreEnd,proto3" json:"score_end,omitempty"`
-	CorpusText           string       `protobuf:"bytes,7,opt,name=corpus_text,json=corpusText,proto3" json:"corpus_text,omitempty"`
-	CorpusId             int64        `protobuf:"zigzag64,8,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	OpUserName           string       `protobuf:"bytes,9,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	CorpusType           CorpusType   `protobuf:"varint,10,opt,name=corpus_type,json=corpusType,proto3,enum=corpus.CorpusType" json:"corpus_type,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `json:"-"`
-	XXX_sizecache        int32        `json:"-"`
+type DelUserInfoData struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ListCorpusReq) Reset()         { *m = ListCorpusReq{} }
-func (m *ListCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusReq) ProtoMessage()    {}
-func (*ListCorpusReq) Descriptor() ([]byte, []int) {
+func (m *DelUserInfoData) Reset()         { *m = DelUserInfoData{} }
+func (m *DelUserInfoData) String() string { return proto.CompactTextString(m) }
+func (*DelUserInfoData) ProtoMessage()    {}
+func (*DelUserInfoData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{9}
 }
 
-func (m *ListCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusReq.Unmarshal(m, b)
+func (m *DelUserInfoData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelUserInfoData.Unmarshal(m, b)
 }
-func (m *ListCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusReq.Marshal(b, m, deterministic)
+func (m *DelUserInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelUserInfoData.Marshal(b, m, deterministic)
 }
-func (m *ListCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusReq.Merge(m, src)
+func (m *DelUserInfoData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelUserInfoData.Merge(m, src)
 }
-func (m *ListCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusReq.Size(m)
+func (m *DelUserInfoData) XXX_Size() int {
+	return xxx_messageInfo_DelUserInfoData.Size(m)
 }
-func (m *ListCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListCorpusReq proto.InternalMessageInfo
-
-func (m *ListCorpusReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
+func (m *DelUserInfoData) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelUserInfoData.DiscardUnknown(m)
 }
 
-func (m *ListCorpusReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
+var xxx_messageInfo_DelUserInfoData proto.InternalMessageInfo
+
+type DelUserInfoRes struct {
+	Errinfo              *ErrorInfo       `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *DelUserInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
-func (m *ListCorpusReq) GetEvaluateType() EvaluateType {
-	if m != nil {
-		return m.EvaluateType
-	}
-	return EvaluateType_evaluatetype
-}
-
-func (m *ListCorpusReq) GetEngineType() EngineType {
-	if m != nil {
-		return m.EngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *ListCorpusReq) GetScoreStart() int64 {
-	if m != nil {
-		return m.ScoreStart
-	}
-	return 0
-}
-
-func (m *ListCorpusReq) GetScoreEnd() int64 {
-	if m != nil {
-		return m.ScoreEnd
-	}
-	return 0
-}
-
-func (m *ListCorpusReq) GetCorpusText() string {
-	if m != nil {
-		return m.CorpusText
-	}
-	return ""
-}
-
-func (m *ListCorpusReq) GetCorpusId() int64 {
-	if m != nil {
-		return m.CorpusId
-	}
-	return 0
-}
-
-func (m *ListCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-func (m *ListCorpusReq) GetCorpusType() CorpusType {
-	if m != nil {
-		return m.CorpusType
-	}
-	return CorpusType_corpustype
-}
-
-type ListCorpusData struct {
-	Items                []*Corpus `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64     `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64     `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool      `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
-}
-
-func (m *ListCorpusData) Reset()         { *m = ListCorpusData{} }
-func (m *ListCorpusData) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusData) ProtoMessage()    {}
-func (*ListCorpusData) Descriptor() ([]byte, []int) {
+func (m *DelUserInfoRes) Reset()         { *m = DelUserInfoRes{} }
+func (m *DelUserInfoRes) String() string { return proto.CompactTextString(m) }
+func (*DelUserInfoRes) ProtoMessage()    {}
+func (*DelUserInfoRes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{10}
 }
 
-func (m *ListCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusData.Unmarshal(m, b)
+func (m *DelUserInfoRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelUserInfoRes.Unmarshal(m, b)
 }
-func (m *ListCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusData.Marshal(b, m, deterministic)
+func (m *DelUserInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelUserInfoRes.Marshal(b, m, deterministic)
 }
-func (m *ListCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusData.Merge(m, src)
+func (m *DelUserInfoRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelUserInfoRes.Merge(m, src)
 }
-func (m *ListCorpusData) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusData.Size(m)
+func (m *DelUserInfoRes) XXX_Size() int {
+	return xxx_messageInfo_DelUserInfoRes.Size(m)
 }
-func (m *ListCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusData.DiscardUnknown(m)
+func (m *DelUserInfoRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelUserInfoRes.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListCorpusData proto.InternalMessageInfo
+var xxx_messageInfo_DelUserInfoRes proto.InternalMessageInfo
 
-func (m *ListCorpusData) GetItems() []*Corpus {
+func (m *DelUserInfoRes) GetErrinfo() *ErrorInfo {
 	if m != nil {
-		return m.Items
+		return m.Errinfo
 	}
 	return nil
 }
 
-func (m *ListCorpusData) GetTotal() int64 {
+func (m *DelUserInfoRes) GetData() *DelUserInfoData {
 	if m != nil {
-		return m.Total
+		return m.Data
 	}
-	return 0
+	return nil
 }
 
-func (m *ListCorpusData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
+type ListUserInfoReq struct {
+	Offset               int64    `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	EMail                string   `protobuf:"bytes,3,opt,name=e_mail,json=eMail,proto3" json:"e_mail,omitempty"`
+	UserName             string   `protobuf:"bytes,4,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	Phone                string   `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Cookie               string   `protobuf:"bytes,6,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ListCorpusData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListCorpusRes struct {
-	Errinfo              *ErrorInfo      `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListCorpusRes) Reset()         { *m = ListCorpusRes{} }
-func (m *ListCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusRes) ProtoMessage()    {}
-func (*ListCorpusRes) Descriptor() ([]byte, []int) {
+func (m *ListUserInfoReq) Reset()         { *m = ListUserInfoReq{} }
+func (m *ListUserInfoReq) String() string { return proto.CompactTextString(m) }
+func (*ListUserInfoReq) ProtoMessage()    {}
+func (*ListUserInfoReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{11}
 }
 
-func (m *ListCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusRes.Unmarshal(m, b)
+func (m *ListUserInfoReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListUserInfoReq.Unmarshal(m, b)
 }
-func (m *ListCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusRes.Marshal(b, m, deterministic)
+func (m *ListUserInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListUserInfoReq.Marshal(b, m, deterministic)
 }
-func (m *ListCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusRes.Merge(m, src)
+func (m *ListUserInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListUserInfoReq.Merge(m, src)
 }
-func (m *ListCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusRes.Size(m)
+func (m *ListUserInfoReq) XXX_Size() int {
+	return xxx_messageInfo_ListUserInfoReq.Size(m)
 }
-func (m *ListCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusRes.DiscardUnknown(m)
+func (m *ListUserInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListUserInfoReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListCorpusRes proto.InternalMessageInfo
+var xxx_messageInfo_ListUserInfoReq proto.InternalMessageInfo
 
-func (m *ListCorpusRes) GetErrinfo() *ErrorInfo {
+func (m *ListUserInfoReq) GetOffset() int64 {
 	if m != nil {
-		return m.Errinfo
+		return m.Offset
 	}
-	return nil
+	return 0
 }
 
-func (m *ListCorpusRes) GetData() *ListCorpusData {
+func (m *ListUserInfoReq) GetLimit() int64 {
 	if m != nil {
-		return m.Data
+		return m.Limit
 	}
-	return nil
+	return 0
 }
 
-//添加revise
-type AddReviseCorpusReq struct {
-	CorpusId             int64    `protobuf:"zigzag64,1,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	ReviseScore          int32    `protobuf:"varint,2,opt,name=revise_score,json=reviseScore,proto3" json:"revise_score,omitempty"`
-	ReviseOperator       string   `protobuf:"bytes,3,opt,name=revise_operator,json=reviseOperator,proto3" json:"revise_operator,omitempty"`
-	OpUserName           string   `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+func (m *ListUserInfoReq) GetEMail() string {
+	if m != nil {
+		return m.EMail
+	}
+	return ""
 }
 
-func (m *AddReviseCorpusReq) Reset()         { *m = AddReviseCorpusReq{} }
-func (m *AddReviseCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*AddReviseCorpusReq) ProtoMessage()    {}
-func (*AddReviseCorpusReq) Descriptor() ([]byte, []int) {
+func (m *ListUserInfoReq) GetUserName() string {
+	if m != nil {
+		return m.UserName
+	}
+	return ""
+}
+
+func (m *ListUserInfoReq) GetPhone() string {
+	if m != nil {
+		return m.Phone
+	}
+	return ""
+}
+
+func (m *ListUserInfoReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type ListUserInfoData struct {
+	Items                []*UserInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Total                int64       `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
+	Offset               int64       `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	More                 bool        `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *ListUserInfoData) Reset()         { *m = ListUserInfoData{} }
+func (m *ListUserInfoData) String() string { return proto.CompactTextString(m) }
+func (*ListUserInfoData) ProtoMessage()    {}
+func (*ListUserInfoData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{12}
 }
 
-func (m *AddReviseCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddReviseCorpusReq.Unmarshal(m, b)
+func (m *ListUserInfoData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListUserInfoData.Unmarshal(m, b)
 }
-func (m *AddReviseCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddReviseCorpusReq.Marshal(b, m, deterministic)
+func (m *ListUserInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListUserInfoData.Marshal(b, m, deterministic)
 }
-func (m *AddReviseCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddReviseCorpusReq.Merge(m, src)
+func (m *ListUserInfoData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListUserInfoData.Merge(m, src)
 }
-func (m *AddReviseCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_AddReviseCorpusReq.Size(m)
+func (m *ListUserInfoData) XXX_Size() int {
+	return xxx_messageInfo_ListUserInfoData.Size(m)
 }
-func (m *AddReviseCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddReviseCorpusReq.DiscardUnknown(m)
+func (m *ListUserInfoData) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListUserInfoData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_AddReviseCorpusReq proto.InternalMessageInfo
+var xxx_messageInfo_ListUserInfoData proto.InternalMessageInfo
 
-func (m *AddReviseCorpusReq) GetCorpusId() int64 {
+func (m *ListUserInfoData) GetItems() []*UserInfo {
 	if m != nil {
-		return m.CorpusId
+		return m.Items
+	}
+	return nil
+}
+
+func (m *ListUserInfoData) GetTotal() int64 {
+	if m != nil {
+		return m.Total
 	}
 	return 0
 }
 
-func (m *AddReviseCorpusReq) GetReviseScore() int32 {
+func (m *ListUserInfoData) GetOffset() int64 {
 	if m != nil {
-		return m.ReviseScore
+		return m.Offset
 	}
 	return 0
 }
 
-func (m *AddReviseCorpusReq) GetReviseOperator() string {
+func (m *ListUserInfoData) GetMore() bool {
 	if m != nil {
-		return m.ReviseOperator
+		return m.More
 	}
-	return ""
+	return false
 }
 
-func (m *AddReviseCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
+type ListUserInfoRes struct {
+	Errinfo              *ErrorInfo        `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *ListUserInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
-type AddReviseCorpusData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddReviseCorpusData) Reset()         { *m = AddReviseCorpusData{} }
-func (m *AddReviseCorpusData) String() string { return proto.CompactTextString(m) }
-func (*AddReviseCorpusData) ProtoMessage()    {}
-func (*AddReviseCorpusData) Descriptor() ([]byte, []int) {
+func (m *ListUserInfoRes) Reset()         { *m = ListUserInfoRes{} }
+func (m *ListUserInfoRes) String() string { return proto.CompactTextString(m) }
+func (*ListUserInfoRes) ProtoMessage()    {}
+func (*ListUserInfoRes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8d06a1256b80a8c8, []int{13}
 }
 
-func (m *AddReviseCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddReviseCorpusData.Unmarshal(m, b)
+func (m *ListUserInfoRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListUserInfoRes.Unmarshal(m, b)
 }
-func (m *AddReviseCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddReviseCorpusData.Marshal(b, m, deterministic)
+func (m *ListUserInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListUserInfoRes.Marshal(b, m, deterministic)
 }
-func (m *AddReviseCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddReviseCorpusData.Merge(m, src)
+func (m *ListUserInfoRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListUserInfoRes.Merge(m, src)
 }
-func (m *AddReviseCorpusData) XXX_Size() int {
-	return xxx_messageInfo_AddReviseCorpusData.Size(m)
+func (m *ListUserInfoRes) XXX_Size() int {
+	return xxx_messageInfo_ListUserInfoRes.Size(m)
 }
-func (m *AddReviseCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddReviseCorpusData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddReviseCorpusData proto.InternalMessageInfo
-
-func (m *AddReviseCorpusData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
+func (m *ListUserInfoRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListUserInfoRes.DiscardUnknown(m)
 }
 
-type AddReviseCorpusRes struct {
-	Errinfo              *ErrorInfo           `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddReviseCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
-}
+var xxx_messageInfo_ListUserInfoRes proto.InternalMessageInfo
 
-func (m *AddReviseCorpusRes) Reset()         { *m = AddReviseCorpusRes{} }
-func (m *AddReviseCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*AddReviseCorpusRes) ProtoMessage()    {}
-func (*AddReviseCorpusRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{14}
-}
-
-func (m *AddReviseCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddReviseCorpusRes.Unmarshal(m, b)
-}
-func (m *AddReviseCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddReviseCorpusRes.Marshal(b, m, deterministic)
-}
-func (m *AddReviseCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddReviseCorpusRes.Merge(m, src)
-}
-func (m *AddReviseCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_AddReviseCorpusRes.Size(m)
-}
-func (m *AddReviseCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddReviseCorpusRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddReviseCorpusRes proto.InternalMessageInfo
-
-func (m *AddReviseCorpusRes) GetErrinfo() *ErrorInfo {
+func (m *ListUserInfoRes) GetErrinfo() *ErrorInfo {
 	if m != nil {
 		return m.Errinfo
 	}
 	return nil
 }
 
-func (m *AddReviseCorpusRes) GetData() *AddReviseCorpusData {
+func (m *ListUserInfoRes) GetData() *ListUserInfoData {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-//修改revise
-type UpdateReviseCorpusReq struct {
-	ReviseCorpusId       int64    `protobuf:"zigzag64,1,opt,name=revise_corpus_id,json=reviseCorpusId,proto3" json:"revise_corpus_id,omitempty"`
-	ReviseScore          int32    `protobuf:"varint,2,opt,name=revise_score,json=reviseScore,proto3" json:"revise_score,omitempty"`
-	ReviseOperator       string   `protobuf:"bytes,3,opt,name=revise_operator,json=reviseOperator,proto3" json:"revise_operator,omitempty"`
-	OpUserName           string   `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateReviseCorpusReq) Reset()         { *m = UpdateReviseCorpusReq{} }
-func (m *UpdateReviseCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*UpdateReviseCorpusReq) ProtoMessage()    {}
-func (*UpdateReviseCorpusReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{15}
-}
-
-func (m *UpdateReviseCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateReviseCorpusReq.Unmarshal(m, b)
-}
-func (m *UpdateReviseCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateReviseCorpusReq.Marshal(b, m, deterministic)
-}
-func (m *UpdateReviseCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateReviseCorpusReq.Merge(m, src)
-}
-func (m *UpdateReviseCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_UpdateReviseCorpusReq.Size(m)
-}
-func (m *UpdateReviseCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateReviseCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateReviseCorpusReq proto.InternalMessageInfo
-
-func (m *UpdateReviseCorpusReq) GetReviseCorpusId() int64 {
-	if m != nil {
-		return m.ReviseCorpusId
-	}
-	return 0
-}
-
-func (m *UpdateReviseCorpusReq) GetReviseScore() int32 {
-	if m != nil {
-		return m.ReviseScore
-	}
-	return 0
-}
-
-func (m *UpdateReviseCorpusReq) GetReviseOperator() string {
-	if m != nil {
-		return m.ReviseOperator
-	}
-	return ""
-}
-
-func (m *UpdateReviseCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type UpdateReviseCorpusData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateReviseCorpusData) Reset()         { *m = UpdateReviseCorpusData{} }
-func (m *UpdateReviseCorpusData) String() string { return proto.CompactTextString(m) }
-func (*UpdateReviseCorpusData) ProtoMessage()    {}
-func (*UpdateReviseCorpusData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{16}
-}
-
-func (m *UpdateReviseCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateReviseCorpusData.Unmarshal(m, b)
-}
-func (m *UpdateReviseCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateReviseCorpusData.Marshal(b, m, deterministic)
-}
-func (m *UpdateReviseCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateReviseCorpusData.Merge(m, src)
-}
-func (m *UpdateReviseCorpusData) XXX_Size() int {
-	return xxx_messageInfo_UpdateReviseCorpusData.Size(m)
-}
-func (m *UpdateReviseCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateReviseCorpusData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateReviseCorpusData proto.InternalMessageInfo
-
-func (m *UpdateReviseCorpusData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type UpdateReviseCorpusRes struct {
-	Errinfo              *ErrorInfo              `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *UpdateReviseCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
-	XXX_unrecognized     []byte                  `json:"-"`
-	XXX_sizecache        int32                   `json:"-"`
-}
-
-func (m *UpdateReviseCorpusRes) Reset()         { *m = UpdateReviseCorpusRes{} }
-func (m *UpdateReviseCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*UpdateReviseCorpusRes) ProtoMessage()    {}
-func (*UpdateReviseCorpusRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{17}
-}
-
-func (m *UpdateReviseCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateReviseCorpusRes.Unmarshal(m, b)
-}
-func (m *UpdateReviseCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateReviseCorpusRes.Marshal(b, m, deterministic)
-}
-func (m *UpdateReviseCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateReviseCorpusRes.Merge(m, src)
-}
-func (m *UpdateReviseCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_UpdateReviseCorpusRes.Size(m)
-}
-func (m *UpdateReviseCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateReviseCorpusRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateReviseCorpusRes proto.InternalMessageInfo
-
-func (m *UpdateReviseCorpusRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *UpdateReviseCorpusRes) GetData() *UpdateReviseCorpusData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//删除revise
-type DelReviseCorpusReq struct {
-	ReviseCorpusId       int64    `protobuf:"zigzag64,1,opt,name=revise_corpus_id,json=reviseCorpusId,proto3" json:"revise_corpus_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,2,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelReviseCorpusReq) Reset()         { *m = DelReviseCorpusReq{} }
-func (m *DelReviseCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*DelReviseCorpusReq) ProtoMessage()    {}
-func (*DelReviseCorpusReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{18}
-}
-
-func (m *DelReviseCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelReviseCorpusReq.Unmarshal(m, b)
-}
-func (m *DelReviseCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelReviseCorpusReq.Marshal(b, m, deterministic)
-}
-func (m *DelReviseCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelReviseCorpusReq.Merge(m, src)
-}
-func (m *DelReviseCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_DelReviseCorpusReq.Size(m)
-}
-func (m *DelReviseCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelReviseCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelReviseCorpusReq proto.InternalMessageInfo
-
-func (m *DelReviseCorpusReq) GetReviseCorpusId() int64 {
-	if m != nil {
-		return m.ReviseCorpusId
-	}
-	return 0
-}
-
-func (m *DelReviseCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type DelReviseCorpusData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelReviseCorpusData) Reset()         { *m = DelReviseCorpusData{} }
-func (m *DelReviseCorpusData) String() string { return proto.CompactTextString(m) }
-func (*DelReviseCorpusData) ProtoMessage()    {}
-func (*DelReviseCorpusData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{19}
-}
-
-func (m *DelReviseCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelReviseCorpusData.Unmarshal(m, b)
-}
-func (m *DelReviseCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelReviseCorpusData.Marshal(b, m, deterministic)
-}
-func (m *DelReviseCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelReviseCorpusData.Merge(m, src)
-}
-func (m *DelReviseCorpusData) XXX_Size() int {
-	return xxx_messageInfo_DelReviseCorpusData.Size(m)
-}
-func (m *DelReviseCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelReviseCorpusData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelReviseCorpusData proto.InternalMessageInfo
-
-func (m *DelReviseCorpusData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type DelReviseCorpusRes struct {
-	Errinfo              *ErrorInfo           `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelReviseCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
-}
-
-func (m *DelReviseCorpusRes) Reset()         { *m = DelReviseCorpusRes{} }
-func (m *DelReviseCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*DelReviseCorpusRes) ProtoMessage()    {}
-func (*DelReviseCorpusRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{20}
-}
-
-func (m *DelReviseCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelReviseCorpusRes.Unmarshal(m, b)
-}
-func (m *DelReviseCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelReviseCorpusRes.Marshal(b, m, deterministic)
-}
-func (m *DelReviseCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelReviseCorpusRes.Merge(m, src)
-}
-func (m *DelReviseCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_DelReviseCorpusRes.Size(m)
-}
-func (m *DelReviseCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelReviseCorpusRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelReviseCorpusRes proto.InternalMessageInfo
-
-func (m *DelReviseCorpusRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *DelReviseCorpusRes) GetData() *DelReviseCorpusData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//查询revise列表
-type ListReviseCorpusReq struct {
-	Offset               int64    `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	ReviseScoreStart     int32    `protobuf:"varint,3,opt,name=revise_score_start,json=reviseScoreStart,proto3" json:"revise_score_start,omitempty"`
-	ReviseScoreEnd       int32    `protobuf:"varint,4,opt,name=revise_score_end,json=reviseScoreEnd,proto3" json:"revise_score_end,omitempty"`
-	ReviseOperator       string   `protobuf:"bytes,5,opt,name=revise_operator,json=reviseOperator,proto3" json:"revise_operator,omitempty"`
-	OpUserName           string   `protobuf:"bytes,6,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	CorpusId             int64    `protobuf:"zigzag64,7,opt,name=corpus_id,json=corpusId,proto3" json:"corpus_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListReviseCorpusReq) Reset()         { *m = ListReviseCorpusReq{} }
-func (m *ListReviseCorpusReq) String() string { return proto.CompactTextString(m) }
-func (*ListReviseCorpusReq) ProtoMessage()    {}
-func (*ListReviseCorpusReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{21}
-}
-
-func (m *ListReviseCorpusReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListReviseCorpusReq.Unmarshal(m, b)
-}
-func (m *ListReviseCorpusReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListReviseCorpusReq.Marshal(b, m, deterministic)
-}
-func (m *ListReviseCorpusReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListReviseCorpusReq.Merge(m, src)
-}
-func (m *ListReviseCorpusReq) XXX_Size() int {
-	return xxx_messageInfo_ListReviseCorpusReq.Size(m)
-}
-func (m *ListReviseCorpusReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListReviseCorpusReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListReviseCorpusReq proto.InternalMessageInfo
-
-func (m *ListReviseCorpusReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusReq) GetReviseScoreStart() int32 {
-	if m != nil {
-		return m.ReviseScoreStart
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusReq) GetReviseScoreEnd() int32 {
-	if m != nil {
-		return m.ReviseScoreEnd
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusReq) GetReviseOperator() string {
-	if m != nil {
-		return m.ReviseOperator
-	}
-	return ""
-}
-
-func (m *ListReviseCorpusReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-func (m *ListReviseCorpusReq) GetCorpusId() int64 {
-	if m != nil {
-		return m.CorpusId
-	}
-	return 0
-}
-
-type ListReviseCorpusData struct {
-	Items                []*ReviseCorpus `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64           `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64           `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool            `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListReviseCorpusData) Reset()         { *m = ListReviseCorpusData{} }
-func (m *ListReviseCorpusData) String() string { return proto.CompactTextString(m) }
-func (*ListReviseCorpusData) ProtoMessage()    {}
-func (*ListReviseCorpusData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{22}
-}
-
-func (m *ListReviseCorpusData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListReviseCorpusData.Unmarshal(m, b)
-}
-func (m *ListReviseCorpusData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListReviseCorpusData.Marshal(b, m, deterministic)
-}
-func (m *ListReviseCorpusData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListReviseCorpusData.Merge(m, src)
-}
-func (m *ListReviseCorpusData) XXX_Size() int {
-	return xxx_messageInfo_ListReviseCorpusData.Size(m)
-}
-func (m *ListReviseCorpusData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListReviseCorpusData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListReviseCorpusData proto.InternalMessageInfo
-
-func (m *ListReviseCorpusData) GetItems() []*ReviseCorpus {
-	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListReviseCorpusData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListReviseCorpusData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListReviseCorpusRes struct {
-	Errinfo              *ErrorInfo            `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListReviseCorpusData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListReviseCorpusRes) Reset()         { *m = ListReviseCorpusRes{} }
-func (m *ListReviseCorpusRes) String() string { return proto.CompactTextString(m) }
-func (*ListReviseCorpusRes) ProtoMessage()    {}
-func (*ListReviseCorpusRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{23}
-}
-
-func (m *ListReviseCorpusRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListReviseCorpusRes.Unmarshal(m, b)
-}
-func (m *ListReviseCorpusRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListReviseCorpusRes.Marshal(b, m, deterministic)
-}
-func (m *ListReviseCorpusRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListReviseCorpusRes.Merge(m, src)
-}
-func (m *ListReviseCorpusRes) XXX_Size() int {
-	return xxx_messageInfo_ListReviseCorpusRes.Size(m)
-}
-func (m *ListReviseCorpusRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListReviseCorpusRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListReviseCorpusRes proto.InternalMessageInfo
-
-func (m *ListReviseCorpusRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *ListReviseCorpusRes) GetData() *ListReviseCorpusData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//集合相关
-type CorpusCollection struct {
-	CorpusCollectionId   int64    `protobuf:"zigzag64,1,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Ct                   int64    `protobuf:"zigzag64,4,opt,name=ct,proto3" json:"ct,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *CorpusCollection) Reset()         { *m = CorpusCollection{} }
-func (m *CorpusCollection) String() string { return proto.CompactTextString(m) }
-func (*CorpusCollection) ProtoMessage()    {}
-func (*CorpusCollection) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{24}
-}
-
-func (m *CorpusCollection) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CorpusCollection.Unmarshal(m, b)
-}
-func (m *CorpusCollection) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CorpusCollection.Marshal(b, m, deterministic)
-}
-func (m *CorpusCollection) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CorpusCollection.Merge(m, src)
-}
-func (m *CorpusCollection) XXX_Size() int {
-	return xxx_messageInfo_CorpusCollection.Size(m)
-}
-func (m *CorpusCollection) XXX_DiscardUnknown() {
-	xxx_messageInfo_CorpusCollection.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_CorpusCollection proto.InternalMessageInfo
-
-func (m *CorpusCollection) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *CorpusCollection) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *CorpusCollection) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *CorpusCollection) GetCt() int64 {
-	if m != nil {
-		return m.Ct
-	}
-	return 0
-}
-
-type AddCollectionReq struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddCollectionReq) Reset()         { *m = AddCollectionReq{} }
-func (m *AddCollectionReq) String() string { return proto.CompactTextString(m) }
-func (*AddCollectionReq) ProtoMessage()    {}
-func (*AddCollectionReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{25}
-}
-
-func (m *AddCollectionReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCollectionReq.Unmarshal(m, b)
-}
-func (m *AddCollectionReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCollectionReq.Marshal(b, m, deterministic)
-}
-func (m *AddCollectionReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCollectionReq.Merge(m, src)
-}
-func (m *AddCollectionReq) XXX_Size() int {
-	return xxx_messageInfo_AddCollectionReq.Size(m)
-}
-func (m *AddCollectionReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCollectionReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCollectionReq proto.InternalMessageInfo
-
-func (m *AddCollectionReq) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *AddCollectionReq) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *AddCollectionReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type AddCollectionData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddCollectionData) Reset()         { *m = AddCollectionData{} }
-func (m *AddCollectionData) String() string { return proto.CompactTextString(m) }
-func (*AddCollectionData) ProtoMessage()    {}
-func (*AddCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{26}
-}
-
-func (m *AddCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCollectionData.Unmarshal(m, b)
-}
-func (m *AddCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCollectionData.Marshal(b, m, deterministic)
-}
-func (m *AddCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCollectionData.Merge(m, src)
-}
-func (m *AddCollectionData) XXX_Size() int {
-	return xxx_messageInfo_AddCollectionData.Size(m)
-}
-func (m *AddCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCollectionData proto.InternalMessageInfo
-
-func (m *AddCollectionData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type AddCollectionRes struct {
-	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
-	XXX_unrecognized     []byte             `json:"-"`
-	XXX_sizecache        int32              `json:"-"`
-}
-
-func (m *AddCollectionRes) Reset()         { *m = AddCollectionRes{} }
-func (m *AddCollectionRes) String() string { return proto.CompactTextString(m) }
-func (*AddCollectionRes) ProtoMessage()    {}
-func (*AddCollectionRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{27}
-}
-
-func (m *AddCollectionRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCollectionRes.Unmarshal(m, b)
-}
-func (m *AddCollectionRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCollectionRes.Marshal(b, m, deterministic)
-}
-func (m *AddCollectionRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCollectionRes.Merge(m, src)
-}
-func (m *AddCollectionRes) XXX_Size() int {
-	return xxx_messageInfo_AddCollectionRes.Size(m)
-}
-func (m *AddCollectionRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCollectionRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCollectionRes proto.InternalMessageInfo
-
-func (m *AddCollectionRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *AddCollectionRes) GetData() *AddCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type UpdateCollectionReq struct {
-	CorpusCollectionId   int64    `protobuf:"zigzag64,1,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	OpUserName           string   `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateCollectionReq) Reset()         { *m = UpdateCollectionReq{} }
-func (m *UpdateCollectionReq) String() string { return proto.CompactTextString(m) }
-func (*UpdateCollectionReq) ProtoMessage()    {}
-func (*UpdateCollectionReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{28}
-}
-
-func (m *UpdateCollectionReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateCollectionReq.Unmarshal(m, b)
-}
-func (m *UpdateCollectionReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateCollectionReq.Marshal(b, m, deterministic)
-}
-func (m *UpdateCollectionReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateCollectionReq.Merge(m, src)
-}
-func (m *UpdateCollectionReq) XXX_Size() int {
-	return xxx_messageInfo_UpdateCollectionReq.Size(m)
-}
-func (m *UpdateCollectionReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateCollectionReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateCollectionReq proto.InternalMessageInfo
-
-func (m *UpdateCollectionReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *UpdateCollectionReq) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *UpdateCollectionReq) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *UpdateCollectionReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type UpdateCollectionData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateCollectionData) Reset()         { *m = UpdateCollectionData{} }
-func (m *UpdateCollectionData) String() string { return proto.CompactTextString(m) }
-func (*UpdateCollectionData) ProtoMessage()    {}
-func (*UpdateCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{29}
-}
-
-func (m *UpdateCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateCollectionData.Unmarshal(m, b)
-}
-func (m *UpdateCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateCollectionData.Marshal(b, m, deterministic)
-}
-func (m *UpdateCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateCollectionData.Merge(m, src)
-}
-func (m *UpdateCollectionData) XXX_Size() int {
-	return xxx_messageInfo_UpdateCollectionData.Size(m)
-}
-func (m *UpdateCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateCollectionData proto.InternalMessageInfo
-
-func (m *UpdateCollectionData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type UpdateCollectionRes struct {
-	Errinfo              *ErrorInfo            `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *UpdateCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *UpdateCollectionRes) Reset()         { *m = UpdateCollectionRes{} }
-func (m *UpdateCollectionRes) String() string { return proto.CompactTextString(m) }
-func (*UpdateCollectionRes) ProtoMessage()    {}
-func (*UpdateCollectionRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{30}
-}
-
-func (m *UpdateCollectionRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateCollectionRes.Unmarshal(m, b)
-}
-func (m *UpdateCollectionRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateCollectionRes.Marshal(b, m, deterministic)
-}
-func (m *UpdateCollectionRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateCollectionRes.Merge(m, src)
-}
-func (m *UpdateCollectionRes) XXX_Size() int {
-	return xxx_messageInfo_UpdateCollectionRes.Size(m)
-}
-func (m *UpdateCollectionRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateCollectionRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateCollectionRes proto.InternalMessageInfo
-
-func (m *UpdateCollectionRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *UpdateCollectionRes) GetData() *UpdateCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type DelCollectionReq struct {
-	CorpusCollectionId   int64    `protobuf:"zigzag64,1,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,2,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelCollectionReq) Reset()         { *m = DelCollectionReq{} }
-func (m *DelCollectionReq) String() string { return proto.CompactTextString(m) }
-func (*DelCollectionReq) ProtoMessage()    {}
-func (*DelCollectionReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{31}
-}
-
-func (m *DelCollectionReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCollectionReq.Unmarshal(m, b)
-}
-func (m *DelCollectionReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCollectionReq.Marshal(b, m, deterministic)
-}
-func (m *DelCollectionReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCollectionReq.Merge(m, src)
-}
-func (m *DelCollectionReq) XXX_Size() int {
-	return xxx_messageInfo_DelCollectionReq.Size(m)
-}
-func (m *DelCollectionReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCollectionReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCollectionReq proto.InternalMessageInfo
-
-func (m *DelCollectionReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *DelCollectionReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type DelCollectionData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelCollectionData) Reset()         { *m = DelCollectionData{} }
-func (m *DelCollectionData) String() string { return proto.CompactTextString(m) }
-func (*DelCollectionData) ProtoMessage()    {}
-func (*DelCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{32}
-}
-
-func (m *DelCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCollectionData.Unmarshal(m, b)
-}
-func (m *DelCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCollectionData.Marshal(b, m, deterministic)
-}
-func (m *DelCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCollectionData.Merge(m, src)
-}
-func (m *DelCollectionData) XXX_Size() int {
-	return xxx_messageInfo_DelCollectionData.Size(m)
-}
-func (m *DelCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCollectionData proto.InternalMessageInfo
-
-func (m *DelCollectionData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type DelCollectionRes struct {
-	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
-	XXX_unrecognized     []byte             `json:"-"`
-	XXX_sizecache        int32              `json:"-"`
-}
-
-func (m *DelCollectionRes) Reset()         { *m = DelCollectionRes{} }
-func (m *DelCollectionRes) String() string { return proto.CompactTextString(m) }
-func (*DelCollectionRes) ProtoMessage()    {}
-func (*DelCollectionRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{33}
-}
-
-func (m *DelCollectionRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCollectionRes.Unmarshal(m, b)
-}
-func (m *DelCollectionRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCollectionRes.Marshal(b, m, deterministic)
-}
-func (m *DelCollectionRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCollectionRes.Merge(m, src)
-}
-func (m *DelCollectionRes) XXX_Size() int {
-	return xxx_messageInfo_DelCollectionRes.Size(m)
-}
-func (m *DelCollectionRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCollectionRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCollectionRes proto.InternalMessageInfo
-
-func (m *DelCollectionRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *DelCollectionRes) GetData() *DelCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//将根据创建时间倒序排序
-type ListCollectionsReq struct {
-	Offset               int64    `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	CorpusCollectionId   int64    `protobuf:"zigzag64,4,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,5,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListCollectionsReq) Reset()         { *m = ListCollectionsReq{} }
-func (m *ListCollectionsReq) String() string { return proto.CompactTextString(m) }
-func (*ListCollectionsReq) ProtoMessage()    {}
-func (*ListCollectionsReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{34}
-}
-
-func (m *ListCollectionsReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCollectionsReq.Unmarshal(m, b)
-}
-func (m *ListCollectionsReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCollectionsReq.Marshal(b, m, deterministic)
-}
-func (m *ListCollectionsReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCollectionsReq.Merge(m, src)
-}
-func (m *ListCollectionsReq) XXX_Size() int {
-	return xxx_messageInfo_ListCollectionsReq.Size(m)
-}
-func (m *ListCollectionsReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCollectionsReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListCollectionsReq proto.InternalMessageInfo
-
-func (m *ListCollectionsReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListCollectionsReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListCollectionsReq) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListCollectionsReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *ListCollectionsReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type ListCollectionData struct {
-	Items                []*CorpusCollection `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64               `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64               `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool                `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *ListCollectionData) Reset()         { *m = ListCollectionData{} }
-func (m *ListCollectionData) String() string { return proto.CompactTextString(m) }
-func (*ListCollectionData) ProtoMessage()    {}
-func (*ListCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{35}
-}
-
-func (m *ListCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCollectionData.Unmarshal(m, b)
-}
-func (m *ListCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCollectionData.Marshal(b, m, deterministic)
-}
-func (m *ListCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCollectionData.Merge(m, src)
-}
-func (m *ListCollectionData) XXX_Size() int {
-	return xxx_messageInfo_ListCollectionData.Size(m)
-}
-func (m *ListCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListCollectionData proto.InternalMessageInfo
-
-func (m *ListCollectionData) GetItems() []*CorpusCollection {
-	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListCollectionData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
-	}
-	return 0
-}
-
-func (m *ListCollectionData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListCollectionData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListCollectionsRes struct {
-	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *ListCollectionsRes) Reset()         { *m = ListCollectionsRes{} }
-func (m *ListCollectionsRes) String() string { return proto.CompactTextString(m) }
-func (*ListCollectionsRes) ProtoMessage()    {}
-func (*ListCollectionsRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{36}
-}
-
-func (m *ListCollectionsRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCollectionsRes.Unmarshal(m, b)
-}
-func (m *ListCollectionsRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCollectionsRes.Marshal(b, m, deterministic)
-}
-func (m *ListCollectionsRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCollectionsRes.Merge(m, src)
-}
-func (m *ListCollectionsRes) XXX_Size() int {
-	return xxx_messageInfo_ListCollectionsRes.Size(m)
-}
-func (m *ListCollectionsRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCollectionsRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListCollectionsRes proto.InternalMessageInfo
-
-func (m *ListCollectionsRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *ListCollectionsRes) GetData() *ListCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type AddCorpusToCollectionReq struct {
-	CorpusIdList         []int64  `protobuf:"zigzag64,1,rep,packed,name=corpus_id_list,json=corpusIdList,proto3" json:"corpus_id_list,omitempty"`
-	CorpusCollectionId   int64    `protobuf:"zigzag64,2,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddCorpusToCollectionReq) Reset()         { *m = AddCorpusToCollectionReq{} }
-func (m *AddCorpusToCollectionReq) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusToCollectionReq) ProtoMessage()    {}
-func (*AddCorpusToCollectionReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{37}
-}
-
-func (m *AddCorpusToCollectionReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusToCollectionReq.Unmarshal(m, b)
-}
-func (m *AddCorpusToCollectionReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusToCollectionReq.Marshal(b, m, deterministic)
-}
-func (m *AddCorpusToCollectionReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusToCollectionReq.Merge(m, src)
-}
-func (m *AddCorpusToCollectionReq) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusToCollectionReq.Size(m)
-}
-func (m *AddCorpusToCollectionReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusToCollectionReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCorpusToCollectionReq proto.InternalMessageInfo
-
-func (m *AddCorpusToCollectionReq) GetCorpusIdList() []int64 {
-	if m != nil {
-		return m.CorpusIdList
-	}
-	return nil
-}
-
-func (m *AddCorpusToCollectionReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *AddCorpusToCollectionReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type AddCorpusToCollectionData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddCorpusToCollectionData) Reset()         { *m = AddCorpusToCollectionData{} }
-func (m *AddCorpusToCollectionData) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusToCollectionData) ProtoMessage()    {}
-func (*AddCorpusToCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{38}
-}
-
-func (m *AddCorpusToCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusToCollectionData.Unmarshal(m, b)
-}
-func (m *AddCorpusToCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusToCollectionData.Marshal(b, m, deterministic)
-}
-func (m *AddCorpusToCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusToCollectionData.Merge(m, src)
-}
-func (m *AddCorpusToCollectionData) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusToCollectionData.Size(m)
-}
-func (m *AddCorpusToCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusToCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCorpusToCollectionData proto.InternalMessageInfo
-
-func (m *AddCorpusToCollectionData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type AddCorpusToCollectionRes struct {
-	Errinfo              *ErrorInfo                 `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddCorpusToCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
-	XXX_unrecognized     []byte                     `json:"-"`
-	XXX_sizecache        int32                      `json:"-"`
-}
-
-func (m *AddCorpusToCollectionRes) Reset()         { *m = AddCorpusToCollectionRes{} }
-func (m *AddCorpusToCollectionRes) String() string { return proto.CompactTextString(m) }
-func (*AddCorpusToCollectionRes) ProtoMessage()    {}
-func (*AddCorpusToCollectionRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{39}
-}
-
-func (m *AddCorpusToCollectionRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddCorpusToCollectionRes.Unmarshal(m, b)
-}
-func (m *AddCorpusToCollectionRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddCorpusToCollectionRes.Marshal(b, m, deterministic)
-}
-func (m *AddCorpusToCollectionRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddCorpusToCollectionRes.Merge(m, src)
-}
-func (m *AddCorpusToCollectionRes) XXX_Size() int {
-	return xxx_messageInfo_AddCorpusToCollectionRes.Size(m)
-}
-func (m *AddCorpusToCollectionRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddCorpusToCollectionRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddCorpusToCollectionRes proto.InternalMessageInfo
-
-func (m *AddCorpusToCollectionRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *AddCorpusToCollectionRes) GetData() *AddCorpusToCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type DelCorpusFromCollectionReq struct {
-	CorpusIdList         []int64  `protobuf:"zigzag64,1,rep,packed,name=corpus_id_list,json=corpusIdList,proto3" json:"corpus_id_list,omitempty"`
-	CorpusCollectionId   int64    `protobuf:"zigzag64,2,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelCorpusFromCollectionReq) Reset()         { *m = DelCorpusFromCollectionReq{} }
-func (m *DelCorpusFromCollectionReq) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusFromCollectionReq) ProtoMessage()    {}
-func (*DelCorpusFromCollectionReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{40}
-}
-
-func (m *DelCorpusFromCollectionReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusFromCollectionReq.Unmarshal(m, b)
-}
-func (m *DelCorpusFromCollectionReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusFromCollectionReq.Marshal(b, m, deterministic)
-}
-func (m *DelCorpusFromCollectionReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusFromCollectionReq.Merge(m, src)
-}
-func (m *DelCorpusFromCollectionReq) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusFromCollectionReq.Size(m)
-}
-func (m *DelCorpusFromCollectionReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusFromCollectionReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCorpusFromCollectionReq proto.InternalMessageInfo
-
-func (m *DelCorpusFromCollectionReq) GetCorpusIdList() []int64 {
-	if m != nil {
-		return m.CorpusIdList
-	}
-	return nil
-}
-
-func (m *DelCorpusFromCollectionReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *DelCorpusFromCollectionReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type DelCorpusFromCollectionData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelCorpusFromCollectionData) Reset()         { *m = DelCorpusFromCollectionData{} }
-func (m *DelCorpusFromCollectionData) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusFromCollectionData) ProtoMessage()    {}
-func (*DelCorpusFromCollectionData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{41}
-}
-
-func (m *DelCorpusFromCollectionData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusFromCollectionData.Unmarshal(m, b)
-}
-func (m *DelCorpusFromCollectionData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusFromCollectionData.Marshal(b, m, deterministic)
-}
-func (m *DelCorpusFromCollectionData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusFromCollectionData.Merge(m, src)
-}
-func (m *DelCorpusFromCollectionData) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusFromCollectionData.Size(m)
-}
-func (m *DelCorpusFromCollectionData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusFromCollectionData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCorpusFromCollectionData proto.InternalMessageInfo
-
-func (m *DelCorpusFromCollectionData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type DelCorpusFromCollectionRes struct {
-	Errinfo              *ErrorInfo                   `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelCorpusFromCollectionData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
-	XXX_unrecognized     []byte                       `json:"-"`
-	XXX_sizecache        int32                        `json:"-"`
-}
-
-func (m *DelCorpusFromCollectionRes) Reset()         { *m = DelCorpusFromCollectionRes{} }
-func (m *DelCorpusFromCollectionRes) String() string { return proto.CompactTextString(m) }
-func (*DelCorpusFromCollectionRes) ProtoMessage()    {}
-func (*DelCorpusFromCollectionRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{42}
-}
-
-func (m *DelCorpusFromCollectionRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelCorpusFromCollectionRes.Unmarshal(m, b)
-}
-func (m *DelCorpusFromCollectionRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelCorpusFromCollectionRes.Marshal(b, m, deterministic)
-}
-func (m *DelCorpusFromCollectionRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelCorpusFromCollectionRes.Merge(m, src)
-}
-func (m *DelCorpusFromCollectionRes) XXX_Size() int {
-	return xxx_messageInfo_DelCorpusFromCollectionRes.Size(m)
-}
-func (m *DelCorpusFromCollectionRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelCorpusFromCollectionRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelCorpusFromCollectionRes proto.InternalMessageInfo
-
-func (m *DelCorpusFromCollectionRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *DelCorpusFromCollectionRes) GetData() *DelCorpusFromCollectionData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//选择是在外面选择 还是在里面选择 EngineType
-type Experiment struct {
-	ExperimentId         int64      `protobuf:"zigzag64,1,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	Ct                   int64      `protobuf:"zigzag64,2,opt,name=ct,proto3" json:"ct,omitempty"`
-	Comment              string     `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
-	EngineType           EngineType `protobuf:"varint,4,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	CorpusCollectionId   int64      `protobuf:"zigzag64,6,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	CollectionName       string     `protobuf:"bytes,7,opt,name=collection_name,json=collectionName,proto3" json:"collection_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
-}
-
-func (m *Experiment) Reset()         { *m = Experiment{} }
-func (m *Experiment) String() string { return proto.CompactTextString(m) }
-func (*Experiment) ProtoMessage()    {}
-func (*Experiment) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{43}
-}
-
-func (m *Experiment) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Experiment.Unmarshal(m, b)
-}
-func (m *Experiment) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Experiment.Marshal(b, m, deterministic)
-}
-func (m *Experiment) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Experiment.Merge(m, src)
-}
-func (m *Experiment) XXX_Size() int {
-	return xxx_messageInfo_Experiment.Size(m)
-}
-func (m *Experiment) XXX_DiscardUnknown() {
-	xxx_messageInfo_Experiment.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Experiment proto.InternalMessageInfo
-
-func (m *Experiment) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *Experiment) GetCt() int64 {
-	if m != nil {
-		return m.Ct
-	}
-	return 0
-}
-
-func (m *Experiment) GetComment() string {
-	if m != nil {
-		return m.Comment
-	}
-	return ""
-}
-
-func (m *Experiment) GetEngineType() EngineType {
-	if m != nil {
-		return m.EngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *Experiment) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *Experiment) GetCollectionName() string {
-	if m != nil {
-		return m.CollectionName
-	}
-	return ""
-}
-
-type ExperimentResult struct {
-	ExperimentResultId   int64        `protobuf:"zigzag64,1,opt,name=experiment_result_id,json=experimentResultId,proto3" json:"experiment_result_id,omitempty"`
-	ExperimentId         int64        `protobuf:"zigzag64,2,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	CorpusText           string       `protobuf:"bytes,3,opt,name=corpus_text,json=corpusText,proto3" json:"corpus_text,omitempty"`
-	AudioUrl             string       `protobuf:"bytes,4,opt,name=audio_url,json=audioUrl,proto3" json:"audio_url,omitempty"`
-	CurrentEngineType    EngineType   `protobuf:"varint,5,opt,name=current_engine_type,json=currentEngineType,proto3,enum=corpus.EngineType" json:"current_engine_type,omitempty"`
-	CurrentEvaluateType  EvaluateType `protobuf:"varint,6,opt,name=current_evaluate_type,json=currentEvaluateType,proto3,enum=corpus.EvaluateType" json:"current_evaluate_type,omitempty"`
-	CurrentCorpusScore   int32        `protobuf:"varint,7,opt,name=current_corpus_score,json=currentCorpusScore,proto3" json:"current_corpus_score,omitempty"`
-	CurrentCt            int64        `protobuf:"zigzag64,8,opt,name=current_ct,json=currentCt,proto3" json:"current_ct,omitempty"`
-	OriginalEngineType   EngineType   `protobuf:"varint,9,opt,name=original_engine_type,json=originalEngineType,proto3,enum=corpus.EngineType" json:"original_engine_type,omitempty"`
-	OriginalEvaluateType EvaluateType `protobuf:"varint,10,opt,name=original_evaluate_type,json=originalEvaluateType,proto3,enum=corpus.EvaluateType" json:"original_evaluate_type,omitempty"`
-	OriginalCorpusScore  int32        `protobuf:"varint,11,opt,name=original_corpus_score,json=originalCorpusScore,proto3" json:"original_corpus_score,omitempty"`
-	OriginalCt           int64        `protobuf:"zigzag64,12,opt,name=original_ct,json=originalCt,proto3" json:"original_ct,omitempty"`
-	OriginReviseScore    int32        `protobuf:"varint,13,opt,name=origin_revise_score,json=originReviseScore,proto3" json:"origin_revise_score,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `json:"-"`
-	XXX_sizecache        int32        `json:"-"`
-}
-
-func (m *ExperimentResult) Reset()         { *m = ExperimentResult{} }
-func (m *ExperimentResult) String() string { return proto.CompactTextString(m) }
-func (*ExperimentResult) ProtoMessage()    {}
-func (*ExperimentResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{44}
-}
-
-func (m *ExperimentResult) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ExperimentResult.Unmarshal(m, b)
-}
-func (m *ExperimentResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ExperimentResult.Marshal(b, m, deterministic)
-}
-func (m *ExperimentResult) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExperimentResult.Merge(m, src)
-}
-func (m *ExperimentResult) XXX_Size() int {
-	return xxx_messageInfo_ExperimentResult.Size(m)
-}
-func (m *ExperimentResult) XXX_DiscardUnknown() {
-	xxx_messageInfo_ExperimentResult.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ExperimentResult proto.InternalMessageInfo
-
-func (m *ExperimentResult) GetExperimentResultId() int64 {
-	if m != nil {
-		return m.ExperimentResultId
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetCorpusText() string {
-	if m != nil {
-		return m.CorpusText
-	}
-	return ""
-}
-
-func (m *ExperimentResult) GetAudioUrl() string {
-	if m != nil {
-		return m.AudioUrl
-	}
-	return ""
-}
-
-func (m *ExperimentResult) GetCurrentEngineType() EngineType {
-	if m != nil {
-		return m.CurrentEngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *ExperimentResult) GetCurrentEvaluateType() EvaluateType {
-	if m != nil {
-		return m.CurrentEvaluateType
-	}
-	return EvaluateType_evaluatetype
-}
-
-func (m *ExperimentResult) GetCurrentCorpusScore() int32 {
-	if m != nil {
-		return m.CurrentCorpusScore
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetCurrentCt() int64 {
-	if m != nil {
-		return m.CurrentCt
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetOriginalEngineType() EngineType {
-	if m != nil {
-		return m.OriginalEngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *ExperimentResult) GetOriginalEvaluateType() EvaluateType {
-	if m != nil {
-		return m.OriginalEvaluateType
-	}
-	return EvaluateType_evaluatetype
-}
-
-func (m *ExperimentResult) GetOriginalCorpusScore() int32 {
-	if m != nil {
-		return m.OriginalCorpusScore
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetOriginalCt() int64 {
-	if m != nil {
-		return m.OriginalCt
-	}
-	return 0
-}
-
-func (m *ExperimentResult) GetOriginReviseScore() int32 {
-	if m != nil {
-		return m.OriginReviseScore
-	}
-	return 0
-}
-
-//添加测试
-type AddExperimentReq struct {
-	CorpusCollectionId   int64      `protobuf:"zigzag64,1,opt,name=corpus_collection_id,json=corpusCollectionId,proto3" json:"corpus_collection_id,omitempty"`
-	EngineType           EngineType `protobuf:"varint,2,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	OpUserName           string     `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
-}
-
-func (m *AddExperimentReq) Reset()         { *m = AddExperimentReq{} }
-func (m *AddExperimentReq) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentReq) ProtoMessage()    {}
-func (*AddExperimentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{45}
-}
-
-func (m *AddExperimentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentReq.Unmarshal(m, b)
-}
-func (m *AddExperimentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentReq.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentReq.Merge(m, src)
-}
-func (m *AddExperimentReq) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentReq.Size(m)
-}
-func (m *AddExperimentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentReq proto.InternalMessageInfo
-
-func (m *AddExperimentReq) GetCorpusCollectionId() int64 {
-	if m != nil {
-		return m.CorpusCollectionId
-	}
-	return 0
-}
-
-func (m *AddExperimentReq) GetEngineType() EngineType {
-	if m != nil {
-		return m.EngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *AddExperimentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type AddExperimentData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddExperimentData) Reset()         { *m = AddExperimentData{} }
-func (m *AddExperimentData) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentData) ProtoMessage()    {}
-func (*AddExperimentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{46}
-}
-
-func (m *AddExperimentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentData.Unmarshal(m, b)
-}
-func (m *AddExperimentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentData.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentData.Merge(m, src)
-}
-func (m *AddExperimentData) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentData.Size(m)
-}
-func (m *AddExperimentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentData proto.InternalMessageInfo
-
-func (m *AddExperimentData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type AddExperimentRes struct {
-	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddExperimentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
-	XXX_unrecognized     []byte             `json:"-"`
-	XXX_sizecache        int32              `json:"-"`
-}
-
-func (m *AddExperimentRes) Reset()         { *m = AddExperimentRes{} }
-func (m *AddExperimentRes) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentRes) ProtoMessage()    {}
-func (*AddExperimentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{47}
-}
-
-func (m *AddExperimentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentRes.Unmarshal(m, b)
-}
-func (m *AddExperimentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentRes.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentRes.Merge(m, src)
-}
-func (m *AddExperimentRes) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentRes.Size(m)
-}
-func (m *AddExperimentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentRes proto.InternalMessageInfo
-
-func (m *AddExperimentRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *AddExperimentRes) GetData() *AddExperimentData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type DelExperimentReq struct {
-	ExperimentId         int64    `protobuf:"zigzag64,1,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,2,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelExperimentReq) Reset()         { *m = DelExperimentReq{} }
-func (m *DelExperimentReq) String() string { return proto.CompactTextString(m) }
-func (*DelExperimentReq) ProtoMessage()    {}
-func (*DelExperimentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{48}
-}
-
-func (m *DelExperimentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelExperimentReq.Unmarshal(m, b)
-}
-func (m *DelExperimentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelExperimentReq.Marshal(b, m, deterministic)
-}
-func (m *DelExperimentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelExperimentReq.Merge(m, src)
-}
-func (m *DelExperimentReq) XXX_Size() int {
-	return xxx_messageInfo_DelExperimentReq.Size(m)
-}
-func (m *DelExperimentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelExperimentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelExperimentReq proto.InternalMessageInfo
-
-func (m *DelExperimentReq) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *DelExperimentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type DelExperimentData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelExperimentData) Reset()         { *m = DelExperimentData{} }
-func (m *DelExperimentData) String() string { return proto.CompactTextString(m) }
-func (*DelExperimentData) ProtoMessage()    {}
-func (*DelExperimentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{49}
-}
-
-func (m *DelExperimentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelExperimentData.Unmarshal(m, b)
-}
-func (m *DelExperimentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelExperimentData.Marshal(b, m, deterministic)
-}
-func (m *DelExperimentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelExperimentData.Merge(m, src)
-}
-func (m *DelExperimentData) XXX_Size() int {
-	return xxx_messageInfo_DelExperimentData.Size(m)
-}
-func (m *DelExperimentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelExperimentData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelExperimentData proto.InternalMessageInfo
-
-func (m *DelExperimentData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type DelExperimentRes struct {
-	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelExperimentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
-	XXX_unrecognized     []byte             `json:"-"`
-	XXX_sizecache        int32              `json:"-"`
-}
-
-func (m *DelExperimentRes) Reset()         { *m = DelExperimentRes{} }
-func (m *DelExperimentRes) String() string { return proto.CompactTextString(m) }
-func (*DelExperimentRes) ProtoMessage()    {}
-func (*DelExperimentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{50}
-}
-
-func (m *DelExperimentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelExperimentRes.Unmarshal(m, b)
-}
-func (m *DelExperimentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelExperimentRes.Marshal(b, m, deterministic)
-}
-func (m *DelExperimentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelExperimentRes.Merge(m, src)
-}
-func (m *DelExperimentRes) XXX_Size() int {
-	return xxx_messageInfo_DelExperimentRes.Size(m)
-}
-func (m *DelExperimentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelExperimentRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelExperimentRes proto.InternalMessageInfo
-
-func (m *DelExperimentRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *DelExperimentRes) GetData() *DelExperimentData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//评价
-type AddExperimentCommentReq struct {
-	ExperimentId         int64    `protobuf:"zigzag64,1,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	Comment              string   `protobuf:"bytes,2,opt,name=comment,proto3" json:"comment,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddExperimentCommentReq) Reset()         { *m = AddExperimentCommentReq{} }
-func (m *AddExperimentCommentReq) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentCommentReq) ProtoMessage()    {}
-func (*AddExperimentCommentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{51}
-}
-
-func (m *AddExperimentCommentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentCommentReq.Unmarshal(m, b)
-}
-func (m *AddExperimentCommentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentCommentReq.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentCommentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentCommentReq.Merge(m, src)
-}
-func (m *AddExperimentCommentReq) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentCommentReq.Size(m)
-}
-func (m *AddExperimentCommentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentCommentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentCommentReq proto.InternalMessageInfo
-
-func (m *AddExperimentCommentReq) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *AddExperimentCommentReq) GetComment() string {
-	if m != nil {
-		return m.Comment
-	}
-	return ""
-}
-
-func (m *AddExperimentCommentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type AddExperimentCommentData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddExperimentCommentData) Reset()         { *m = AddExperimentCommentData{} }
-func (m *AddExperimentCommentData) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentCommentData) ProtoMessage()    {}
-func (*AddExperimentCommentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{52}
-}
-
-func (m *AddExperimentCommentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentCommentData.Unmarshal(m, b)
-}
-func (m *AddExperimentCommentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentCommentData.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentCommentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentCommentData.Merge(m, src)
-}
-func (m *AddExperimentCommentData) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentCommentData.Size(m)
-}
-func (m *AddExperimentCommentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentCommentData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentCommentData proto.InternalMessageInfo
-
-func (m *AddExperimentCommentData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type AddExperimentCommentRes struct {
-	Errinfo              *ErrorInfo                `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddExperimentCommentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `json:"-"`
-	XXX_sizecache        int32                     `json:"-"`
-}
-
-func (m *AddExperimentCommentRes) Reset()         { *m = AddExperimentCommentRes{} }
-func (m *AddExperimentCommentRes) String() string { return proto.CompactTextString(m) }
-func (*AddExperimentCommentRes) ProtoMessage()    {}
-func (*AddExperimentCommentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{53}
-}
-
-func (m *AddExperimentCommentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddExperimentCommentRes.Unmarshal(m, b)
-}
-func (m *AddExperimentCommentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddExperimentCommentRes.Marshal(b, m, deterministic)
-}
-func (m *AddExperimentCommentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddExperimentCommentRes.Merge(m, src)
-}
-func (m *AddExperimentCommentRes) XXX_Size() int {
-	return xxx_messageInfo_AddExperimentCommentRes.Size(m)
-}
-func (m *AddExperimentCommentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddExperimentCommentRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddExperimentCommentRes proto.InternalMessageInfo
-
-func (m *AddExperimentCommentRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *AddExperimentCommentRes) GetData() *AddExperimentCommentData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type UpdateExperimentCommentReq struct {
-	ExperimentId         int64    `protobuf:"zigzag64,1,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	Comment              string   `protobuf:"bytes,2,opt,name=comment,proto3" json:"comment,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateExperimentCommentReq) Reset()         { *m = UpdateExperimentCommentReq{} }
-func (m *UpdateExperimentCommentReq) String() string { return proto.CompactTextString(m) }
-func (*UpdateExperimentCommentReq) ProtoMessage()    {}
-func (*UpdateExperimentCommentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{54}
-}
-
-func (m *UpdateExperimentCommentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateExperimentCommentReq.Unmarshal(m, b)
-}
-func (m *UpdateExperimentCommentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateExperimentCommentReq.Marshal(b, m, deterministic)
-}
-func (m *UpdateExperimentCommentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateExperimentCommentReq.Merge(m, src)
-}
-func (m *UpdateExperimentCommentReq) XXX_Size() int {
-	return xxx_messageInfo_UpdateExperimentCommentReq.Size(m)
-}
-func (m *UpdateExperimentCommentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateExperimentCommentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateExperimentCommentReq proto.InternalMessageInfo
-
-func (m *UpdateExperimentCommentReq) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *UpdateExperimentCommentReq) GetComment() string {
-	if m != nil {
-		return m.Comment
-	}
-	return ""
-}
-
-func (m *UpdateExperimentCommentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type UpdateExperimentCommentData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdateExperimentCommentData) Reset()         { *m = UpdateExperimentCommentData{} }
-func (m *UpdateExperimentCommentData) String() string { return proto.CompactTextString(m) }
-func (*UpdateExperimentCommentData) ProtoMessage()    {}
-func (*UpdateExperimentCommentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{55}
-}
-
-func (m *UpdateExperimentCommentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateExperimentCommentData.Unmarshal(m, b)
-}
-func (m *UpdateExperimentCommentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateExperimentCommentData.Marshal(b, m, deterministic)
-}
-func (m *UpdateExperimentCommentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateExperimentCommentData.Merge(m, src)
-}
-func (m *UpdateExperimentCommentData) XXX_Size() int {
-	return xxx_messageInfo_UpdateExperimentCommentData.Size(m)
-}
-func (m *UpdateExperimentCommentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateExperimentCommentData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateExperimentCommentData proto.InternalMessageInfo
-
-func (m *UpdateExperimentCommentData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type UpdateExperimentCommentRes struct {
-	Errinfo              *ErrorInfo                   `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *UpdateExperimentCommentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
-	XXX_unrecognized     []byte                       `json:"-"`
-	XXX_sizecache        int32                        `json:"-"`
-}
-
-func (m *UpdateExperimentCommentRes) Reset()         { *m = UpdateExperimentCommentRes{} }
-func (m *UpdateExperimentCommentRes) String() string { return proto.CompactTextString(m) }
-func (*UpdateExperimentCommentRes) ProtoMessage()    {}
-func (*UpdateExperimentCommentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{56}
-}
-
-func (m *UpdateExperimentCommentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateExperimentCommentRes.Unmarshal(m, b)
-}
-func (m *UpdateExperimentCommentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateExperimentCommentRes.Marshal(b, m, deterministic)
-}
-func (m *UpdateExperimentCommentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdateExperimentCommentRes.Merge(m, src)
-}
-func (m *UpdateExperimentCommentRes) XXX_Size() int {
-	return xxx_messageInfo_UpdateExperimentCommentRes.Size(m)
-}
-func (m *UpdateExperimentCommentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdateExperimentCommentRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdateExperimentCommentRes proto.InternalMessageInfo
-
-func (m *UpdateExperimentCommentRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *UpdateExperimentCommentRes) GetData() *UpdateExperimentCommentData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-// 查看测试列表
-type ListExperimentReq struct {
-	Offset               int64      `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64      `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	EngineType           EngineType `protobuf:"varint,3,opt,name=engine_type,json=engineType,proto3,enum=corpus.EngineType" json:"engine_type,omitempty"`
-	OpUserName           string     `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	ExperimentId         int64      `protobuf:"zigzag64,5,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
-}
-
-func (m *ListExperimentReq) Reset()         { *m = ListExperimentReq{} }
-func (m *ListExperimentReq) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentReq) ProtoMessage()    {}
-func (*ListExperimentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{57}
-}
-
-func (m *ListExperimentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentReq.Unmarshal(m, b)
-}
-func (m *ListExperimentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentReq.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentReq.Merge(m, src)
-}
-func (m *ListExperimentReq) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentReq.Size(m)
-}
-func (m *ListExperimentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentReq proto.InternalMessageInfo
-
-func (m *ListExperimentReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListExperimentReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListExperimentReq) GetEngineType() EngineType {
-	if m != nil {
-		return m.EngineType
-	}
-	return EngineType_enginetype
-}
-
-func (m *ListExperimentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-func (m *ListExperimentReq) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-type ListExperimentData struct {
-	Items                []*Experiment `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64         `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64         `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool          `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
-	XXX_unrecognized     []byte        `json:"-"`
-	XXX_sizecache        int32         `json:"-"`
-}
-
-func (m *ListExperimentData) Reset()         { *m = ListExperimentData{} }
-func (m *ListExperimentData) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentData) ProtoMessage()    {}
-func (*ListExperimentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{58}
-}
-
-func (m *ListExperimentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentData.Unmarshal(m, b)
-}
-func (m *ListExperimentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentData.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentData.Merge(m, src)
-}
-func (m *ListExperimentData) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentData.Size(m)
-}
-func (m *ListExperimentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentData proto.InternalMessageInfo
-
-func (m *ListExperimentData) GetItems() []*Experiment {
-	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListExperimentData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
-	}
-	return 0
-}
-
-func (m *ListExperimentData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListExperimentData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListExperimentRes struct {
-	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListExperimentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *ListExperimentRes) Reset()         { *m = ListExperimentRes{} }
-func (m *ListExperimentRes) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentRes) ProtoMessage()    {}
-func (*ListExperimentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{59}
-}
-
-func (m *ListExperimentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentRes.Unmarshal(m, b)
-}
-func (m *ListExperimentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentRes.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentRes.Merge(m, src)
-}
-func (m *ListExperimentRes) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentRes.Size(m)
-}
-func (m *ListExperimentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentRes proto.InternalMessageInfo
-
-func (m *ListExperimentRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *ListExperimentRes) GetData() *ListExperimentData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//查看测试结果
-type ListExperimentResultReq struct {
-	ExperimentId         int64    `protobuf:"zigzag64,1,opt,name=experiment_id,json=experimentId,proto3" json:"experiment_id,omitempty"`
-	Offset               int64    `protobuf:"zigzag64,2,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"zigzag64,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	OpUserName           string   `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListExperimentResultReq) Reset()         { *m = ListExperimentResultReq{} }
-func (m *ListExperimentResultReq) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentResultReq) ProtoMessage()    {}
-func (*ListExperimentResultReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{60}
-}
-
-func (m *ListExperimentResultReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentResultReq.Unmarshal(m, b)
-}
-func (m *ListExperimentResultReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentResultReq.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentResultReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentResultReq.Merge(m, src)
-}
-func (m *ListExperimentResultReq) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentResultReq.Size(m)
-}
-func (m *ListExperimentResultReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentResultReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentResultReq proto.InternalMessageInfo
-
-func (m *ListExperimentResultReq) GetExperimentId() int64 {
-	if m != nil {
-		return m.ExperimentId
-	}
-	return 0
-}
-
-func (m *ListExperimentResultReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListExperimentResultReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListExperimentResultReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type ListExperimentResultData struct {
-	Items                []*ExperimentResult `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64               `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64               `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool                `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *ListExperimentResultData) Reset()         { *m = ListExperimentResultData{} }
-func (m *ListExperimentResultData) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentResultData) ProtoMessage()    {}
-func (*ListExperimentResultData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{61}
-}
-
-func (m *ListExperimentResultData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentResultData.Unmarshal(m, b)
-}
-func (m *ListExperimentResultData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentResultData.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentResultData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentResultData.Merge(m, src)
-}
-func (m *ListExperimentResultData) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentResultData.Size(m)
-}
-func (m *ListExperimentResultData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentResultData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentResultData proto.InternalMessageInfo
-
-func (m *ListExperimentResultData) GetItems() []*ExperimentResult {
-	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListExperimentResultData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
-	}
-	return 0
-}
-
-func (m *ListExperimentResultData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListExperimentResultData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListExperimentResultRes struct {
-	Errinfo              *ErrorInfo                `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListExperimentResultData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `json:"-"`
-	XXX_sizecache        int32                     `json:"-"`
-}
-
-func (m *ListExperimentResultRes) Reset()         { *m = ListExperimentResultRes{} }
-func (m *ListExperimentResultRes) String() string { return proto.CompactTextString(m) }
-func (*ListExperimentResultRes) ProtoMessage()    {}
-func (*ListExperimentResultRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{62}
-}
-
-func (m *ListExperimentResultRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListExperimentResultRes.Unmarshal(m, b)
-}
-func (m *ListExperimentResultRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListExperimentResultRes.Marshal(b, m, deterministic)
-}
-func (m *ListExperimentResultRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListExperimentResultRes.Merge(m, src)
-}
-func (m *ListExperimentResultRes) XXX_Size() int {
-	return xxx_messageInfo_ListExperimentResultRes.Size(m)
-}
-func (m *ListExperimentResultRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListExperimentResultRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListExperimentResultRes proto.InternalMessageInfo
-
-func (m *ListExperimentResultRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *ListExperimentResultRes) GetData() *ListExperimentResultData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//音素信息
-type PhonemeInfo struct {
-	ChivoxPhoneme        string   `protobuf:"bytes,1,opt,name=chivox_phoneme,json=chivoxPhoneme,proto3" json:"chivox_phoneme,omitempty"`
-	Ipa66Phoneme         string   `protobuf:"bytes,2,opt,name=ipa66_phoneme,json=ipa66Phoneme,proto3" json:"ipa66_phoneme,omitempty"`
-	Ipa88Phoneme         string   `protobuf:"bytes,3,opt,name=ipa88_phoneme,json=ipa88Phoneme,proto3" json:"ipa88_phoneme,omitempty"`
-	KkPhoneme            string   `protobuf:"bytes,4,opt,name=kk_phoneme,json=kkPhoneme,proto3" json:"kk_phoneme,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *PhonemeInfo) Reset()         { *m = PhonemeInfo{} }
-func (m *PhonemeInfo) String() string { return proto.CompactTextString(m) }
-func (*PhonemeInfo) ProtoMessage()    {}
-func (*PhonemeInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{63}
-}
-
-func (m *PhonemeInfo) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PhonemeInfo.Unmarshal(m, b)
-}
-func (m *PhonemeInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PhonemeInfo.Marshal(b, m, deterministic)
-}
-func (m *PhonemeInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PhonemeInfo.Merge(m, src)
-}
-func (m *PhonemeInfo) XXX_Size() int {
-	return xxx_messageInfo_PhonemeInfo.Size(m)
-}
-func (m *PhonemeInfo) XXX_DiscardUnknown() {
-	xxx_messageInfo_PhonemeInfo.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PhonemeInfo proto.InternalMessageInfo
-
-func (m *PhonemeInfo) GetChivoxPhoneme() string {
-	if m != nil {
-		return m.ChivoxPhoneme
-	}
-	return ""
-}
-
-func (m *PhonemeInfo) GetIpa66Phoneme() string {
-	if m != nil {
-		return m.Ipa66Phoneme
-	}
-	return ""
-}
-
-func (m *PhonemeInfo) GetIpa88Phoneme() string {
-	if m != nil {
-		return m.Ipa88Phoneme
-	}
-	return ""
-}
-
-func (m *PhonemeInfo) GetKkPhoneme() string {
-	if m != nil {
-		return m.KkPhoneme
-	}
-	return ""
-}
-
-//添加音素 管理员添加  从apollo拉取
-type AddPhonemeInfoReq struct {
-	ChivoxPhoneme        string   `protobuf:"bytes,1,opt,name=chivox_phoneme,json=chivoxPhoneme,proto3" json:"chivox_phoneme,omitempty"`
-	Ipa66Phoneme         string   `protobuf:"bytes,2,opt,name=ipa66_phoneme,json=ipa66Phoneme,proto3" json:"ipa66_phoneme,omitempty"`
-	Ipa88Phoneme         string   `protobuf:"bytes,3,opt,name=ipa88_phoneme,json=ipa88Phoneme,proto3" json:"ipa88_phoneme,omitempty"`
-	KkPhoneme            string   `protobuf:"bytes,4,opt,name=kk_phoneme,json=kkPhoneme,proto3" json:"kk_phoneme,omitempty"`
-	OpUserName           string   `protobuf:"bytes,5,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddPhonemeInfoReq) Reset()         { *m = AddPhonemeInfoReq{} }
-func (m *AddPhonemeInfoReq) String() string { return proto.CompactTextString(m) }
-func (*AddPhonemeInfoReq) ProtoMessage()    {}
-func (*AddPhonemeInfoReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{64}
-}
-
-func (m *AddPhonemeInfoReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddPhonemeInfoReq.Unmarshal(m, b)
-}
-func (m *AddPhonemeInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddPhonemeInfoReq.Marshal(b, m, deterministic)
-}
-func (m *AddPhonemeInfoReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddPhonemeInfoReq.Merge(m, src)
-}
-func (m *AddPhonemeInfoReq) XXX_Size() int {
-	return xxx_messageInfo_AddPhonemeInfoReq.Size(m)
-}
-func (m *AddPhonemeInfoReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddPhonemeInfoReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddPhonemeInfoReq proto.InternalMessageInfo
-
-func (m *AddPhonemeInfoReq) GetChivoxPhoneme() string {
-	if m != nil {
-		return m.ChivoxPhoneme
-	}
-	return ""
-}
-
-func (m *AddPhonemeInfoReq) GetIpa66Phoneme() string {
-	if m != nil {
-		return m.Ipa66Phoneme
-	}
-	return ""
-}
-
-func (m *AddPhonemeInfoReq) GetIpa88Phoneme() string {
-	if m != nil {
-		return m.Ipa88Phoneme
-	}
-	return ""
-}
-
-func (m *AddPhonemeInfoReq) GetKkPhoneme() string {
-	if m != nil {
-		return m.KkPhoneme
-	}
-	return ""
-}
-
-func (m *AddPhonemeInfoReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type AddPhonemeInfoData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *AddPhonemeInfoData) Reset()         { *m = AddPhonemeInfoData{} }
-func (m *AddPhonemeInfoData) String() string { return proto.CompactTextString(m) }
-func (*AddPhonemeInfoData) ProtoMessage()    {}
-func (*AddPhonemeInfoData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{65}
-}
-
-func (m *AddPhonemeInfoData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddPhonemeInfoData.Unmarshal(m, b)
-}
-func (m *AddPhonemeInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddPhonemeInfoData.Marshal(b, m, deterministic)
-}
-func (m *AddPhonemeInfoData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddPhonemeInfoData.Merge(m, src)
-}
-func (m *AddPhonemeInfoData) XXX_Size() int {
-	return xxx_messageInfo_AddPhonemeInfoData.Size(m)
-}
-func (m *AddPhonemeInfoData) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddPhonemeInfoData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddPhonemeInfoData proto.InternalMessageInfo
-
-func (m *AddPhonemeInfoData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type AddPhonemeInfoRes struct {
-	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *AddPhonemeInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *AddPhonemeInfoRes) Reset()         { *m = AddPhonemeInfoRes{} }
-func (m *AddPhonemeInfoRes) String() string { return proto.CompactTextString(m) }
-func (*AddPhonemeInfoRes) ProtoMessage()    {}
-func (*AddPhonemeInfoRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{66}
-}
-
-func (m *AddPhonemeInfoRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AddPhonemeInfoRes.Unmarshal(m, b)
-}
-func (m *AddPhonemeInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AddPhonemeInfoRes.Marshal(b, m, deterministic)
-}
-func (m *AddPhonemeInfoRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddPhonemeInfoRes.Merge(m, src)
-}
-func (m *AddPhonemeInfoRes) XXX_Size() int {
-	return xxx_messageInfo_AddPhonemeInfoRes.Size(m)
-}
-func (m *AddPhonemeInfoRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddPhonemeInfoRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddPhonemeInfoRes proto.InternalMessageInfo
-
-func (m *AddPhonemeInfoRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *AddPhonemeInfoRes) GetData() *AddPhonemeInfoData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//修改音素 管理员
-type UpdatePhonemeInfoReq struct {
-	ChivoxPhoneme        string   `protobuf:"bytes,1,opt,name=chivox_phoneme,json=chivoxPhoneme,proto3" json:"chivox_phoneme,omitempty"`
-	Ipa66Phoneme         string   `protobuf:"bytes,2,opt,name=ipa66_phoneme,json=ipa66Phoneme,proto3" json:"ipa66_phoneme,omitempty"`
-	Ipa88Phoneme         string   `protobuf:"bytes,3,opt,name=ipa88_phoneme,json=ipa88Phoneme,proto3" json:"ipa88_phoneme,omitempty"`
-	KkPhoneme            string   `protobuf:"bytes,4,opt,name=kk_phoneme,json=kkPhoneme,proto3" json:"kk_phoneme,omitempty"`
-	OpUserName           string   `protobuf:"bytes,5,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdatePhonemeInfoReq) Reset()         { *m = UpdatePhonemeInfoReq{} }
-func (m *UpdatePhonemeInfoReq) String() string { return proto.CompactTextString(m) }
-func (*UpdatePhonemeInfoReq) ProtoMessage()    {}
-func (*UpdatePhonemeInfoReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{67}
-}
-
-func (m *UpdatePhonemeInfoReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdatePhonemeInfoReq.Unmarshal(m, b)
-}
-func (m *UpdatePhonemeInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdatePhonemeInfoReq.Marshal(b, m, deterministic)
-}
-func (m *UpdatePhonemeInfoReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdatePhonemeInfoReq.Merge(m, src)
-}
-func (m *UpdatePhonemeInfoReq) XXX_Size() int {
-	return xxx_messageInfo_UpdatePhonemeInfoReq.Size(m)
-}
-func (m *UpdatePhonemeInfoReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdatePhonemeInfoReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdatePhonemeInfoReq proto.InternalMessageInfo
-
-func (m *UpdatePhonemeInfoReq) GetChivoxPhoneme() string {
-	if m != nil {
-		return m.ChivoxPhoneme
-	}
-	return ""
-}
-
-func (m *UpdatePhonemeInfoReq) GetIpa66Phoneme() string {
-	if m != nil {
-		return m.Ipa66Phoneme
-	}
-	return ""
-}
-
-func (m *UpdatePhonemeInfoReq) GetIpa88Phoneme() string {
-	if m != nil {
-		return m.Ipa88Phoneme
-	}
-	return ""
-}
-
-func (m *UpdatePhonemeInfoReq) GetKkPhoneme() string {
-	if m != nil {
-		return m.KkPhoneme
-	}
-	return ""
-}
-
-func (m *UpdatePhonemeInfoReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type UpdatePhonemeInfoData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdatePhonemeInfoData) Reset()         { *m = UpdatePhonemeInfoData{} }
-func (m *UpdatePhonemeInfoData) String() string { return proto.CompactTextString(m) }
-func (*UpdatePhonemeInfoData) ProtoMessage()    {}
-func (*UpdatePhonemeInfoData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{68}
-}
-
-func (m *UpdatePhonemeInfoData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdatePhonemeInfoData.Unmarshal(m, b)
-}
-func (m *UpdatePhonemeInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdatePhonemeInfoData.Marshal(b, m, deterministic)
-}
-func (m *UpdatePhonemeInfoData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdatePhonemeInfoData.Merge(m, src)
-}
-func (m *UpdatePhonemeInfoData) XXX_Size() int {
-	return xxx_messageInfo_UpdatePhonemeInfoData.Size(m)
-}
-func (m *UpdatePhonemeInfoData) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdatePhonemeInfoData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdatePhonemeInfoData proto.InternalMessageInfo
-
-func (m *UpdatePhonemeInfoData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type UpdatePhonemeInfoRes struct {
-	Errinfo              *ErrorInfo             `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *UpdatePhonemeInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
-	XXX_unrecognized     []byte                 `json:"-"`
-	XXX_sizecache        int32                  `json:"-"`
-}
-
-func (m *UpdatePhonemeInfoRes) Reset()         { *m = UpdatePhonemeInfoRes{} }
-func (m *UpdatePhonemeInfoRes) String() string { return proto.CompactTextString(m) }
-func (*UpdatePhonemeInfoRes) ProtoMessage()    {}
-func (*UpdatePhonemeInfoRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{69}
-}
-
-func (m *UpdatePhonemeInfoRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdatePhonemeInfoRes.Unmarshal(m, b)
-}
-func (m *UpdatePhonemeInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdatePhonemeInfoRes.Marshal(b, m, deterministic)
-}
-func (m *UpdatePhonemeInfoRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdatePhonemeInfoRes.Merge(m, src)
-}
-func (m *UpdatePhonemeInfoRes) XXX_Size() int {
-	return xxx_messageInfo_UpdatePhonemeInfoRes.Size(m)
-}
-func (m *UpdatePhonemeInfoRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdatePhonemeInfoRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdatePhonemeInfoRes proto.InternalMessageInfo
-
-func (m *UpdatePhonemeInfoRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *UpdatePhonemeInfoRes) GetData() *UpdatePhonemeInfoData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//删除音素 管理员
-type DelPhonemeInfoReq struct {
-	ChivoxPhoneme        string   `protobuf:"bytes,1,opt,name=chivox_phoneme,json=chivoxPhoneme,proto3" json:"chivox_phoneme,omitempty"`
-	OpUserName           string   `protobuf:"bytes,2,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelPhonemeInfoReq) Reset()         { *m = DelPhonemeInfoReq{} }
-func (m *DelPhonemeInfoReq) String() string { return proto.CompactTextString(m) }
-func (*DelPhonemeInfoReq) ProtoMessage()    {}
-func (*DelPhonemeInfoReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{70}
-}
-
-func (m *DelPhonemeInfoReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelPhonemeInfoReq.Unmarshal(m, b)
-}
-func (m *DelPhonemeInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelPhonemeInfoReq.Marshal(b, m, deterministic)
-}
-func (m *DelPhonemeInfoReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelPhonemeInfoReq.Merge(m, src)
-}
-func (m *DelPhonemeInfoReq) XXX_Size() int {
-	return xxx_messageInfo_DelPhonemeInfoReq.Size(m)
-}
-func (m *DelPhonemeInfoReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelPhonemeInfoReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelPhonemeInfoReq proto.InternalMessageInfo
-
-func (m *DelPhonemeInfoReq) GetChivoxPhoneme() string {
-	if m != nil {
-		return m.ChivoxPhoneme
-	}
-	return ""
-}
-
-func (m *DelPhonemeInfoReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type DelPhonemeInfoData struct {
-	IsSuccess            bool     `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DelPhonemeInfoData) Reset()         { *m = DelPhonemeInfoData{} }
-func (m *DelPhonemeInfoData) String() string { return proto.CompactTextString(m) }
-func (*DelPhonemeInfoData) ProtoMessage()    {}
-func (*DelPhonemeInfoData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{71}
-}
-
-func (m *DelPhonemeInfoData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelPhonemeInfoData.Unmarshal(m, b)
-}
-func (m *DelPhonemeInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelPhonemeInfoData.Marshal(b, m, deterministic)
-}
-func (m *DelPhonemeInfoData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelPhonemeInfoData.Merge(m, src)
-}
-func (m *DelPhonemeInfoData) XXX_Size() int {
-	return xxx_messageInfo_DelPhonemeInfoData.Size(m)
-}
-func (m *DelPhonemeInfoData) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelPhonemeInfoData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelPhonemeInfoData proto.InternalMessageInfo
-
-func (m *DelPhonemeInfoData) GetIsSuccess() bool {
-	if m != nil {
-		return m.IsSuccess
-	}
-	return false
-}
-
-type DelPhonemeInfoRes struct {
-	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *DelPhonemeInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
-}
-
-func (m *DelPhonemeInfoRes) Reset()         { *m = DelPhonemeInfoRes{} }
-func (m *DelPhonemeInfoRes) String() string { return proto.CompactTextString(m) }
-func (*DelPhonemeInfoRes) ProtoMessage()    {}
-func (*DelPhonemeInfoRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{72}
-}
-
-func (m *DelPhonemeInfoRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DelPhonemeInfoRes.Unmarshal(m, b)
-}
-func (m *DelPhonemeInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DelPhonemeInfoRes.Marshal(b, m, deterministic)
-}
-func (m *DelPhonemeInfoRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DelPhonemeInfoRes.Merge(m, src)
-}
-func (m *DelPhonemeInfoRes) XXX_Size() int {
-	return xxx_messageInfo_DelPhonemeInfoRes.Size(m)
-}
-func (m *DelPhonemeInfoRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_DelPhonemeInfoRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DelPhonemeInfoRes proto.InternalMessageInfo
-
-func (m *DelPhonemeInfoRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *DelPhonemeInfoRes) GetData() *DelPhonemeInfoData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-//查看因素 管理员
-type ListPhonemeInfoReq struct {
-	Offset               int64    `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	OpUserName           string   `protobuf:"bytes,3,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListPhonemeInfoReq) Reset()         { *m = ListPhonemeInfoReq{} }
-func (m *ListPhonemeInfoReq) String() string { return proto.CompactTextString(m) }
-func (*ListPhonemeInfoReq) ProtoMessage()    {}
-func (*ListPhonemeInfoReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{73}
-}
-
-func (m *ListPhonemeInfoReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListPhonemeInfoReq.Unmarshal(m, b)
-}
-func (m *ListPhonemeInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListPhonemeInfoReq.Marshal(b, m, deterministic)
-}
-func (m *ListPhonemeInfoReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPhonemeInfoReq.Merge(m, src)
-}
-func (m *ListPhonemeInfoReq) XXX_Size() int {
-	return xxx_messageInfo_ListPhonemeInfoReq.Size(m)
-}
-func (m *ListPhonemeInfoReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPhonemeInfoReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListPhonemeInfoReq proto.InternalMessageInfo
-
-func (m *ListPhonemeInfoReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListPhonemeInfoReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListPhonemeInfoReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type ListPhonemeInfoData struct {
-	Items                []*PhonemeInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64          `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64          `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool           `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
-}
-
-func (m *ListPhonemeInfoData) Reset()         { *m = ListPhonemeInfoData{} }
-func (m *ListPhonemeInfoData) String() string { return proto.CompactTextString(m) }
-func (*ListPhonemeInfoData) ProtoMessage()    {}
-func (*ListPhonemeInfoData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{74}
-}
-
-func (m *ListPhonemeInfoData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListPhonemeInfoData.Unmarshal(m, b)
-}
-func (m *ListPhonemeInfoData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListPhonemeInfoData.Marshal(b, m, deterministic)
-}
-func (m *ListPhonemeInfoData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPhonemeInfoData.Merge(m, src)
-}
-func (m *ListPhonemeInfoData) XXX_Size() int {
-	return xxx_messageInfo_ListPhonemeInfoData.Size(m)
-}
-func (m *ListPhonemeInfoData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPhonemeInfoData.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListPhonemeInfoData proto.InternalMessageInfo
-
-func (m *ListPhonemeInfoData) GetItems() []*PhonemeInfo {
-	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListPhonemeInfoData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
-	}
-	return 0
-}
-
-func (m *ListPhonemeInfoData) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListPhonemeInfoData) GetMore() bool {
-	if m != nil {
-		return m.More
-	}
-	return false
-}
-
-type ListPhonemeInfoRes struct {
-	Errinfo              *ErrorInfo           `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListPhonemeInfoData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
-}
-
-func (m *ListPhonemeInfoRes) Reset()         { *m = ListPhonemeInfoRes{} }
-func (m *ListPhonemeInfoRes) String() string { return proto.CompactTextString(m) }
-func (*ListPhonemeInfoRes) ProtoMessage()    {}
-func (*ListPhonemeInfoRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{75}
-}
-
-func (m *ListPhonemeInfoRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListPhonemeInfoRes.Unmarshal(m, b)
-}
-func (m *ListPhonemeInfoRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListPhonemeInfoRes.Marshal(b, m, deterministic)
-}
-func (m *ListPhonemeInfoRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPhonemeInfoRes.Merge(m, src)
-}
-func (m *ListPhonemeInfoRes) XXX_Size() int {
-	return xxx_messageInfo_ListPhonemeInfoRes.Size(m)
-}
-func (m *ListPhonemeInfoRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPhonemeInfoRes.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListPhonemeInfoRes proto.InternalMessageInfo
-
-func (m *ListPhonemeInfoRes) GetErrinfo() *ErrorInfo {
-	if m != nil {
-		return m.Errinfo
-	}
-	return nil
-}
-
-func (m *ListPhonemeInfoRes) GetData() *ListPhonemeInfoData {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type ListCorpusDocumentReq struct {
-	Offset               int64    `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	CollectionId         int64    `protobuf:"zigzag64,3,opt,name=collection_id,json=collectionId,proto3" json:"collection_id,omitempty"`
-	OpUserName           string   `protobuf:"bytes,4,opt,name=op_user_name,json=opUserName,proto3" json:"op_user_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListCorpusDocumentReq) Reset()         { *m = ListCorpusDocumentReq{} }
-func (m *ListCorpusDocumentReq) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusDocumentReq) ProtoMessage()    {}
-func (*ListCorpusDocumentReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{76}
-}
-
-func (m *ListCorpusDocumentReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusDocumentReq.Unmarshal(m, b)
-}
-func (m *ListCorpusDocumentReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusDocumentReq.Marshal(b, m, deterministic)
-}
-func (m *ListCorpusDocumentReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusDocumentReq.Merge(m, src)
-}
-func (m *ListCorpusDocumentReq) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusDocumentReq.Size(m)
-}
-func (m *ListCorpusDocumentReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusDocumentReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListCorpusDocumentReq proto.InternalMessageInfo
-
-func (m *ListCorpusDocumentReq) GetOffset() int64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-func (m *ListCorpusDocumentReq) GetLimit() int64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *ListCorpusDocumentReq) GetCollectionId() int64 {
-	if m != nil {
-		return m.CollectionId
-	}
-	return 0
-}
-
-func (m *ListCorpusDocumentReq) GetOpUserName() string {
-	if m != nil {
-		return m.OpUserName
-	}
-	return ""
-}
-
-type ListCorpusDocumentData struct {
-	Items                []*Corpus `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total                int64     `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
-	Offset               int64     `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	More                 bool      `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
+type Audio struct {
+	AudioId              int64     `protobuf:"zigzag64,1,opt,name=audio_id,json=audioId,proto3" json:"audio_id,omitempty"`
+	OriginAudio          string    `protobuf:"bytes,2,opt,name=origin_audio,json=originAudio,proto3" json:"origin_audio,omitempty"`
+	TransAudio           string    `protobuf:"bytes,3,opt,name=trans_audio,json=transAudio,proto3" json:"trans_audio,omitempty"`
+	AudioType            AudioType `protobuf:"varint,4,opt,name=audio_type,json=audioType,proto3,enum=corpus.AudioType" json:"audio_type,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *ListCorpusDocumentData) Reset()         { *m = ListCorpusDocumentData{} }
-func (m *ListCorpusDocumentData) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusDocumentData) ProtoMessage()    {}
-func (*ListCorpusDocumentData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{77}
+func (m *Audio) Reset()         { *m = Audio{} }
+func (m *Audio) String() string { return proto.CompactTextString(m) }
+func (*Audio) ProtoMessage()    {}
+func (*Audio) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{14}
 }
 
-func (m *ListCorpusDocumentData) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusDocumentData.Unmarshal(m, b)
+func (m *Audio) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Audio.Unmarshal(m, b)
 }
-func (m *ListCorpusDocumentData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusDocumentData.Marshal(b, m, deterministic)
+func (m *Audio) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Audio.Marshal(b, m, deterministic)
 }
-func (m *ListCorpusDocumentData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusDocumentData.Merge(m, src)
+func (m *Audio) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Audio.Merge(m, src)
 }
-func (m *ListCorpusDocumentData) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusDocumentData.Size(m)
+func (m *Audio) XXX_Size() int {
+	return xxx_messageInfo_Audio.Size(m)
 }
-func (m *ListCorpusDocumentData) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusDocumentData.DiscardUnknown(m)
+func (m *Audio) XXX_DiscardUnknown() {
+	xxx_messageInfo_Audio.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListCorpusDocumentData proto.InternalMessageInfo
+var xxx_messageInfo_Audio proto.InternalMessageInfo
 
-func (m *ListCorpusDocumentData) GetItems() []*Corpus {
+func (m *Audio) GetAudioId() int64 {
 	if m != nil {
-		return m.Items
-	}
-	return nil
-}
-
-func (m *ListCorpusDocumentData) GetTotal() int64 {
-	if m != nil {
-		return m.Total
+		return m.AudioId
 	}
 	return 0
 }
 
-func (m *ListCorpusDocumentData) GetOffset() int64 {
+func (m *Audio) GetOriginAudio() string {
 	if m != nil {
-		return m.Offset
+		return m.OriginAudio
 	}
-	return 0
+	return ""
 }
 
-func (m *ListCorpusDocumentData) GetMore() bool {
+func (m *Audio) GetTransAudio() string {
 	if m != nil {
-		return m.More
+		return m.TransAudio
 	}
-	return false
+	return ""
 }
 
-type ListCorpusDocumentRes struct {
-	Errinfo              *ErrorInfo              `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
-	Data                 *ListCorpusDocumentData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
-	XXX_unrecognized     []byte                  `json:"-"`
-	XXX_sizecache        int32                   `json:"-"`
+func (m *Audio) GetAudioType() AudioType {
+	if m != nil {
+		return m.AudioType
+	}
+	return AudioType_audio_type
 }
 
-func (m *ListCorpusDocumentRes) Reset()         { *m = ListCorpusDocumentRes{} }
-func (m *ListCorpusDocumentRes) String() string { return proto.CompactTextString(m) }
-func (*ListCorpusDocumentRes) ProtoMessage()    {}
-func (*ListCorpusDocumentRes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8d06a1256b80a8c8, []int{78}
+type AddTransAudioReq struct {
+	OriginAudio          string   `protobuf:"bytes,1,opt,name=origin_audio,json=originAudio,proto3" json:"origin_audio,omitempty"`
+	TransAudio           string   `protobuf:"bytes,2,opt,name=trans_audio,json=transAudio,proto3" json:"trans_audio,omitempty"`
+	Cookie               string   `protobuf:"bytes,3,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ListCorpusDocumentRes) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListCorpusDocumentRes.Unmarshal(m, b)
-}
-func (m *ListCorpusDocumentRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListCorpusDocumentRes.Marshal(b, m, deterministic)
-}
-func (m *ListCorpusDocumentRes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListCorpusDocumentRes.Merge(m, src)
-}
-func (m *ListCorpusDocumentRes) XXX_Size() int {
-	return xxx_messageInfo_ListCorpusDocumentRes.Size(m)
-}
-func (m *ListCorpusDocumentRes) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListCorpusDocumentRes.DiscardUnknown(m)
+func (m *AddTransAudioReq) Reset()         { *m = AddTransAudioReq{} }
+func (m *AddTransAudioReq) String() string { return proto.CompactTextString(m) }
+func (*AddTransAudioReq) ProtoMessage()    {}
+func (*AddTransAudioReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{15}
 }
 
-var xxx_messageInfo_ListCorpusDocumentRes proto.InternalMessageInfo
+func (m *AddTransAudioReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddTransAudioReq.Unmarshal(m, b)
+}
+func (m *AddTransAudioReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddTransAudioReq.Marshal(b, m, deterministic)
+}
+func (m *AddTransAudioReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTransAudioReq.Merge(m, src)
+}
+func (m *AddTransAudioReq) XXX_Size() int {
+	return xxx_messageInfo_AddTransAudioReq.Size(m)
+}
+func (m *AddTransAudioReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTransAudioReq.DiscardUnknown(m)
+}
 
-func (m *ListCorpusDocumentRes) GetErrinfo() *ErrorInfo {
+var xxx_messageInfo_AddTransAudioReq proto.InternalMessageInfo
+
+func (m *AddTransAudioReq) GetOriginAudio() string {
+	if m != nil {
+		return m.OriginAudio
+	}
+	return ""
+}
+
+func (m *AddTransAudioReq) GetTransAudio() string {
+	if m != nil {
+		return m.TransAudio
+	}
+	return ""
+}
+
+func (m *AddTransAudioReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type AddTransAudioData struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddTransAudioData) Reset()         { *m = AddTransAudioData{} }
+func (m *AddTransAudioData) String() string { return proto.CompactTextString(m) }
+func (*AddTransAudioData) ProtoMessage()    {}
+func (*AddTransAudioData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{16}
+}
+
+func (m *AddTransAudioData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddTransAudioData.Unmarshal(m, b)
+}
+func (m *AddTransAudioData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddTransAudioData.Marshal(b, m, deterministic)
+}
+func (m *AddTransAudioData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTransAudioData.Merge(m, src)
+}
+func (m *AddTransAudioData) XXX_Size() int {
+	return xxx_messageInfo_AddTransAudioData.Size(m)
+}
+func (m *AddTransAudioData) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTransAudioData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTransAudioData proto.InternalMessageInfo
+
+type AddTransAudioRes struct {
+	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *AddTransAudioData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *AddTransAudioRes) Reset()         { *m = AddTransAudioRes{} }
+func (m *AddTransAudioRes) String() string { return proto.CompactTextString(m) }
+func (*AddTransAudioRes) ProtoMessage()    {}
+func (*AddTransAudioRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{17}
+}
+
+func (m *AddTransAudioRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddTransAudioRes.Unmarshal(m, b)
+}
+func (m *AddTransAudioRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddTransAudioRes.Marshal(b, m, deterministic)
+}
+func (m *AddTransAudioRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTransAudioRes.Merge(m, src)
+}
+func (m *AddTransAudioRes) XXX_Size() int {
+	return xxx_messageInfo_AddTransAudioRes.Size(m)
+}
+func (m *AddTransAudioRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTransAudioRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTransAudioRes proto.InternalMessageInfo
+
+func (m *AddTransAudioRes) GetErrinfo() *ErrorInfo {
 	if m != nil {
 		return m.Errinfo
 	}
 	return nil
 }
 
-func (m *ListCorpusDocumentRes) GetData() *ListCorpusDocumentData {
+func (m *AddTransAudioRes) GetData() *AddTransAudioData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type DelTransAudioReq struct {
+	AudioId              int64    `protobuf:"zigzag64,1,opt,name=audio_id,json=audioId,proto3" json:"audio_id,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DelTransAudioReq) Reset()         { *m = DelTransAudioReq{} }
+func (m *DelTransAudioReq) String() string { return proto.CompactTextString(m) }
+func (*DelTransAudioReq) ProtoMessage()    {}
+func (*DelTransAudioReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{18}
+}
+
+func (m *DelTransAudioReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelTransAudioReq.Unmarshal(m, b)
+}
+func (m *DelTransAudioReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelTransAudioReq.Marshal(b, m, deterministic)
+}
+func (m *DelTransAudioReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTransAudioReq.Merge(m, src)
+}
+func (m *DelTransAudioReq) XXX_Size() int {
+	return xxx_messageInfo_DelTransAudioReq.Size(m)
+}
+func (m *DelTransAudioReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTransAudioReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTransAudioReq proto.InternalMessageInfo
+
+func (m *DelTransAudioReq) GetAudioId() int64 {
+	if m != nil {
+		return m.AudioId
+	}
+	return 0
+}
+
+func (m *DelTransAudioReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type DelTransAudioData struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DelTransAudioData) Reset()         { *m = DelTransAudioData{} }
+func (m *DelTransAudioData) String() string { return proto.CompactTextString(m) }
+func (*DelTransAudioData) ProtoMessage()    {}
+func (*DelTransAudioData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{19}
+}
+
+func (m *DelTransAudioData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelTransAudioData.Unmarshal(m, b)
+}
+func (m *DelTransAudioData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelTransAudioData.Marshal(b, m, deterministic)
+}
+func (m *DelTransAudioData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTransAudioData.Merge(m, src)
+}
+func (m *DelTransAudioData) XXX_Size() int {
+	return xxx_messageInfo_DelTransAudioData.Size(m)
+}
+func (m *DelTransAudioData) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTransAudioData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTransAudioData proto.InternalMessageInfo
+
+type DelTransAudioRes struct {
+	Errinfo              *ErrorInfo         `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *DelTransAudioData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *DelTransAudioRes) Reset()         { *m = DelTransAudioRes{} }
+func (m *DelTransAudioRes) String() string { return proto.CompactTextString(m) }
+func (*DelTransAudioRes) ProtoMessage()    {}
+func (*DelTransAudioRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{20}
+}
+
+func (m *DelTransAudioRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DelTransAudioRes.Unmarshal(m, b)
+}
+func (m *DelTransAudioRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DelTransAudioRes.Marshal(b, m, deterministic)
+}
+func (m *DelTransAudioRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DelTransAudioRes.Merge(m, src)
+}
+func (m *DelTransAudioRes) XXX_Size() int {
+	return xxx_messageInfo_DelTransAudioRes.Size(m)
+}
+func (m *DelTransAudioRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_DelTransAudioRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DelTransAudioRes proto.InternalMessageInfo
+
+func (m *DelTransAudioRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *DelTransAudioRes) GetData() *DelTransAudioData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type ListTransAudioReq struct {
+	Offset               int64     `protobuf:"zigzag64,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64     `protobuf:"zigzag64,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	AudioType            AudioType `protobuf:"varint,3,opt,name=audio_type,json=audioType,proto3,enum=corpus.AudioType" json:"audio_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *ListTransAudioReq) Reset()         { *m = ListTransAudioReq{} }
+func (m *ListTransAudioReq) String() string { return proto.CompactTextString(m) }
+func (*ListTransAudioReq) ProtoMessage()    {}
+func (*ListTransAudioReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{21}
+}
+
+func (m *ListTransAudioReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListTransAudioReq.Unmarshal(m, b)
+}
+func (m *ListTransAudioReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListTransAudioReq.Marshal(b, m, deterministic)
+}
+func (m *ListTransAudioReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTransAudioReq.Merge(m, src)
+}
+func (m *ListTransAudioReq) XXX_Size() int {
+	return xxx_messageInfo_ListTransAudioReq.Size(m)
+}
+func (m *ListTransAudioReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTransAudioReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTransAudioReq proto.InternalMessageInfo
+
+func (m *ListTransAudioReq) GetOffset() int64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *ListTransAudioReq) GetLimit() int64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *ListTransAudioReq) GetAudioType() AudioType {
+	if m != nil {
+		return m.AudioType
+	}
+	return AudioType_audio_type
+}
+
+type ListTransAudioData struct {
+	Items                []*Audio `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Total                int64    `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
+	Offset               int64    `protobuf:"zigzag64,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	More                 bool     `protobuf:"varint,4,opt,name=more,proto3" json:"more,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListTransAudioData) Reset()         { *m = ListTransAudioData{} }
+func (m *ListTransAudioData) String() string { return proto.CompactTextString(m) }
+func (*ListTransAudioData) ProtoMessage()    {}
+func (*ListTransAudioData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{22}
+}
+
+func (m *ListTransAudioData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListTransAudioData.Unmarshal(m, b)
+}
+func (m *ListTransAudioData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListTransAudioData.Marshal(b, m, deterministic)
+}
+func (m *ListTransAudioData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTransAudioData.Merge(m, src)
+}
+func (m *ListTransAudioData) XXX_Size() int {
+	return xxx_messageInfo_ListTransAudioData.Size(m)
+}
+func (m *ListTransAudioData) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTransAudioData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTransAudioData proto.InternalMessageInfo
+
+func (m *ListTransAudioData) GetItems() []*Audio {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *ListTransAudioData) GetTotal() int64 {
+	if m != nil {
+		return m.Total
+	}
+	return 0
+}
+
+func (m *ListTransAudioData) GetOffset() int64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *ListTransAudioData) GetMore() bool {
+	if m != nil {
+		return m.More
+	}
+	return false
+}
+
+type ListTransAudioRes struct {
+	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *ListTransAudioData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
+}
+
+func (m *ListTransAudioRes) Reset()         { *m = ListTransAudioRes{} }
+func (m *ListTransAudioRes) String() string { return proto.CompactTextString(m) }
+func (*ListTransAudioRes) ProtoMessage()    {}
+func (*ListTransAudioRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{23}
+}
+
+func (m *ListTransAudioRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListTransAudioRes.Unmarshal(m, b)
+}
+func (m *ListTransAudioRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListTransAudioRes.Marshal(b, m, deterministic)
+}
+func (m *ListTransAudioRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTransAudioRes.Merge(m, src)
+}
+func (m *ListTransAudioRes) XXX_Size() int {
+	return xxx_messageInfo_ListTransAudioRes.Size(m)
+}
+func (m *ListTransAudioRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTransAudioRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTransAudioRes proto.InternalMessageInfo
+
+func (m *ListTransAudioRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *ListTransAudioRes) GetData() *ListTransAudioData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type KeyWord struct {
+	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Score                float32  `protobuf:"fixed32,2,opt,name=score,proto3" json:"score,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *KeyWord) Reset()         { *m = KeyWord{} }
+func (m *KeyWord) String() string { return proto.CompactTextString(m) }
+func (*KeyWord) ProtoMessage()    {}
+func (*KeyWord) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{24}
+}
+
+func (m *KeyWord) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_KeyWord.Unmarshal(m, b)
+}
+func (m *KeyWord) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_KeyWord.Marshal(b, m, deterministic)
+}
+func (m *KeyWord) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KeyWord.Merge(m, src)
+}
+func (m *KeyWord) XXX_Size() int {
+	return xxx_messageInfo_KeyWord.Size(m)
+}
+func (m *KeyWord) XXX_DiscardUnknown() {
+	xxx_messageInfo_KeyWord.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KeyWord proto.InternalMessageInfo
+
+func (m *KeyWord) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+func (m *KeyWord) GetScore() float32 {
+	if m != nil {
+		return m.Score
+	}
+	return 0
+}
+
+type GetKeyWordReq struct {
+	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetKeyWordReq) Reset()         { *m = GetKeyWordReq{} }
+func (m *GetKeyWordReq) String() string { return proto.CompactTextString(m) }
+func (*GetKeyWordReq) ProtoMessage()    {}
+func (*GetKeyWordReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{25}
+}
+
+func (m *GetKeyWordReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetKeyWordReq.Unmarshal(m, b)
+}
+func (m *GetKeyWordReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetKeyWordReq.Marshal(b, m, deterministic)
+}
+func (m *GetKeyWordReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetKeyWordReq.Merge(m, src)
+}
+func (m *GetKeyWordReq) XXX_Size() int {
+	return xxx_messageInfo_GetKeyWordReq.Size(m)
+}
+func (m *GetKeyWordReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetKeyWordReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetKeyWordReq proto.InternalMessageInfo
+
+func (m *GetKeyWordReq) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+func (m *GetKeyWordReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type GetKeyWordData struct {
+	Items                []*KeyWord `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Total                int64      `protobuf:"zigzag64,2,opt,name=total,proto3" json:"total,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *GetKeyWordData) Reset()         { *m = GetKeyWordData{} }
+func (m *GetKeyWordData) String() string { return proto.CompactTextString(m) }
+func (*GetKeyWordData) ProtoMessage()    {}
+func (*GetKeyWordData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{26}
+}
+
+func (m *GetKeyWordData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetKeyWordData.Unmarshal(m, b)
+}
+func (m *GetKeyWordData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetKeyWordData.Marshal(b, m, deterministic)
+}
+func (m *GetKeyWordData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetKeyWordData.Merge(m, src)
+}
+func (m *GetKeyWordData) XXX_Size() int {
+	return xxx_messageInfo_GetKeyWordData.Size(m)
+}
+func (m *GetKeyWordData) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetKeyWordData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetKeyWordData proto.InternalMessageInfo
+
+func (m *GetKeyWordData) GetItems() []*KeyWord {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *GetKeyWordData) GetTotal() int64 {
+	if m != nil {
+		return m.Total
+	}
+	return 0
+}
+
+type GetKeyWordRes struct {
+	Errinfo              *ErrorInfo      `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *GetKeyWordData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *GetKeyWordRes) Reset()         { *m = GetKeyWordRes{} }
+func (m *GetKeyWordRes) String() string { return proto.CompactTextString(m) }
+func (*GetKeyWordRes) ProtoMessage()    {}
+func (*GetKeyWordRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{27}
+}
+
+func (m *GetKeyWordRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetKeyWordRes.Unmarshal(m, b)
+}
+func (m *GetKeyWordRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetKeyWordRes.Marshal(b, m, deterministic)
+}
+func (m *GetKeyWordRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetKeyWordRes.Merge(m, src)
+}
+func (m *GetKeyWordRes) XXX_Size() int {
+	return xxx_messageInfo_GetKeyWordRes.Size(m)
+}
+func (m *GetKeyWordRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetKeyWordRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetKeyWordRes proto.InternalMessageInfo
+
+func (m *GetKeyWordRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *GetKeyWordRes) GetData() *GetKeyWordData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type Word struct {
+	Content              string   `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
+	Score                float32  `protobuf:"fixed32,2,opt,name=score,proto3" json:"score,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Word) Reset()         { *m = Word{} }
+func (m *Word) String() string { return proto.CompactTextString(m) }
+func (*Word) ProtoMessage()    {}
+func (*Word) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{28}
+}
+
+func (m *Word) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Word.Unmarshal(m, b)
+}
+func (m *Word) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Word.Marshal(b, m, deterministic)
+}
+func (m *Word) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Word.Merge(m, src)
+}
+func (m *Word) XXX_Size() int {
+	return xxx_messageInfo_Word.Size(m)
+}
+func (m *Word) XXX_DiscardUnknown() {
+	xxx_messageInfo_Word.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Word proto.InternalMessageInfo
+
+func (m *Word) GetContent() string {
+	if m != nil {
+		return m.Content
+	}
+	return ""
+}
+
+func (m *Word) GetScore() float32 {
+	if m != nil {
+		return m.Score
+	}
+	return 0
+}
+
+type EvaluationReq struct {
+	Audio                string   `protobuf:"bytes,1,opt,name=audio,proto3" json:"audio,omitempty"`
+	Text                 string   `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	Cookie               string   `protobuf:"bytes,3,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *EvaluationReq) Reset()         { *m = EvaluationReq{} }
+func (m *EvaluationReq) String() string { return proto.CompactTextString(m) }
+func (*EvaluationReq) ProtoMessage()    {}
+func (*EvaluationReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{29}
+}
+
+func (m *EvaluationReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EvaluationReq.Unmarshal(m, b)
+}
+func (m *EvaluationReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EvaluationReq.Marshal(b, m, deterministic)
+}
+func (m *EvaluationReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EvaluationReq.Merge(m, src)
+}
+func (m *EvaluationReq) XXX_Size() int {
+	return xxx_messageInfo_EvaluationReq.Size(m)
+}
+func (m *EvaluationReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_EvaluationReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EvaluationReq proto.InternalMessageInfo
+
+func (m *EvaluationReq) GetAudio() string {
+	if m != nil {
+		return m.Audio
+	}
+	return ""
+}
+
+func (m *EvaluationReq) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+func (m *EvaluationReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type EvaluationData struct {
+	Items                []*Word  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	TotalNumber          int64    `protobuf:"zigzag64,2,opt,name=total_number,json=totalNumber,proto3" json:"total_number,omitempty"`
+	TotalScore           int64    `protobuf:"zigzag64,3,opt,name=total_score,json=totalScore,proto3" json:"total_score,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *EvaluationData) Reset()         { *m = EvaluationData{} }
+func (m *EvaluationData) String() string { return proto.CompactTextString(m) }
+func (*EvaluationData) ProtoMessage()    {}
+func (*EvaluationData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{30}
+}
+
+func (m *EvaluationData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EvaluationData.Unmarshal(m, b)
+}
+func (m *EvaluationData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EvaluationData.Marshal(b, m, deterministic)
+}
+func (m *EvaluationData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EvaluationData.Merge(m, src)
+}
+func (m *EvaluationData) XXX_Size() int {
+	return xxx_messageInfo_EvaluationData.Size(m)
+}
+func (m *EvaluationData) XXX_DiscardUnknown() {
+	xxx_messageInfo_EvaluationData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EvaluationData proto.InternalMessageInfo
+
+func (m *EvaluationData) GetItems() []*Word {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *EvaluationData) GetTotalNumber() int64 {
+	if m != nil {
+		return m.TotalNumber
+	}
+	return 0
+}
+
+func (m *EvaluationData) GetTotalScore() int64 {
+	if m != nil {
+		return m.TotalScore
+	}
+	return 0
+}
+
+type EvaluationRes struct {
+	Errinfo              *ErrorInfo      `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *EvaluationData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *EvaluationRes) Reset()         { *m = EvaluationRes{} }
+func (m *EvaluationRes) String() string { return proto.CompactTextString(m) }
+func (*EvaluationRes) ProtoMessage()    {}
+func (*EvaluationRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{31}
+}
+
+func (m *EvaluationRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EvaluationRes.Unmarshal(m, b)
+}
+func (m *EvaluationRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EvaluationRes.Marshal(b, m, deterministic)
+}
+func (m *EvaluationRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EvaluationRes.Merge(m, src)
+}
+func (m *EvaluationRes) XXX_Size() int {
+	return xxx_messageInfo_EvaluationRes.Size(m)
+}
+func (m *EvaluationRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_EvaluationRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EvaluationRes proto.InternalMessageInfo
+
+func (m *EvaluationRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *EvaluationRes) GetData() *EvaluationData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type RecognizeImageReq struct {
+	File                 string   `protobuf:"bytes,1,opt,name=file,proto3" json:"file,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RecognizeImageReq) Reset()         { *m = RecognizeImageReq{} }
+func (m *RecognizeImageReq) String() string { return proto.CompactTextString(m) }
+func (*RecognizeImageReq) ProtoMessage()    {}
+func (*RecognizeImageReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{32}
+}
+
+func (m *RecognizeImageReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeImageReq.Unmarshal(m, b)
+}
+func (m *RecognizeImageReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeImageReq.Marshal(b, m, deterministic)
+}
+func (m *RecognizeImageReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeImageReq.Merge(m, src)
+}
+func (m *RecognizeImageReq) XXX_Size() int {
+	return xxx_messageInfo_RecognizeImageReq.Size(m)
+}
+func (m *RecognizeImageReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeImageReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeImageReq proto.InternalMessageInfo
+
+func (m *RecognizeImageReq) GetFile() string {
+	if m != nil {
+		return m.File
+	}
+	return ""
+}
+
+func (m *RecognizeImageReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type RecognizeImageData struct {
+	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RecognizeImageData) Reset()         { *m = RecognizeImageData{} }
+func (m *RecognizeImageData) String() string { return proto.CompactTextString(m) }
+func (*RecognizeImageData) ProtoMessage()    {}
+func (*RecognizeImageData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{33}
+}
+
+func (m *RecognizeImageData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeImageData.Unmarshal(m, b)
+}
+func (m *RecognizeImageData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeImageData.Marshal(b, m, deterministic)
+}
+func (m *RecognizeImageData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeImageData.Merge(m, src)
+}
+func (m *RecognizeImageData) XXX_Size() int {
+	return xxx_messageInfo_RecognizeImageData.Size(m)
+}
+func (m *RecognizeImageData) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeImageData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeImageData proto.InternalMessageInfo
+
+func (m *RecognizeImageData) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+type RecognizeImageRes struct {
+	Errinfo              *ErrorInfo          `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *RecognizeImageData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
+}
+
+func (m *RecognizeImageRes) Reset()         { *m = RecognizeImageRes{} }
+func (m *RecognizeImageRes) String() string { return proto.CompactTextString(m) }
+func (*RecognizeImageRes) ProtoMessage()    {}
+func (*RecognizeImageRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{34}
+}
+
+func (m *RecognizeImageRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeImageRes.Unmarshal(m, b)
+}
+func (m *RecognizeImageRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeImageRes.Marshal(b, m, deterministic)
+}
+func (m *RecognizeImageRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeImageRes.Merge(m, src)
+}
+func (m *RecognizeImageRes) XXX_Size() int {
+	return xxx_messageInfo_RecognizeImageRes.Size(m)
+}
+func (m *RecognizeImageRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeImageRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeImageRes proto.InternalMessageInfo
+
+func (m *RecognizeImageRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *RecognizeImageRes) GetData() *RecognizeImageData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type RecognizeAgeReq struct {
+	Audio                string   `protobuf:"bytes,1,opt,name=audio,proto3" json:"audio,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RecognizeAgeReq) Reset()         { *m = RecognizeAgeReq{} }
+func (m *RecognizeAgeReq) String() string { return proto.CompactTextString(m) }
+func (*RecognizeAgeReq) ProtoMessage()    {}
+func (*RecognizeAgeReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{35}
+}
+
+func (m *RecognizeAgeReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeAgeReq.Unmarshal(m, b)
+}
+func (m *RecognizeAgeReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeAgeReq.Marshal(b, m, deterministic)
+}
+func (m *RecognizeAgeReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeAgeReq.Merge(m, src)
+}
+func (m *RecognizeAgeReq) XXX_Size() int {
+	return xxx_messageInfo_RecognizeAgeReq.Size(m)
+}
+func (m *RecognizeAgeReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeAgeReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeAgeReq proto.InternalMessageInfo
+
+func (m *RecognizeAgeReq) GetAudio() string {
+	if m != nil {
+		return m.Audio
+	}
+	return ""
+}
+
+func (m *RecognizeAgeReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type RecognizeAgeData struct {
+	AgeChild             string   `protobuf:"bytes,1,opt,name=age_child,json=ageChild,proto3" json:"age_child,omitempty"`
+	AgeMiddle            string   `protobuf:"bytes,2,opt,name=age_middle,json=ageMiddle,proto3" json:"age_middle,omitempty"`
+	AgeOld               string   `protobuf:"bytes,3,opt,name=age_old,json=ageOld,proto3" json:"age_old,omitempty"`
+	Gender               string   `protobuf:"bytes,4,opt,name=gender,proto3" json:"gender,omitempty"`
+	GenderMale           string   `protobuf:"bytes,5,opt,name=gender_male,json=genderMale,proto3" json:"gender_male,omitempty"`
+	GenderFemale         string   `protobuf:"bytes,6,opt,name=gender_female,json=genderFemale,proto3" json:"gender_female,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RecognizeAgeData) Reset()         { *m = RecognizeAgeData{} }
+func (m *RecognizeAgeData) String() string { return proto.CompactTextString(m) }
+func (*RecognizeAgeData) ProtoMessage()    {}
+func (*RecognizeAgeData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{36}
+}
+
+func (m *RecognizeAgeData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeAgeData.Unmarshal(m, b)
+}
+func (m *RecognizeAgeData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeAgeData.Marshal(b, m, deterministic)
+}
+func (m *RecognizeAgeData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeAgeData.Merge(m, src)
+}
+func (m *RecognizeAgeData) XXX_Size() int {
+	return xxx_messageInfo_RecognizeAgeData.Size(m)
+}
+func (m *RecognizeAgeData) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeAgeData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeAgeData proto.InternalMessageInfo
+
+func (m *RecognizeAgeData) GetAgeChild() string {
+	if m != nil {
+		return m.AgeChild
+	}
+	return ""
+}
+
+func (m *RecognizeAgeData) GetAgeMiddle() string {
+	if m != nil {
+		return m.AgeMiddle
+	}
+	return ""
+}
+
+func (m *RecognizeAgeData) GetAgeOld() string {
+	if m != nil {
+		return m.AgeOld
+	}
+	return ""
+}
+
+func (m *RecognizeAgeData) GetGender() string {
+	if m != nil {
+		return m.Gender
+	}
+	return ""
+}
+
+func (m *RecognizeAgeData) GetGenderMale() string {
+	if m != nil {
+		return m.GenderMale
+	}
+	return ""
+}
+
+func (m *RecognizeAgeData) GetGenderFemale() string {
+	if m != nil {
+		return m.GenderFemale
+	}
+	return ""
+}
+
+type RecognizeAgeRes struct {
+	Errinfo              *ErrorInfo        `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *RecognizeAgeData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *RecognizeAgeRes) Reset()         { *m = RecognizeAgeRes{} }
+func (m *RecognizeAgeRes) String() string { return proto.CompactTextString(m) }
+func (*RecognizeAgeRes) ProtoMessage()    {}
+func (*RecognizeAgeRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{37}
+}
+
+func (m *RecognizeAgeRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognizeAgeRes.Unmarshal(m, b)
+}
+func (m *RecognizeAgeRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognizeAgeRes.Marshal(b, m, deterministic)
+}
+func (m *RecognizeAgeRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognizeAgeRes.Merge(m, src)
+}
+func (m *RecognizeAgeRes) XXX_Size() int {
+	return xxx_messageInfo_RecognizeAgeRes.Size(m)
+}
+func (m *RecognizeAgeRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognizeAgeRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognizeAgeRes proto.InternalMessageInfo
+
+func (m *RecognizeAgeRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *RecognizeAgeRes) GetData() *RecognizeAgeData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type TransAudioToTextReq struct {
+	Audio                string   `protobuf:"bytes,1,opt,name=audio,proto3" json:"audio,omitempty"`
+	Cookie               string   `protobuf:"bytes,2,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TransAudioToTextReq) Reset()         { *m = TransAudioToTextReq{} }
+func (m *TransAudioToTextReq) String() string { return proto.CompactTextString(m) }
+func (*TransAudioToTextReq) ProtoMessage()    {}
+func (*TransAudioToTextReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{38}
+}
+
+func (m *TransAudioToTextReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransAudioToTextReq.Unmarshal(m, b)
+}
+func (m *TransAudioToTextReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransAudioToTextReq.Marshal(b, m, deterministic)
+}
+func (m *TransAudioToTextReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransAudioToTextReq.Merge(m, src)
+}
+func (m *TransAudioToTextReq) XXX_Size() int {
+	return xxx_messageInfo_TransAudioToTextReq.Size(m)
+}
+func (m *TransAudioToTextReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransAudioToTextReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransAudioToTextReq proto.InternalMessageInfo
+
+func (m *TransAudioToTextReq) GetAudio() string {
+	if m != nil {
+		return m.Audio
+	}
+	return ""
+}
+
+func (m *TransAudioToTextReq) GetCookie() string {
+	if m != nil {
+		return m.Cookie
+	}
+	return ""
+}
+
+type TransAudioToTextData struct {
+	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TransAudioToTextData) Reset()         { *m = TransAudioToTextData{} }
+func (m *TransAudioToTextData) String() string { return proto.CompactTextString(m) }
+func (*TransAudioToTextData) ProtoMessage()    {}
+func (*TransAudioToTextData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{39}
+}
+
+func (m *TransAudioToTextData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransAudioToTextData.Unmarshal(m, b)
+}
+func (m *TransAudioToTextData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransAudioToTextData.Marshal(b, m, deterministic)
+}
+func (m *TransAudioToTextData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransAudioToTextData.Merge(m, src)
+}
+func (m *TransAudioToTextData) XXX_Size() int {
+	return xxx_messageInfo_TransAudioToTextData.Size(m)
+}
+func (m *TransAudioToTextData) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransAudioToTextData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransAudioToTextData proto.InternalMessageInfo
+
+func (m *TransAudioToTextData) GetText() string {
+	if m != nil {
+		return m.Text
+	}
+	return ""
+}
+
+type TransAudioToTextRes struct {
+	Errinfo              *ErrorInfo            `protobuf:"bytes,1,opt,name=errinfo,proto3" json:"errinfo,omitempty"`
+	Data                 *TransAudioToTextData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *TransAudioToTextRes) Reset()         { *m = TransAudioToTextRes{} }
+func (m *TransAudioToTextRes) String() string { return proto.CompactTextString(m) }
+func (*TransAudioToTextRes) ProtoMessage()    {}
+func (*TransAudioToTextRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8d06a1256b80a8c8, []int{40}
+}
+
+func (m *TransAudioToTextRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransAudioToTextRes.Unmarshal(m, b)
+}
+func (m *TransAudioToTextRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransAudioToTextRes.Marshal(b, m, deterministic)
+}
+func (m *TransAudioToTextRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransAudioToTextRes.Merge(m, src)
+}
+func (m *TransAudioToTextRes) XXX_Size() int {
+	return xxx_messageInfo_TransAudioToTextRes.Size(m)
+}
+func (m *TransAudioToTextRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransAudioToTextRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransAudioToTextRes proto.InternalMessageInfo
+
+func (m *TransAudioToTextRes) GetErrinfo() *ErrorInfo {
+	if m != nil {
+		return m.Errinfo
+	}
+	return nil
+}
+
+func (m *TransAudioToTextRes) GetData() *TransAudioToTextData {
 	if m != nil {
 		return m.Data
 	}
@@ -4447,88 +2187,51 @@ func (m *ListCorpusDocumentRes) GetData() *ListCorpusDocumentData {
 }
 
 func init() {
-	proto.RegisterEnum("corpus.EngineType", EngineType_name, EngineType_value)
-	proto.RegisterEnum("corpus.EvaluateType", EvaluateType_name, EvaluateType_value)
-	proto.RegisterEnum("corpus.CorpusType", CorpusType_name, CorpusType_value)
+	proto.RegisterEnum("corpus.LoginType", LoginType_name, LoginType_value)
+	proto.RegisterEnum("corpus.UserType", UserType_name, UserType_value)
+	proto.RegisterEnum("corpus.AudioType", AudioType_name, AudioType_value)
+	proto.RegisterEnum("corpus.AgeType", AgeType_name, AgeType_value)
 	proto.RegisterType((*ErrorInfo)(nil), "corpus.ErrorInfo")
-	proto.RegisterType((*Corpus)(nil), "corpus.Corpus")
-	proto.RegisterType((*ReviseCorpus)(nil), "corpus.ReviseCorpus")
-	proto.RegisterType((*AddCorpusReq)(nil), "corpus.AddCorpusReq")
-	proto.RegisterType((*AddCorpusData)(nil), "corpus.AddCorpusData")
-	proto.RegisterType((*AddCorpusRes)(nil), "corpus.AddCorpusRes")
-	proto.RegisterType((*DelCorpusReq)(nil), "corpus.DelCorpusReq")
-	proto.RegisterType((*DelCorpusData)(nil), "corpus.DelCorpusData")
-	proto.RegisterType((*DelCorpusRes)(nil), "corpus.DelCorpusRes")
-	proto.RegisterType((*ListCorpusReq)(nil), "corpus.ListCorpusReq")
-	proto.RegisterType((*ListCorpusData)(nil), "corpus.ListCorpusData")
-	proto.RegisterType((*ListCorpusRes)(nil), "corpus.ListCorpusRes")
-	proto.RegisterType((*AddReviseCorpusReq)(nil), "corpus.AddReviseCorpusReq")
-	proto.RegisterType((*AddReviseCorpusData)(nil), "corpus.AddReviseCorpusData")
-	proto.RegisterType((*AddReviseCorpusRes)(nil), "corpus.AddReviseCorpusRes")
-	proto.RegisterType((*UpdateReviseCorpusReq)(nil), "corpus.UpdateReviseCorpusReq")
-	proto.RegisterType((*UpdateReviseCorpusData)(nil), "corpus.UpdateReviseCorpusData")
-	proto.RegisterType((*UpdateReviseCorpusRes)(nil), "corpus.UpdateReviseCorpusRes")
-	proto.RegisterType((*DelReviseCorpusReq)(nil), "corpus.DelReviseCorpusReq")
-	proto.RegisterType((*DelReviseCorpusData)(nil), "corpus.DelReviseCorpusData")
-	proto.RegisterType((*DelReviseCorpusRes)(nil), "corpus.DelReviseCorpusRes")
-	proto.RegisterType((*ListReviseCorpusReq)(nil), "corpus.ListReviseCorpusReq")
-	proto.RegisterType((*ListReviseCorpusData)(nil), "corpus.ListReviseCorpusData")
-	proto.RegisterType((*ListReviseCorpusRes)(nil), "corpus.ListReviseCorpusRes")
-	proto.RegisterType((*CorpusCollection)(nil), "corpus.CorpusCollection")
-	proto.RegisterType((*AddCollectionReq)(nil), "corpus.AddCollectionReq")
-	proto.RegisterType((*AddCollectionData)(nil), "corpus.AddCollectionData")
-	proto.RegisterType((*AddCollectionRes)(nil), "corpus.AddCollectionRes")
-	proto.RegisterType((*UpdateCollectionReq)(nil), "corpus.UpdateCollectionReq")
-	proto.RegisterType((*UpdateCollectionData)(nil), "corpus.UpdateCollectionData")
-	proto.RegisterType((*UpdateCollectionRes)(nil), "corpus.UpdateCollectionRes")
-	proto.RegisterType((*DelCollectionReq)(nil), "corpus.DelCollectionReq")
-	proto.RegisterType((*DelCollectionData)(nil), "corpus.DelCollectionData")
-	proto.RegisterType((*DelCollectionRes)(nil), "corpus.DelCollectionRes")
-	proto.RegisterType((*ListCollectionsReq)(nil), "corpus.ListCollectionsReq")
-	proto.RegisterType((*ListCollectionData)(nil), "corpus.ListCollectionData")
-	proto.RegisterType((*ListCollectionsRes)(nil), "corpus.ListCollectionsRes")
-	proto.RegisterType((*AddCorpusToCollectionReq)(nil), "corpus.AddCorpusToCollectionReq")
-	proto.RegisterType((*AddCorpusToCollectionData)(nil), "corpus.AddCorpusToCollectionData")
-	proto.RegisterType((*AddCorpusToCollectionRes)(nil), "corpus.AddCorpusToCollectionRes")
-	proto.RegisterType((*DelCorpusFromCollectionReq)(nil), "corpus.DelCorpusFromCollectionReq")
-	proto.RegisterType((*DelCorpusFromCollectionData)(nil), "corpus.DelCorpusFromCollectionData")
-	proto.RegisterType((*DelCorpusFromCollectionRes)(nil), "corpus.DelCorpusFromCollectionRes")
-	proto.RegisterType((*Experiment)(nil), "corpus.Experiment")
-	proto.RegisterType((*ExperimentResult)(nil), "corpus.ExperimentResult")
-	proto.RegisterType((*AddExperimentReq)(nil), "corpus.AddExperimentReq")
-	proto.RegisterType((*AddExperimentData)(nil), "corpus.AddExperimentData")
-	proto.RegisterType((*AddExperimentRes)(nil), "corpus.AddExperimentRes")
-	proto.RegisterType((*DelExperimentReq)(nil), "corpus.DelExperimentReq")
-	proto.RegisterType((*DelExperimentData)(nil), "corpus.DelExperimentData")
-	proto.RegisterType((*DelExperimentRes)(nil), "corpus.DelExperimentRes")
-	proto.RegisterType((*AddExperimentCommentReq)(nil), "corpus.AddExperimentCommentReq")
-	proto.RegisterType((*AddExperimentCommentData)(nil), "corpus.AddExperimentCommentData")
-	proto.RegisterType((*AddExperimentCommentRes)(nil), "corpus.AddExperimentCommentRes")
-	proto.RegisterType((*UpdateExperimentCommentReq)(nil), "corpus.UpdateExperimentCommentReq")
-	proto.RegisterType((*UpdateExperimentCommentData)(nil), "corpus.UpdateExperimentCommentData")
-	proto.RegisterType((*UpdateExperimentCommentRes)(nil), "corpus.UpdateExperimentCommentRes")
-	proto.RegisterType((*ListExperimentReq)(nil), "corpus.ListExperimentReq")
-	proto.RegisterType((*ListExperimentData)(nil), "corpus.ListExperimentData")
-	proto.RegisterType((*ListExperimentRes)(nil), "corpus.ListExperimentRes")
-	proto.RegisterType((*ListExperimentResultReq)(nil), "corpus.ListExperimentResultReq")
-	proto.RegisterType((*ListExperimentResultData)(nil), "corpus.ListExperimentResultData")
-	proto.RegisterType((*ListExperimentResultRes)(nil), "corpus.ListExperimentResultRes")
-	proto.RegisterType((*PhonemeInfo)(nil), "corpus.PhonemeInfo")
-	proto.RegisterType((*AddPhonemeInfoReq)(nil), "corpus.AddPhonemeInfoReq")
-	proto.RegisterType((*AddPhonemeInfoData)(nil), "corpus.AddPhonemeInfoData")
-	proto.RegisterType((*AddPhonemeInfoRes)(nil), "corpus.AddPhonemeInfoRes")
-	proto.RegisterType((*UpdatePhonemeInfoReq)(nil), "corpus.UpdatePhonemeInfoReq")
-	proto.RegisterType((*UpdatePhonemeInfoData)(nil), "corpus.UpdatePhonemeInfoData")
-	proto.RegisterType((*UpdatePhonemeInfoRes)(nil), "corpus.UpdatePhonemeInfoRes")
-	proto.RegisterType((*DelPhonemeInfoReq)(nil), "corpus.DelPhonemeInfoReq")
-	proto.RegisterType((*DelPhonemeInfoData)(nil), "corpus.DelPhonemeInfoData")
-	proto.RegisterType((*DelPhonemeInfoRes)(nil), "corpus.DelPhonemeInfoRes")
-	proto.RegisterType((*ListPhonemeInfoReq)(nil), "corpus.ListPhonemeInfoReq")
-	proto.RegisterType((*ListPhonemeInfoData)(nil), "corpus.ListPhonemeInfoData")
-	proto.RegisterType((*ListPhonemeInfoRes)(nil), "corpus.ListPhonemeInfoRes")
-	proto.RegisterType((*ListCorpusDocumentReq)(nil), "corpus.ListCorpusDocumentReq")
-	proto.RegisterType((*ListCorpusDocumentData)(nil), "corpus.ListCorpusDocumentData")
-	proto.RegisterType((*ListCorpusDocumentRes)(nil), "corpus.ListCorpusDocumentRes")
+	proto.RegisterType((*UserInfo)(nil), "corpus.UserInfo")
+	proto.RegisterType((*LoginUserReq)(nil), "corpus.LoginUserReq")
+	proto.RegisterType((*LoginUserData)(nil), "corpus.LoginUserData")
+	proto.RegisterType((*LoginUserRes)(nil), "corpus.LoginUserRes")
+	proto.RegisterType((*UpdateUserInfoReq)(nil), "corpus.UpdateUserInfoReq")
+	proto.RegisterType((*UpdateUserInfoData)(nil), "corpus.UpdateUserInfoData")
+	proto.RegisterType((*UpdateUserInfoRes)(nil), "corpus.UpdateUserInfoRes")
+	proto.RegisterType((*DelUserInfoReq)(nil), "corpus.DelUserInfoReq")
+	proto.RegisterType((*DelUserInfoData)(nil), "corpus.DelUserInfoData")
+	proto.RegisterType((*DelUserInfoRes)(nil), "corpus.DelUserInfoRes")
+	proto.RegisterType((*ListUserInfoReq)(nil), "corpus.ListUserInfoReq")
+	proto.RegisterType((*ListUserInfoData)(nil), "corpus.ListUserInfoData")
+	proto.RegisterType((*ListUserInfoRes)(nil), "corpus.ListUserInfoRes")
+	proto.RegisterType((*Audio)(nil), "corpus.Audio")
+	proto.RegisterType((*AddTransAudioReq)(nil), "corpus.AddTransAudioReq")
+	proto.RegisterType((*AddTransAudioData)(nil), "corpus.AddTransAudioData")
+	proto.RegisterType((*AddTransAudioRes)(nil), "corpus.AddTransAudioRes")
+	proto.RegisterType((*DelTransAudioReq)(nil), "corpus.DelTransAudioReq")
+	proto.RegisterType((*DelTransAudioData)(nil), "corpus.DelTransAudioData")
+	proto.RegisterType((*DelTransAudioRes)(nil), "corpus.DelTransAudioRes")
+	proto.RegisterType((*ListTransAudioReq)(nil), "corpus.ListTransAudioReq")
+	proto.RegisterType((*ListTransAudioData)(nil), "corpus.ListTransAudioData")
+	proto.RegisterType((*ListTransAudioRes)(nil), "corpus.ListTransAudioRes")
+	proto.RegisterType((*KeyWord)(nil), "corpus.KeyWord")
+	proto.RegisterType((*GetKeyWordReq)(nil), "corpus.GetKeyWordReq")
+	proto.RegisterType((*GetKeyWordData)(nil), "corpus.GetKeyWordData")
+	proto.RegisterType((*GetKeyWordRes)(nil), "corpus.GetKeyWordRes")
+	proto.RegisterType((*Word)(nil), "corpus.Word")
+	proto.RegisterType((*EvaluationReq)(nil), "corpus.EvaluationReq")
+	proto.RegisterType((*EvaluationData)(nil), "corpus.EvaluationData")
+	proto.RegisterType((*EvaluationRes)(nil), "corpus.EvaluationRes")
+	proto.RegisterType((*RecognizeImageReq)(nil), "corpus.RecognizeImageReq")
+	proto.RegisterType((*RecognizeImageData)(nil), "corpus.RecognizeImageData")
+	proto.RegisterType((*RecognizeImageRes)(nil), "corpus.RecognizeImageRes")
+	proto.RegisterType((*RecognizeAgeReq)(nil), "corpus.RecognizeAgeReq")
+	proto.RegisterType((*RecognizeAgeData)(nil), "corpus.RecognizeAgeData")
+	proto.RegisterType((*RecognizeAgeRes)(nil), "corpus.RecognizeAgeRes")
+	proto.RegisterType((*TransAudioToTextReq)(nil), "corpus.TransAudioToTextReq")
+	proto.RegisterType((*TransAudioToTextData)(nil), "corpus.TransAudioToTextData")
+	proto.RegisterType((*TransAudioToTextRes)(nil), "corpus.TransAudioToTextRes")
 }
 
 func init() {
@@ -4536,158 +2239,92 @@ func init() {
 }
 
 var fileDescriptor_8d06a1256b80a8c8 = []byte{
-	// 2410 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x5b, 0xcd, 0x6f, 0x23, 0x49,
-	0x15, 0xa7, 0xdb, 0x1f, 0x89, 0x9f, 0x3f, 0xa6, 0x53, 0xf9, 0x18, 0xc7, 0xd9, 0x30, 0x19, 0xcf,
-	0xa2, 0xcd, 0x06, 0xc8, 0x2e, 0x99, 0xd9, 0x99, 0xd9, 0xd5, 0x5e, 0x96, 0x4c, 0x16, 0x82, 0x06,
-	0x06, 0x79, 0x66, 0x24, 0x10, 0x48, 0xa6, 0xb1, 0x2b, 0x49, 0x33, 0x76, 0xb7, 0xd3, 0xdd, 0x0e,
-	0x59, 0xb4, 0xa0, 0xd1, 0x82, 0x38, 0xa0, 0x15, 0x27, 0xc4, 0x05, 0xad, 0xb8, 0x70, 0xe2, 0x82,
-	0x38, 0x23, 0x0e, 0x1c, 0x90, 0xf8, 0x5f, 0xf8, 0x27, 0x50, 0x7d, 0x74, 0x77, 0x55, 0x57, 0xb5,
-	0xdd, 0x36, 0xad, 0x61, 0xb9, 0xb9, 0x5f, 0xbd, 0x7a, 0xfd, 0xde, 0xef, 0xbd, 0x7a, 0xf5, 0xea,
-	0x55, 0x1b, 0x1a, 0xc7, 0x9e, 0x3f, 0x99, 0x06, 0x87, 0x13, 0xdf, 0x0b, 0x3d, 0x54, 0x1d, 0xd0,
-	0xa7, 0xee, 0x5b, 0x50, 0x3b, 0xf1, 0x7d, 0xcf, 0x3f, 0x75, 0xcf, 0x3c, 0x64, 0x41, 0xc9, 0xc7,
-	0x61, 0xdb, 0xd8, 0x33, 0xf6, 0x51, 0x8f, 0xfc, 0x24, 0x94, 0x71, 0x70, 0xde, 0x36, 0xf7, 0x8c,
-	0xfd, 0x5a, 0x8f, 0xfc, 0xec, 0xfe, 0xcd, 0x84, 0x2a, 0x93, 0x84, 0x76, 0xa0, 0xc6, 0xa4, 0xf4,
-	0x9d, 0x21, 0x9f, 0xb4, 0xca, 0x08, 0xa7, 0x43, 0x74, 0x0b, 0xea, 0x7c, 0x30, 0xc4, 0xd7, 0x21,
-	0x97, 0x00, 0x8c, 0xf4, 0x0c, 0x5f, 0x87, 0x64, 0xb6, 0x3d, 0x1d, 0x3a, 0x5e, 0x7f, 0xea, 0x8f,
-	0xda, 0x25, 0x3a, 0xbc, 0x4a, 0x09, 0xcf, 0xfd, 0x11, 0xba, 0x0b, 0x75, 0xec, 0x9e, 0x3b, 0x2e,
-	0xee, 0x87, 0x1f, 0x4d, 0x70, 0xbb, 0xbc, 0x67, 0xec, 0xb7, 0x8e, 0xd0, 0x21, 0x9b, 0x7e, 0x78,
-	0x42, 0x87, 0x9e, 0x7d, 0x34, 0xc1, 0x3d, 0xc0, 0xf1, 0x6f, 0xf4, 0x2e, 0x34, 0xf1, 0x95, 0x3d,
-	0x9a, 0xda, 0x21, 0x9f, 0x56, 0xa1, 0xd3, 0x36, 0xe2, 0x69, 0x7c, 0x90, 0x4e, 0x6c, 0x60, 0xe1,
-	0x09, 0xdd, 0x86, 0x06, 0xd7, 0x36, 0x18, 0x78, 0x3e, 0x6e, 0x57, 0xf7, 0x8c, 0xfd, 0x4a, 0x8f,
-	0x5b, 0xf0, 0x94, 0x90, 0x50, 0x0b, 0xcc, 0x41, 0xd8, 0x5e, 0xa1, 0x66, 0x9a, 0x83, 0x90, 0xa8,
-	0x18, 0x19, 0x48, 0xde, 0xb5, 0x2a, 0xab, 0xc8, 0x20, 0x62, 0x2a, 0x0e, 0xe2, 0xdf, 0xdd, 0xbf,
-	0x1a, 0xd0, 0xe8, 0xe1, 0x2b, 0x27, 0xc0, 0x1c, 0xc3, 0x7d, 0xb0, 0x7c, 0xfa, 0xdc, 0x4f, 0x43,
-	0xd9, 0xf2, 0x05, 0xbe, 0xd3, 0xa1, 0x8c, 0xb6, 0x99, 0x42, 0xfb, 0x36, 0x34, 0xb8, 0x18, 0xa6,
-	0x7f, 0x89, 0x8e, 0xd7, 0x19, 0x8d, 0xe9, 0xff, 0x06, 0xdc, 0xe0, 0x2c, 0xde, 0x04, 0xfb, 0x76,
-	0xe8, 0xf9, 0x14, 0xd6, 0x5a, 0xf4, 0xa2, 0x27, 0x9c, 0xca, 0x0d, 0xad, 0x44, 0x86, 0x76, 0xff,
-	0x54, 0x82, 0xc6, 0x07, 0xc3, 0x21, 0x53, 0xa4, 0x87, 0x2f, 0xd3, 0xae, 0x35, 0x66, 0xbb, 0xd6,
-	0x9c, 0xed, 0xda, 0xd2, 0x72, 0xae, 0x2d, 0x2f, 0xed, 0xda, 0x4a, 0x96, 0x6b, 0xab, 0xb1, 0x6b,
-	0xf7, 0xa0, 0xe1, 0x4d, 0xfa, 0xd3, 0x00, 0xfb, 0x7d, 0xd7, 0x1e, 0x63, 0xea, 0xf4, 0x5a, 0x0f,
-	0xbc, 0xc9, 0xf3, 0x00, 0xfb, 0xdf, 0xb1, 0xc7, 0x18, 0xbd, 0x0d, 0x1b, 0x5c, 0xa8, 0xe7, 0x3b,
-	0xe7, 0x8e, 0x6b, 0x8f, 0xfa, 0x43, 0x3b, 0xb4, 0x69, 0x14, 0xd4, 0x7a, 0x88, 0x8d, 0x3d, 0xe1,
-	0x43, 0x8f, 0xec, 0xd0, 0x46, 0x07, 0xb0, 0x16, 0x81, 0xe6, 0xdb, 0x6e, 0xc0, 0xd8, 0x6b, 0x94,
-	0xfd, 0x06, 0x87, 0x8e, 0xd0, 0x29, 0x6f, 0x2a, 0xb4, 0x20, 0x57, 0x68, 0x1d, 0x42, 0x33, 0xf6,
-	0x12, 0x95, 0xb2, 0x0b, 0xe0, 0x04, 0xfd, 0x60, 0x3a, 0x18, 0xe0, 0x20, 0xa0, 0x5e, 0x5a, 0xed,
-	0xd5, 0x9c, 0xe0, 0x29, 0x23, 0x74, 0xcf, 0x24, 0xaf, 0x06, 0xe8, 0xcb, 0xb0, 0x82, 0x7d, 0xdf,
-	0x71, 0xcf, 0x3c, 0xca, 0x5b, 0x3f, 0x5a, 0x8b, 0xc1, 0x8d, 0x12, 0x44, 0x2f, 0xe2, 0x40, 0x6f,
-	0x42, 0x99, 0x1a, 0x60, 0x52, 0xce, 0xcd, 0x88, 0x53, 0x52, 0xa0, 0x47, 0x59, 0xba, 0xdf, 0x86,
-	0xc6, 0x23, 0x3c, 0x4a, 0xa2, 0x67, 0x66, 0xd6, 0x48, 0x23, 0x6f, 0xa6, 0x91, 0x27, 0x66, 0xc6,
-	0xe2, 0x72, 0x9a, 0x29, 0xbc, 0xbe, 0x18, 0x33, 0x25, 0x05, 0xb8, 0x99, 0x2f, 0x4b, 0xd0, 0x7c,
-	0xec, 0x04, 0x61, 0x62, 0xe8, 0x16, 0x54, 0xbd, 0xb3, 0xb3, 0x20, 0x4e, 0xa8, 0xfc, 0x09, 0x6d,
-	0x40, 0x65, 0xe4, 0x8c, 0x9d, 0x90, 0x2f, 0x62, 0xf6, 0xa0, 0x46, 0x78, 0x29, 0x77, 0x84, 0x2f,
-	0x95, 0x2c, 0x6f, 0x41, 0x9d, 0xae, 0x87, 0x7e, 0x10, 0xda, 0x7e, 0xb4, 0xdc, 0x81, 0x92, 0x9e,
-	0x12, 0x0a, 0xf1, 0x13, 0x63, 0xc0, 0xee, 0x90, 0xaf, 0x8d, 0x55, 0x4a, 0x38, 0x71, 0x95, 0xec,
-	0xbe, 0xa2, 0x4b, 0x01, 0x89, 0x97, 0x57, 0xe7, 0x78, 0xb9, 0xa6, 0xac, 0xaf, 0xa5, 0x56, 0xc0,
-	0x35, 0xb4, 0x12, 0x0f, 0xd0, 0xd8, 0x78, 0x1d, 0x2a, 0x4e, 0x88, 0xc7, 0x24, 0x2c, 0x4a, 0xfb,
-	0xf5, 0xa3, 0x96, 0x2c, 0xa0, 0xc7, 0x06, 0x89, 0x43, 0x42, 0x2f, 0xb4, 0x47, 0x91, 0x43, 0xe8,
-	0x83, 0xe0, 0xbe, 0x92, 0xe4, 0x3e, 0x04, 0xe5, 0x31, 0xc9, 0x23, 0x65, 0x1a, 0x69, 0xf4, 0x77,
-	0xf7, 0x42, 0xf6, 0xfd, 0x82, 0x51, 0x76, 0x20, 0x45, 0xd9, 0x56, 0xc4, 0x29, 0xdb, 0xc2, 0xc3,
-	0xec, 0x8f, 0x06, 0xa0, 0x0f, 0x86, 0x43, 0x71, 0x0f, 0x99, 0xbb, 0xa8, 0xd2, 0x9b, 0x83, 0xc9,
-	0x32, 0xe0, 0x9c, 0xcd, 0xa1, 0xa4, 0xdd, 0x1c, 0xd2, 0xae, 0x2b, 0x2b, 0x0b, 0xf4, 0x1e, 0xac,
-	0xa7, 0x14, 0xcc, 0xb3, 0x4c, 0x7d, 0x8d, 0x59, 0x0b, 0xc2, 0xf8, 0x96, 0x04, 0xe3, 0x8e, 0x90,
-	0x93, 0xd2, 0xca, 0x70, 0x2c, 0xff, 0x62, 0xc0, 0xe6, 0xf3, 0xc9, 0xd0, 0x0e, 0x71, 0x1a, 0xce,
-	0xfc, 0xbb, 0xf2, 0xab, 0xc5, 0xf6, 0x01, 0x6c, 0xa9, 0x0a, 0xe7, 0x81, 0xf7, 0x5a, 0x6f, 0xe9,
-	0x82, 0x08, 0x1f, 0x49, 0x08, 0x7f, 0x31, 0xe2, 0xd4, 0xab, 0xc4, 0x41, 0xfe, 0x11, 0xa0, 0x47,
-	0x78, 0xb4, 0x3c, 0xc0, 0xf3, 0x77, 0x84, 0x7b, 0xb0, 0x9e, 0x7a, 0x43, 0xce, 0x80, 0x53, 0xf4,
-	0x2a, 0x26, 0xe0, 0x34, 0xca, 0x70, 0x2c, 0x7e, 0x69, 0xc2, 0x3a, 0x59, 0xd5, 0x69, 0x34, 0x16,
-	0xdb, 0x29, 0xbe, 0x02, 0x48, 0x0c, 0x39, 0x9e, 0xc0, 0x4b, 0x34, 0xf0, 0x2c, 0x21, 0xf0, 0x58,
-	0x1a, 0x4f, 0x90, 0x4e, 0xb2, 0x79, 0x99, 0xf2, 0xb6, 0x04, 0x5e, 0x92, 0xd3, 0x35, 0x71, 0x5a,
-	0xc9, 0x15, 0xa7, 0x55, 0x25, 0x7d, 0x4b, 0xe9, 0x68, 0x45, 0x4e, 0x47, 0xdd, 0x5f, 0x19, 0xb0,
-	0x91, 0x46, 0x81, 0x97, 0x48, 0x52, 0xb6, 0x8e, 0xb7, 0x3e, 0x09, 0xae, 0xc2, 0x72, 0x76, 0xa8,
-	0xf3, 0xc5, 0x82, 0x11, 0xf0, 0xb6, 0x14, 0x01, 0xaf, 0x89, 0x99, 0x3b, 0x23, 0x04, 0x7e, 0x63,
-	0x80, 0xc5, 0x88, 0xc7, 0xde, 0x68, 0x84, 0x07, 0xa1, 0xe3, 0xb9, 0x42, 0x35, 0x39, 0x88, 0x89,
-	0xc9, 0x8a, 0xe0, 0xd5, 0x64, 0xc2, 0x7f, 0x3a, 0x24, 0x06, 0x09, 0xab, 0x81, 0xfe, 0x46, 0x7b,
-	0x50, 0x1f, 0xe2, 0x60, 0xe0, 0x3b, 0x13, 0xc2, 0xc4, 0x73, 0x8c, 0x48, 0xe2, 0x75, 0x6e, 0x39,
-	0xae, 0xec, 0x7f, 0x02, 0x16, 0xad, 0xd8, 0x22, 0xc1, 0x24, 0x16, 0x23, 0xc9, 0x46, 0xb6, 0x64,
-	0x53, 0x95, 0x9c, 0x0e, 0x89, 0x92, 0xb2, 0x4a, 0x8f, 0x60, 0x4d, 0x7a, 0x57, 0x9e, 0x35, 0xea,
-	0x2a, 0xfa, 0x2d, 0xe8, 0x9f, 0xaf, 0x4a, 0xfe, 0xd9, 0x96, 0xca, 0x54, 0x51, 0x91, 0x64, 0x73,
-	0x5d, 0x67, 0xc9, 0x4c, 0xc6, 0xe4, 0x55, 0xf9, 0x67, 0xfe, 0x06, 0xf0, 0x0e, 0x6c, 0xa4, 0x15,
-	0xcc, 0x03, 0x64, 0xa8, 0xb3, 0xab, 0x98, 0x58, 0xd7, 0xa9, 0xc3, 0xe1, 0x3c, 0x03, 0x8b, 0x56,
-	0xca, 0xff, 0x1d, 0x94, 0xf3, 0x37, 0x80, 0x23, 0x58, 0x93, 0xde, 0x93, 0x33, 0xb4, 0x52, 0xba,
-	0x15, 0x13, 0x5a, 0x8a, 0x22, 0x1c, 0x8b, 0x3f, 0x1b, 0x80, 0x58, 0x41, 0x17, 0x0d, 0x2e, 0x91,
-	0xf9, 0xa3, 0xa8, 0x2a, 0x09, 0x51, 0x95, 0x05, 0x68, 0x39, 0x37, 0xa0, 0x15, 0x05, 0xd0, 0x5f,
-	0x2b, 0xca, 0x52, 0x48, 0x0f, 0xe5, 0xfc, 0xdc, 0x96, 0xab, 0x69, 0x01, 0xcb, 0xc2, 0x72, 0xf4,
-	0xa5, 0x06, 0xb4, 0x05, 0xfd, 0x74, 0x28, 0xf9, 0xa9, 0x23, 0x17, 0xd7, 0x1a, 0x47, 0xfd, 0xce,
-	0x80, 0x76, 0x7c, 0x8c, 0x7d, 0xe6, 0xc9, 0xd1, 0xfb, 0x3a, 0xb4, 0xe2, 0x7d, 0xad, 0x3f, 0x72,
-	0x82, 0x90, 0x42, 0x81, 0x7a, 0x8d, 0x68, 0x73, 0x23, 0x62, 0x33, 0x5d, 0x62, 0xe6, 0x76, 0x89,
-	0x9a, 0x3e, 0xdf, 0x83, 0x6d, 0xad, 0x56, 0x79, 0x62, 0xfd, 0x17, 0x99, 0x16, 0x2d, 0x88, 0xe5,
-	0x3b, 0x12, 0x96, 0xb7, 0x95, 0x53, 0x7f, 0x5a, 0x31, 0x0e, 0xe9, 0xef, 0x0d, 0xe8, 0xc4, 0x47,
-	0xe6, 0x0f, 0x7d, 0x6f, 0xfc, 0x79, 0x01, 0xf5, 0x7d, 0xd8, 0xc9, 0xd0, 0x2b, 0x0f, 0xac, 0x9f,
-	0xcc, 0x32, 0x6b, 0x41, 0x64, 0x1f, 0x48, 0xc8, 0xde, 0x51, 0x1a, 0x0d, 0xaa, 0x76, 0x1c, 0xdb,
-	0x7f, 0x1b, 0x00, 0x27, 0xd7, 0x13, 0xec, 0x3b, 0x63, 0xec, 0x86, 0xe8, 0x0e, 0x34, 0x71, 0xfc,
-	0x94, 0xe4, 0xd5, 0x46, 0x42, 0x3c, 0x1d, 0xf2, 0x32, 0xc0, 0x8c, 0xdb, 0x5d, 0x6d, 0x58, 0x19,
-	0x78, 0x63, 0x32, 0xc8, 0x31, 0x8a, 0x1e, 0x97, 0xeb, 0x2c, 0x64, 0x79, 0xaa, 0x9a, 0xe9, 0xa9,
-	0x37, 0xe0, 0x86, 0xc0, 0x2a, 0xb4, 0xdc, 0x5a, 0x09, 0x99, 0x3a, 0xec, 0xb3, 0x0a, 0x58, 0x89,
-	0xb5, 0x3d, 0x1c, 0x4c, 0x47, 0x34, 0x32, 0x04, 0x9b, 0x7d, 0x4a, 0x14, 0xb6, 0x14, 0x9c, 0xe2,
-	0x3f, 0x1d, 0xaa, 0x28, 0x99, 0x1a, 0x94, 0x52, 0x2d, 0x8e, 0xd2, 0xec, 0x2e, 0x67, 0x39, 0xd5,
-	0xe5, 0xfc, 0x3a, 0xac, 0x0f, 0xa6, 0xbe, 0x4f, 0xe4, 0x8b, 0x08, 0x56, 0x32, 0x11, 0x5c, 0xe3,
-	0xec, 0x09, 0x09, 0x7d, 0x13, 0x36, 0x63, 0x19, 0x52, 0x6b, 0xa8, 0x3a, 0xa3, 0x35, 0x14, 0xbd,
-	0x56, 0x24, 0x52, 0x97, 0x70, 0x49, 0x52, 0x2f, 0x74, 0x85, 0x1e, 0x04, 0x10, 0x1f, 0x3b, 0x16,
-	0x5a, 0xa2, 0xbb, 0x00, 0xf1, 0x8c, 0x90, 0x37, 0x70, 0x6a, 0x11, 0x5f, 0x88, 0x1e, 0xc1, 0x46,
-	0xdc, 0xf8, 0x14, 0xed, 0xab, 0x65, 0xda, 0x87, 0x22, 0x7e, 0xc1, 0xc0, 0x6f, 0xc1, 0x56, 0x22,
-	0x45, 0xb2, 0x10, 0x66, 0x58, 0x18, 0xbf, 0x59, 0x32, 0xf1, 0x08, 0x36, 0x63, 0x59, 0x92, 0x8d,
-	0x75, 0x6a, 0xe3, 0x7a, 0x34, 0x28, 0x1a, 0x79, 0x0b, 0xea, 0xc9, 0x9c, 0xb0, 0xdd, 0x60, 0x3d,
-	0xb0, 0x98, 0x33, 0x44, 0x87, 0xc0, 0xe7, 0xf5, 0xa5, 0x43, 0x7e, 0x93, 0x8a, 0x5c, 0x63, 0x43,
-	0xbd, 0xe4, 0x14, 0xd5, 0xfd, 0x83, 0x41, 0x2b, 0x56, 0x31, 0x44, 0x97, 0x29, 0x79, 0x52, 0xcb,
-	0xce, 0xcc, 0xb5, 0xec, 0xf2, 0x96, 0xe0, 0x89, 0x72, 0xf9, 0x4b, 0x70, 0x69, 0xcd, 0x15, 0x55,
-	0x82, 0xcb, 0x8a, 0xf0, 0x7c, 0xf6, 0x7d, 0x5a, 0x97, 0xc9, 0x00, 0xe6, 0x4a, 0x6a, 0x79, 0xcb,
-	0xc4, 0x85, 0xcd, 0x4f, 0xa9, 0x53, 0x58, 0x99, 0xa8, 0x35, 0xff, 0x67, 0x70, 0x53, 0x42, 0xe6,
-	0x98, 0x25, 0xe2, 0xdc, 0x28, 0x08, 0xa9, 0xdc, 0x94, 0x53, 0xf9, 0xfc, 0xf0, 0x78, 0x97, 0x96,
-	0x09, 0xca, 0xbb, 0xf3, 0xc0, 0xf4, 0x71, 0x96, 0xda, 0x0b, 0xa2, 0x75, 0x4f, 0x42, 0x6b, 0x4f,
-	0x1b, 0x2c, 0x82, 0x5a, 0x1c, 0xb4, 0x9f, 0x43, 0x87, 0x9d, 0x42, 0xfe, 0x37, 0xb8, 0xbd, 0x0f,
-	0x3b, 0x19, 0xaf, 0xcf, 0x5b, 0x45, 0x64, 0x6a, 0x5f, 0x4c, 0x15, 0x31, 0x43, 0x3b, 0x8e, 0xe0,
-	0xdf, 0x0d, 0x58, 0x23, 0x55, 0x96, 0xbc, 0xee, 0x16, 0x3b, 0x9c, 0x2c, 0x75, 0xaf, 0x37, 0xf7,
-	0xc4, 0xab, 0xba, 0xaf, 0xa2, 0xba, 0xaf, 0xfb, 0x92, 0x1f, 0x58, 0x52, 0x8b, 0x7b, 0x5f, 0x3e,
-	0xb0, 0x24, 0xca, 0x24, 0x66, 0x16, 0x76, 0x54, 0x99, 0xa8, 0x08, 0x16, 0x77, 0x52, 0xd1, 0xe6,
-	0x8a, 0xdf, 0x1a, 0x70, 0x53, 0x79, 0xe5, 0x74, 0x94, 0x3f, 0xe8, 0x13, 0xf3, 0x4c, 0xbd, 0x7f,
-	0x4b, 0xa2, 0x7f, 0xe7, 0x37, 0x27, 0x3e, 0x35, 0xa0, 0xad, 0x53, 0x68, 0xe6, 0xe1, 0x51, 0xd1,
-	0xbe, 0x30, 0x8f, 0x7c, 0x9c, 0x05, 0x4f, 0x31, 0x49, 0x29, 0xcb, 0x52, 0xee, 0x9d, 0xcf, 0x0c,
-	0xa8, 0x7f, 0xf7, 0xc2, 0x73, 0xf1, 0x18, 0xd3, 0x6f, 0x2b, 0xbe, 0x04, 0xad, 0xc1, 0x85, 0x73,
-	0xe5, 0x5d, 0xf7, 0x27, 0x8c, 0xca, 0x3b, 0x6c, 0x4d, 0x46, 0xe5, 0xac, 0xc4, 0x71, 0xce, 0xc4,
-	0xbe, 0x7f, 0x3f, 0xe6, 0x62, 0xe9, 0xa8, 0x41, 0x89, 0x32, 0xd3, 0xc3, 0x87, 0x31, 0x53, 0x29,
-	0x66, 0x7a, 0xf8, 0x30, 0x62, 0xda, 0x05, 0x78, 0xf1, 0x22, 0xe6, 0x60, 0xde, 0xaa, 0xbd, 0x78,
-	0xc1, 0x87, 0xbb, 0xff, 0x34, 0x68, 0x35, 0x20, 0xa8, 0x48, 0xe2, 0xe6, 0x73, 0xa6, 0x65, 0x8e,
-	0x5e, 0xc5, 0x5d, 0x7a, 0x71, 0x24, 0x98, 0x91, 0x27, 0xe9, 0x4e, 0x54, 0xdb, 0x8b, 0x59, 0xac,
-	0xaa, 0x2a, 0x3c, 0x1c, 0xfe, 0x65, 0x44, 0x9d, 0xbb, 0xff, 0x7b, 0xc4, 0xef, 0x47, 0x77, 0x49,
-	0x0b, 0x82, 0x7e, 0xa5, 0x45, 0x60, 0x41, 0xdc, 0xbf, 0x26, 0xe1, 0xbe, 0x2b, 0x6f, 0x71, 0x7a,
-	0xe8, 0x7f, 0x48, 0xeb, 0xbe, 0xe5, 0x60, 0x9f, 0x5f, 0x55, 0xde, 0xa5, 0xf7, 0x48, 0x8b, 0xc7,
-	0x5f, 0x5a, 0xa5, 0x62, 0xe2, 0x4f, 0x55, 0x85, 0x83, 0x30, 0x64, 0x1b, 0x64, 0x0a, 0x85, 0xc5,
-	0x76, 0xf8, 0xf9, 0xa5, 0xd0, 0x27, 0x06, 0xbb, 0x54, 0x49, 0xc3, 0xf1, 0xa6, 0x9c, 0xfc, 0xd7,
-	0x23, 0x75, 0x45, 0x75, 0x0a, 0xcb, 0xfb, 0xbe, 0xc6, 0xd4, 0x62, 0x6e, 0xf6, 0x34, 0xa6, 0x71,
-	0x78, 0x3f, 0x35, 0x60, 0x53, 0xb8, 0xaf, 0xf7, 0x06, 0xd3, 0xe5, 0x8a, 0xa8, 0x3b, 0xd0, 0x94,
-	0x0f, 0x89, 0xcc, 0xdc, 0xc6, 0x60, 0x56, 0x63, 0x4b, 0xdd, 0x89, 0x5f, 0x1a, 0xb0, 0xa5, 0xaa,
-	0xf3, 0x4a, 0x3f, 0x89, 0xb8, 0xd6, 0x03, 0x52, 0xcc, 0x8d, 0xb3, 0xde, 0x36, 0xe6, 0x8b, 0x83,
-	0x13, 0x00, 0xa1, 0xc7, 0xd0, 0x02, 0x5e, 0x6f, 0x92, 0xaa, 0xd4, 0xfa, 0x02, 0x02, 0xa8, 0xb2,
-	0x25, 0x6e, 0x19, 0xa8, 0x09, 0xb5, 0xe0, 0x02, 0xbb, 0xe7, 0xa1, 0xe7, 0x9e, 0x5b, 0x26, 0x6a,
-	0xc0, 0xea, 0xd4, 0x75, 0x02, 0x6f, 0xea, 0x0e, 0xad, 0xd2, 0xc1, 0x37, 0xa0, 0x21, 0x35, 0x18,
-	0x2c, 0x88, 0xbf, 0xba, 0xe1, 0xa2, 0x56, 0xa1, 0xfc, 0x53, 0xcf, 0x1f, 0x5a, 0x06, 0x99, 0x19,
-	0x60, 0x37, 0xc4, 0xee, 0x00, 0x5b, 0x26, 0x11, 0x3b, 0xb1, 0x7d, 0xfb, 0xdc, 0xb7, 0x27, 0x17,
-	0x56, 0xe9, 0xe0, 0x3e, 0x40, 0xf2, 0xc1, 0x0a, 0xd1, 0x87, 0x19, 0xc1, 0x85, 0x34, 0xa1, 0xe6,
-	0xb8, 0x21, 0xf6, 0xcf, 0xec, 0x01, 0xb6, 0x0c, 0x54, 0x83, 0xca, 0xc5, 0x74, 0x6c, 0xbb, 0x96,
-	0x79, 0xf4, 0x8f, 0x16, 0x34, 0x79, 0xb7, 0x02, 0xfb, 0x57, 0xce, 0x00, 0xa3, 0x07, 0x50, 0x8b,
-	0x7b, 0xad, 0x68, 0x43, 0x69, 0xbf, 0xf6, 0xf0, 0x65, 0x47, 0x47, 0x0d, 0xc8, 0xc4, 0xb8, 0x95,
-	0x98, 0x4c, 0x14, 0x3f, 0xcb, 0xea, 0xe8, 0xa8, 0x01, 0x7a, 0x0f, 0x20, 0xc1, 0x1a, 0x6d, 0xaa,
-	0xf8, 0x93, 0xa9, 0x5a, 0x72, 0x80, 0x4e, 0xe1, 0x46, 0xea, 0xdb, 0x0b, 0xd4, 0xc9, 0xf8, 0x28,
-	0x83, 0x48, 0xc9, 0x1e, 0x0b, 0x50, 0x0f, 0x90, 0xfa, 0x91, 0x01, 0xda, 0xcd, 0xfe, 0x00, 0x81,
-	0x08, 0x9c, 0x39, 0x4c, 0xd5, 0x4b, 0xdd, 0xd4, 0xa3, 0x4e, 0xc6, 0x15, 0xbe, 0xa4, 0x9e, 0xe6,
-	0xab, 0x81, 0xc7, 0x60, 0xa5, 0xaf, 0x7c, 0xd1, 0x4e, 0xd6, 0x65, 0x30, 0x11, 0x36, 0x63, 0x30,
-	0x40, 0xc7, 0xf4, 0x43, 0x3e, 0xa1, 0xa9, 0xdb, 0xd6, 0x9e, 0x83, 0x89, 0x9c, 0xac, 0x11, 0x2a,
-	0x44, 0xea, 0x31, 0x24, 0x42, 0xd2, 0xed, 0x95, 0x4e, 0xd6, 0x48, 0x80, 0x3e, 0x64, 0x1f, 0x54,
-	0x09, 0x52, 0xb6, 0xb3, 0xaa, 0xdf, 0xcb, 0x4e, 0xe6, 0x50, 0x80, 0xbe, 0xc7, 0x2e, 0xfc, 0x95,
-	0xce, 0xed, 0xad, 0x59, 0xb5, 0x34, 0x91, 0x39, 0x87, 0x81, 0x4a, 0xd6, 0x35, 0x07, 0x12, 0xc9,
-	0x19, 0xdd, 0x94, 0xce, 0x1c, 0x86, 0x00, 0xd9, 0x70, 0x33, 0xe3, 0xdc, 0x8c, 0xba, 0x73, 0x0e,
-	0xd6, 0x44, 0xfe, 0x7c, 0x9e, 0x00, 0xfd, 0x00, 0x36, 0xb5, 0x57, 0x27, 0x68, 0x6f, 0xe6, 0xcd,
-	0x0a, 0x11, 0x3f, 0x8f, 0x83, 0xea, 0x9f, 0x71, 0x7b, 0x90, 0xe8, 0x9f, 0x7d, 0x29, 0xd3, 0x99,
-	0xcf, 0x13, 0x05, 0xaa, 0x20, 0xb8, 0xad, 0xbd, 0x60, 0x4f, 0x07, 0xaa, 0x2c, 0xe4, 0x31, 0x58,
-	0xe9, 0x2b, 0xe4, 0x64, 0xed, 0x68, 0x2e, 0xe3, 0x3b, 0x33, 0x06, 0xa3, 0xb0, 0xd7, 0xa9, 0x94,
-	0xbe, 0x89, 0xee, 0x64, 0x8d, 0xd0, 0xcc, 0x90, 0xba, 0x75, 0x44, 0x19, 0xf7, 0x86, 0x72, 0x66,
-	0xd0, 0x5c, 0x55, 0xf6, 0xa2, 0x0b, 0x4c, 0x71, 0xaf, 0x4a, 0x12, 0x97, 0xb6, 0x64, 0xe8, 0xcc,
-	0x1c, 0xa6, 0xab, 0x52, 0x3e, 0x66, 0xa0, 0x6d, 0xfd, 0xf1, 0x43, 0x5a, 0x95, 0xea, 0x79, 0xe7,
-	0x09, 0xac, 0x29, 0x65, 0x33, 0x7a, 0x2d, 0xb3, 0xa2, 0x26, 0xd2, 0x66, 0x8d, 0x52, 0xc5, 0xe4,
-	0xfa, 0x13, 0x6d, 0xeb, 0xeb, 0x52, 0x49, 0x31, 0xb5, 0x10, 0xe6, 0xf8, 0x8b, 0x82, 0x3a, 0x19,
-	0x25, 0x98, 0x82, 0xbf, 0x2c, 0xea, 0xc7, 0x55, 0xfa, 0x6f, 0x87, 0xbb, 0xff, 0x09, 0x00, 0x00,
-	0xff, 0xff, 0xf0, 0x22, 0xda, 0xe7, 0xfd, 0x30, 0x00, 0x00,
+	// 1354 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0xef, 0x8e, 0xdb, 0x44,
+	0x10, 0xaf, 0xf3, 0x3f, 0x93, 0x3f, 0xe7, 0x6c, 0xaf, 0xd7, 0x34, 0x05, 0x71, 0x4d, 0x05, 0xba,
+	0xa6, 0x70, 0x94, 0xab, 0x54, 0x24, 0x10, 0x82, 0x28, 0x6d, 0xd1, 0x89, 0x5e, 0x01, 0xf7, 0x4a,
+	0x3f, 0x46, 0x6e, 0xbc, 0xc9, 0x19, 0x6c, 0xaf, 0x6b, 0xfb, 0x4a, 0x0f, 0x78, 0x04, 0x1e, 0x80,
+	0xaf, 0xbc, 0x01, 0x12, 0xcf, 0xc0, 0x7b, 0xa1, 0x9d, 0x5d, 0xc7, 0x5e, 0xff, 0x39, 0x1a, 0x29,
+	0x7c, 0xdb, 0x9d, 0x9d, 0x9d, 0x99, 0xdf, 0x6f, 0x66, 0xbd, 0xb3, 0x86, 0xee, 0x8c, 0x05, 0xfe,
+	0x79, 0x78, 0xe8, 0x07, 0x2c, 0x62, 0xa4, 0xb1, 0xc0, 0xd9, 0xf8, 0x63, 0x68, 0x3f, 0x0a, 0x02,
+	0x16, 0x1c, 0x7b, 0x4b, 0x46, 0x74, 0xa8, 0x06, 0x34, 0x1a, 0x6a, 0xfb, 0xda, 0x01, 0x31, 0xf8,
+	0x90, 0x4b, 0xdc, 0x70, 0x35, 0xac, 0xec, 0x6b, 0x07, 0x6d, 0x83, 0x0f, 0xc7, 0x2e, 0xb4, 0x9e,
+	0x87, 0x54, 0xe8, 0x5f, 0x87, 0xe6, 0x79, 0x48, 0x83, 0xb9, 0x6d, 0xc9, 0x3d, 0x0d, 0x3e, 0x3d,
+	0xb6, 0xc8, 0x4d, 0x68, 0xe3, 0x82, 0x67, 0xba, 0x54, 0x6e, 0x6e, 0x71, 0xc1, 0x53, 0xd3, 0xa5,
+	0x64, 0x17, 0xea, 0xfe, 0x19, 0xf3, 0xe8, 0xb0, 0x8a, 0x0b, 0x62, 0x42, 0xae, 0x41, 0x83, 0xce,
+	0x5d, 0xd3, 0x76, 0x86, 0x35, 0x21, 0xa6, 0x27, 0xa6, 0xed, 0x8c, 0x7f, 0xd7, 0xa0, 0xfb, 0x84,
+	0xad, 0x6c, 0x8f, 0x3b, 0x35, 0xe8, 0xab, 0x94, 0x9e, 0x96, 0xd2, 0x23, 0xb7, 0xa1, 0x87, 0x1e,
+	0x7d, 0x33, 0x0c, 0x7f, 0x66, 0x81, 0x25, 0xbd, 0x76, 0xb9, 0xf0, 0x3b, 0x29, 0x2b, 0xf1, 0x4c,
+	0xa0, 0xb6, 0x60, 0x16, 0x45, 0xbf, 0xc4, 0xc0, 0x31, 0xd9, 0x83, 0xc6, 0x82, 0xb1, 0x9f, 0x6c,
+	0x3a, 0xac, 0xa3, 0xaa, 0x9c, 0x8d, 0x77, 0xa0, 0xb7, 0x8e, 0xe6, 0xa1, 0x19, 0x99, 0xe3, 0xa5,
+	0x12, 0x5e, 0x48, 0xee, 0x42, 0x93, 0x06, 0x81, 0xed, 0x2d, 0x19, 0xc6, 0xd7, 0x39, 0x1a, 0x1c,
+	0x0a, 0xa6, 0x0f, 0xd7, 0x34, 0x1b, 0xb1, 0x06, 0xb9, 0x03, 0x35, 0xcb, 0x8c, 0x4c, 0x8c, 0xb5,
+	0x73, 0x74, 0x2d, 0xd6, 0x54, 0x3c, 0x18, 0xa8, 0x32, 0xfe, 0x4b, 0x83, 0xc1, 0x73, 0xdf, 0x32,
+	0x23, 0x1a, 0xb3, 0xcf, 0xc9, 0xf8, 0xff, 0x13, 0x40, 0xf6, 0xa1, 0x63, 0xd1, 0x70, 0x11, 0xd8,
+	0x7e, 0x64, 0x33, 0x4f, 0xd2, 0x91, 0x16, 0xa5, 0xb8, 0x6a, 0x28, 0x5c, 0xed, 0x02, 0x51, 0x23,
+	0x46, 0xc2, 0xfc, 0x3c, 0x8e, 0x0d, 0x59, 0x3b, 0x54, 0x58, 0x1b, 0xc5, 0x9a, 0x79, 0x5f, 0x92,
+	0xba, 0x29, 0xf4, 0x1f, 0x52, 0xe7, 0xad, 0x68, 0x4b, 0xa0, 0x54, 0x14, 0x28, 0x03, 0xd8, 0x49,
+	0x99, 0x40, 0x1c, 0x3f, 0x66, 0xac, 0x6e, 0x08, 0xe2, 0xae, 0x02, 0xe2, 0x7a, 0xac, 0x99, 0xf1,
+	0x22, 0x11, 0xfc, 0xa9, 0xc1, 0xce, 0x13, 0x3b, 0x8c, 0xd2, 0x18, 0xf6, 0xa0, 0xc1, 0x96, 0xcb,
+	0x70, 0x7d, 0x5c, 0xe5, 0x8c, 0x27, 0xd7, 0xb1, 0x5d, 0x3b, 0x42, 0xcb, 0xc4, 0x10, 0x93, 0x54,
+	0x72, 0xab, 0xe9, 0xe4, 0x2a, 0x65, 0x52, 0x2b, 0x2b, 0x93, 0x7a, 0xba, 0x4c, 0xca, 0xb2, 0xfd,
+	0x1b, 0xe8, 0xe9, 0x10, 0x79, 0xf4, 0xe4, 0x03, 0xa8, 0xdb, 0x11, 0x75, 0xc3, 0xa1, 0xb6, 0x5f,
+	0x3d, 0xe8, 0x1c, 0xe9, 0xeb, 0x54, 0xc5, 0x38, 0xc4, 0x32, 0xf7, 0x14, 0xb1, 0xc8, 0x74, 0xe2,
+	0x98, 0x71, 0x92, 0x42, 0x58, 0x55, 0x10, 0x12, 0xa8, 0xb9, 0x2c, 0x10, 0xf1, 0xb6, 0x0c, 0x1c,
+	0x8f, 0x9d, 0x2c, 0x41, 0x1b, 0xa6, 0xe3, 0x43, 0x25, 0x1d, 0xc3, 0xf5, 0x49, 0xcc, 0x20, 0x92,
+	0xf9, 0xf8, 0x43, 0x83, 0xfa, 0xf4, 0xdc, 0xb2, 0x19, 0xb9, 0x01, 0x2d, 0x93, 0x0f, 0x92, 0x52,
+	0x6a, 0xe2, 0xfc, 0xd8, 0x22, 0xb7, 0xa0, 0xcb, 0x02, 0x7b, 0x65, 0x7b, 0x73, 0x94, 0xc8, 0x8a,
+	0xea, 0x08, 0x99, 0xd8, 0xfd, 0x1e, 0x74, 0xa2, 0xc0, 0xf4, 0x42, 0xa9, 0x21, 0x52, 0x03, 0x28,
+	0x12, 0x0a, 0xf7, 0x00, 0x84, 0xf9, 0xe8, 0xc2, 0x17, 0x80, 0xfb, 0x09, 0x0c, 0x54, 0x39, 0xbd,
+	0xf0, 0xa9, 0xd1, 0x36, 0xe3, 0xe1, 0xd8, 0x03, 0x7d, 0x6a, 0x59, 0xa7, 0x6b, 0x13, 0xbc, 0x54,
+	0xb2, 0x91, 0x68, 0xff, 0x19, 0x49, 0x25, 0x17, 0x49, 0x92, 0xf6, 0xaa, 0x92, 0xf6, 0xab, 0x30,
+	0x50, 0xfc, 0xe1, 0xd9, 0xc8, 0x07, 0xb1, 0x61, 0x3a, 0x3e, 0x52, 0xd2, 0x71, 0x63, 0x8d, 0x38,
+	0xeb, 0x49, 0xe6, 0xe3, 0x11, 0xe8, 0x0f, 0xa9, 0xa3, 0x82, 0xbe, 0x24, 0x33, 0x65, 0xa7, 0xfc,
+	0x2a, 0x0c, 0x14, 0x33, 0x31, 0x96, 0x8c, 0xed, 0xed, 0x60, 0xc9, 0x79, 0x92, 0x58, 0x42, 0x18,
+	0xf0, 0xaa, 0x53, 0xc1, 0x6c, 0x76, 0xd8, 0xd5, 0xaa, 0xa9, 0xbe, 0x45, 0xd5, 0xfc, 0x0a, 0x44,
+	0x75, 0x8a, 0xc7, 0xf7, 0xb6, 0x7a, 0x7c, 0x7b, 0x8a, 0x89, 0xed, 0x9d, 0x5d, 0x3f, 0x8f, 0x78,
+	0x3b, 0x37, 0x42, 0x1e, 0x92, 0xe4, 0xf8, 0x3e, 0x34, 0xbf, 0xa1, 0x17, 0x2f, 0x78, 0x4b, 0x40,
+	0xa0, 0x16, 0xd1, 0x37, 0x91, 0x3c, 0x13, 0x38, 0xe6, 0x90, 0xc2, 0x05, 0x8f, 0x92, 0xdb, 0xab,
+	0x18, 0x62, 0x32, 0xfe, 0x1c, 0x7a, 0x5f, 0xd3, 0x48, 0xee, 0xe3, 0x49, 0x29, 0xda, 0x5a, 0x56,
+	0x5a, 0x27, 0xd0, 0x4f, 0x36, 0x23, 0xb9, 0xef, 0xab, 0xe4, 0xee, 0xc4, 0x41, 0xc7, 0x0e, 0x2e,
+	0xa3, 0x77, 0x7c, 0xa6, 0xc6, 0xb2, 0x21, 0x5d, 0x13, 0x85, 0xae, 0xbd, 0x58, 0x53, 0x0d, 0x50,
+	0x52, 0xf5, 0x00, 0x6a, 0xc8, 0xd3, 0x10, 0x9a, 0x0b, 0xe6, 0x45, 0xd4, 0x8b, 0xf1, 0xc6, 0xd3,
+	0x12, 0xb6, 0xbe, 0x87, 0xde, 0xa3, 0xd7, 0xa6, 0x73, 0x6e, 0xf2, 0x16, 0x81, 0xb3, 0xb5, 0x0b,
+	0xf5, 0xf4, 0xd7, 0x47, 0x4c, 0xd6, 0x1c, 0x56, 0x0a, 0x39, 0x54, 0x3f, 0x35, 0x6f, 0xa0, 0x9f,
+	0x98, 0x44, 0x0e, 0xc7, 0x2a, 0x87, 0xdd, 0x18, 0x49, 0x9a, 0xc0, 0x5b, 0xd0, 0x45, 0xce, 0xe6,
+	0xde, 0xb9, 0xfb, 0x92, 0x06, 0x92, 0xc7, 0x0e, 0xca, 0x9e, 0xa2, 0x08, 0x3f, 0x7e, 0xa8, 0x22,
+	0x70, 0x88, 0x8a, 0x05, 0x14, 0x3d, 0x43, 0x30, 0x67, 0x2a, 0x98, 0xed, 0xd0, 0xad, 0x62, 0x91,
+	0x74, 0x7f, 0x09, 0x03, 0x83, 0x2e, 0xd8, 0xca, 0xb3, 0x7f, 0xa1, 0xc7, 0xae, 0xb9, 0xa2, 0xb2,
+	0xd0, 0x96, 0xb6, 0x43, 0xe3, 0x42, 0xe3, 0xe3, 0xd2, 0x42, 0x3b, 0x00, 0xa2, 0x1a, 0x40, 0xa2,
+	0x0a, 0x4a, 0x95, 0x1f, 0xbb, 0xac, 0xab, 0xed, 0x1c, 0xbb, 0xbc, 0xff, 0x35, 0xb8, 0x9d, 0xf5,
+	0xda, 0x54, 0x40, 0x2b, 0xae, 0x8a, 0x32, 0x70, 0xff, 0x68, 0xa0, 0xa7, 0x2d, 0x20, 0xb6, 0x9b,
+	0xd0, 0x36, 0x57, 0x74, 0xbe, 0x38, 0xb3, 0x1d, 0x4b, 0x9a, 0x69, 0x99, 0x2b, 0x3a, 0xe3, 0x73,
+	0xf2, 0x2e, 0x00, 0x5f, 0x74, 0x6d, 0xcb, 0x72, 0x62, 0x6b, 0x5c, 0xfd, 0x04, 0x05, 0xbc, 0x11,
+	0xe4, 0xcb, 0xcc, 0xb1, 0xe2, 0x5a, 0x33, 0x57, 0xf4, 0x5b, 0x07, 0xaf, 0x88, 0x15, 0xf5, 0x2c,
+	0x1a, 0xc8, 0xae, 0x48, 0xce, 0x78, 0xa9, 0x88, 0xd1, 0xdc, 0x35, 0x9d, 0xb8, 0x33, 0x02, 0x21,
+	0x3a, 0x31, 0x1d, 0xca, 0xdf, 0x21, 0x52, 0x61, 0x49, 0x51, 0x45, 0x74, 0x49, 0x5d, 0x21, 0x7c,
+	0x8c, 0x32, 0xde, 0xad, 0xa8, 0x44, 0x6c, 0xa7, 0x5b, 0xc9, 0x52, 0x23, 0x69, 0x9f, 0xc1, 0xd5,
+	0xe4, 0x2b, 0x78, 0xca, 0x4e, 0xe9, 0x9b, 0x68, 0x73, 0xea, 0x27, 0xb0, 0x9b, 0x35, 0x52, 0x5a,
+	0x59, 0x51, 0x91, 0xc3, 0x0d, 0x21, 0xde, 0x53, 0x20, 0xbe, 0x13, 0x6b, 0x16, 0xc5, 0x20, 0x60,
+	0x4e, 0x3e, 0x81, 0x36, 0x3e, 0x9c, 0xf8, 0x85, 0x46, 0xfa, 0x00, 0x0e, 0x9f, 0xe0, 0x15, 0xa8,
+	0x5f, 0x21, 0x10, 0xf7, 0xbf, 0xba, 0x46, 0x5a, 0xe2, 0xbd, 0xa7, 0x57, 0x26, 0x87, 0xe2, 0x2d,
+	0x8b, 0x3b, 0x7a, 0xb2, 0x15, 0x4e, 0x36, 0x78, 0x2c, 0x70, 0x4d, 0xbe, 0xa1, 0x09, 0xd5, 0xd7,
+	0xb6, 0xaf, 0x57, 0x26, 0x0f, 0xa0, 0xbd, 0xbe, 0x3e, 0xb9, 0x8b, 0xe4, 0x96, 0xd5, 0xaf, 0x70,
+	0xad, 0x13, 0xff, 0xbe, 0x50, 0x9f, 0xce, 0x66, 0x7a, 0x85, 0x0f, 0x5e, 0x4c, 0x7f, 0xd0, 0xab,
+	0x93, 0x3b, 0xd0, 0x9c, 0xae, 0x28, 0xee, 0x02, 0x68, 0x88, 0x62, 0xd4, 0xaf, 0x90, 0x36, 0xd4,
+	0xb1, 0x6a, 0x85, 0x2a, 0x73, 0x2c, 0xbd, 0x7a, 0xf4, 0x77, 0x03, 0x7a, 0xe2, 0xa1, 0xfe, 0x8c,
+	0x06, 0xaf, 0xed, 0x05, 0x25, 0x9f, 0x4a, 0x5c, 0x3c, 0x52, 0xb2, 0x9b, 0x7b, 0x23, 0x1a, 0xf4,
+	0xd5, 0xa8, 0x48, 0x1a, 0x92, 0xc7, 0xd0, 0x57, 0xdf, 0x44, 0xe4, 0x46, 0xf1, 0x5b, 0x89, 0x9b,
+	0x28, 0x5d, 0x0a, 0xc9, 0x17, 0xd0, 0x49, 0x3d, 0x4b, 0xc8, 0x5e, 0xc1, 0x5b, 0x85, 0x5b, 0x28,
+	0x96, 0x87, 0xe4, 0x2b, 0xe8, 0xa6, 0xdb, 0x68, 0x72, 0xbd, 0xa8, 0xb9, 0xe6, 0x06, 0x4a, 0x16,
+	0x42, 0x32, 0x83, 0x9e, 0xd2, 0xf9, 0x91, 0x61, 0x61, 0x43, 0xc8, 0x6d, 0x94, 0xad, 0xa0, 0x11,
+	0xa5, 0xe5, 0x4a, 0x8c, 0x64, 0x5b, 0xc7, 0x51, 0xd9, 0x0a, 0x52, 0xaa, 0x36, 0x15, 0x09, 0xa5,
+	0xb9, 0xa6, 0x6d, 0x54, 0xba, 0x14, 0x92, 0xcf, 0x00, 0x92, 0xdb, 0x96, 0x5c, 0xcb, 0xdf, 0xc0,
+	0x7c, 0x7f, 0xa1, 0x18, 0xf7, 0x26, 0x57, 0x47, 0xb2, 0x57, 0xb9, 0x6d, 0x47, 0x85, 0x62, 0x8c,
+	0x5f, 0xfd, 0x3a, 0x27, 0xf1, 0xe7, 0xae, 0x9d, 0x51, 0xe9, 0x52, 0x48, 0x9e, 0x80, 0x9e, 0x3d,
+	0x89, 0xe4, 0x66, 0xd9, 0x19, 0xe5, 0xb6, 0x2e, 0x59, 0xc4, 0x0a, 0x49, 0x7f, 0xba, 0x92, 0x0a,
+	0xc9, 0xdc, 0x16, 0xa3, 0x92, 0x85, 0xf0, 0x65, 0x03, 0x7f, 0x6a, 0xdd, 0xff, 0x37, 0x00, 0x00,
+	0xff, 0xff, 0xc9, 0x94, 0x34, 0x97, 0xe4, 0x12, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -4703,30 +2340,24 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CorpusServiceClient interface {
 	//该行下的接口正式使用
-	AddCorpus(ctx context.Context, in *AddCorpusReq, opts ...grpc.CallOption) (*AddCorpusRes, error)
-	DelCorpus(ctx context.Context, in *DelCorpusReq, opts ...grpc.CallOption) (*DelCorpusRes, error)
-	ListCorpus(ctx context.Context, in *ListCorpusReq, opts ...grpc.CallOption) (*ListCorpusRes, error)
-	AddReviseCorpus(ctx context.Context, in *AddReviseCorpusReq, opts ...grpc.CallOption) (*AddReviseCorpusRes, error)
-	UpdateReviseCorpus(ctx context.Context, in *UpdateReviseCorpusReq, opts ...grpc.CallOption) (*UpdateReviseCorpusRes, error)
-	DelReviseCorpus(ctx context.Context, in *DelReviseCorpusReq, opts ...grpc.CallOption) (*DelReviseCorpusRes, error)
-	ListReviseCorpus(ctx context.Context, in *ListReviseCorpusReq, opts ...grpc.CallOption) (*ListReviseCorpusRes, error)
-	AddExperiment(ctx context.Context, in *AddExperimentReq, opts ...grpc.CallOption) (*AddExperimentRes, error)
-	DelExperiment(ctx context.Context, in *DelExperimentReq, opts ...grpc.CallOption) (*DelExperimentRes, error)
-	ListExperiment(ctx context.Context, in *ListExperimentReq, opts ...grpc.CallOption) (*ListExperimentRes, error)
-	ListExperimentResult(ctx context.Context, in *ListExperimentResultReq, opts ...grpc.CallOption) (*ListExperimentResultRes, error)
-	AddExperimentComment(ctx context.Context, in *AddExperimentCommentReq, opts ...grpc.CallOption) (*AddExperimentCommentRes, error)
-	UpdateExperimentComment(ctx context.Context, in *UpdateExperimentCommentReq, opts ...grpc.CallOption) (*UpdateExperimentCommentRes, error)
-	AddCorpusToCollection(ctx context.Context, in *AddCorpusToCollectionReq, opts ...grpc.CallOption) (*AddCorpusToCollectionRes, error)
-	DelCorpusFromCollection(ctx context.Context, in *DelCorpusFromCollectionReq, opts ...grpc.CallOption) (*DelCorpusFromCollectionRes, error)
-	AddCollection(ctx context.Context, in *AddCollectionReq, opts ...grpc.CallOption) (*AddCollectionRes, error)
-	UpdateCollection(ctx context.Context, in *UpdateCollectionReq, opts ...grpc.CallOption) (*UpdateCollectionRes, error)
-	DelCollection(ctx context.Context, in *DelCollectionReq, opts ...grpc.CallOption) (*DelCollectionRes, error)
-	ListCollections(ctx context.Context, in *ListCollectionsReq, opts ...grpc.CallOption) (*ListCollectionsRes, error)
-	ListCorpusDocument(ctx context.Context, in *ListCorpusDocumentReq, opts ...grpc.CallOption) (*ListCorpusDocumentRes, error)
-	AddPhonemeInfo(ctx context.Context, in *AddPhonemeInfoReq, opts ...grpc.CallOption) (*AddPhonemeInfoRes, error)
-	UpdatePhonemeInfo(ctx context.Context, in *UpdatePhonemeInfoReq, opts ...grpc.CallOption) (*UpdatePhonemeInfoRes, error)
-	DelPhonemeInfo(ctx context.Context, in *DelPhonemeInfoReq, opts ...grpc.CallOption) (*DelPhonemeInfoRes, error)
-	ListPhonemeInfo(ctx context.Context, in *ListPhonemeInfoReq, opts ...grpc.CallOption) (*ListPhonemeInfoRes, error)
+	//用户相关
+	LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserRes, error)
+	UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error)
+	DelUserInfo(ctx context.Context, in *DelUserInfoReq, opts ...grpc.CallOption) (*DelUserInfoRes, error)
+	ListUserInfo(ctx context.Context, in *ListUserInfoReq, opts ...grpc.CallOption) (*ListUserInfoRes, error)
+	//转码
+	AddTransAudio(ctx context.Context, in *AddTransAudioReq, opts ...grpc.CallOption) (*AddTransAudioRes, error)
+	DelTransAudio(ctx context.Context, in *DelTransAudioReq, opts ...grpc.CallOption) (*DelTransAudioRes, error)
+	ListTransAudio(ctx context.Context, in *ListTransAudioReq, opts ...grpc.CallOption) (*ListTransAudioRes, error)
+	//关键字
+	GetKeyWord(ctx context.Context, in *GetKeyWordReq, opts ...grpc.CallOption) (*GetKeyWordRes, error)
+	//打分
+	Evaluation(ctx context.Context, in *EvaluationReq, opts ...grpc.CallOption) (*EvaluationRes, error)
+	//手写文字识别和语音转文本
+	RecognizeImage(ctx context.Context, in *RecognizeImageReq, opts ...grpc.CallOption) (*RecognizeImageRes, error)
+	TransAudioToText(ctx context.Context, in *TransAudioToTextReq, opts ...grpc.CallOption) (*TransAudioToTextRes, error)
+	//年龄识别
+	RecognizeAge(ctx context.Context, in *RecognizeAgeReq, opts ...grpc.CallOption) (*RecognizeAgeRes, error)
 }
 
 type corpusServiceClient struct {
@@ -4737,216 +2368,108 @@ func NewCorpusServiceClient(cc grpc.ClientConnInterface) CorpusServiceClient {
 	return &corpusServiceClient{cc}
 }
 
-func (c *corpusServiceClient) AddCorpus(ctx context.Context, in *AddCorpusReq, opts ...grpc.CallOption) (*AddCorpusRes, error) {
-	out := new(AddCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddCorpus", in, out, opts...)
+func (c *corpusServiceClient) LoginUser(ctx context.Context, in *LoginUserReq, opts ...grpc.CallOption) (*LoginUserRes, error) {
+	out := new(LoginUserRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/LoginUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) DelCorpus(ctx context.Context, in *DelCorpusReq, opts ...grpc.CallOption) (*DelCorpusRes, error) {
-	out := new(DelCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelCorpus", in, out, opts...)
+func (c *corpusServiceClient) UpdateUserInfo(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*UpdateUserInfoRes, error) {
+	out := new(UpdateUserInfoRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/UpdateUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) ListCorpus(ctx context.Context, in *ListCorpusReq, opts ...grpc.CallOption) (*ListCorpusRes, error) {
-	out := new(ListCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListCorpus", in, out, opts...)
+func (c *corpusServiceClient) DelUserInfo(ctx context.Context, in *DelUserInfoReq, opts ...grpc.CallOption) (*DelUserInfoRes, error) {
+	out := new(DelUserInfoRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) AddReviseCorpus(ctx context.Context, in *AddReviseCorpusReq, opts ...grpc.CallOption) (*AddReviseCorpusRes, error) {
-	out := new(AddReviseCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddReviseCorpus", in, out, opts...)
+func (c *corpusServiceClient) ListUserInfo(ctx context.Context, in *ListUserInfoReq, opts ...grpc.CallOption) (*ListUserInfoRes, error) {
+	out := new(ListUserInfoRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) UpdateReviseCorpus(ctx context.Context, in *UpdateReviseCorpusReq, opts ...grpc.CallOption) (*UpdateReviseCorpusRes, error) {
-	out := new(UpdateReviseCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/UpdateReviseCorpus", in, out, opts...)
+func (c *corpusServiceClient) AddTransAudio(ctx context.Context, in *AddTransAudioReq, opts ...grpc.CallOption) (*AddTransAudioRes, error) {
+	out := new(AddTransAudioRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddTransAudio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) DelReviseCorpus(ctx context.Context, in *DelReviseCorpusReq, opts ...grpc.CallOption) (*DelReviseCorpusRes, error) {
-	out := new(DelReviseCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelReviseCorpus", in, out, opts...)
+func (c *corpusServiceClient) DelTransAudio(ctx context.Context, in *DelTransAudioReq, opts ...grpc.CallOption) (*DelTransAudioRes, error) {
+	out := new(DelTransAudioRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelTransAudio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) ListReviseCorpus(ctx context.Context, in *ListReviseCorpusReq, opts ...grpc.CallOption) (*ListReviseCorpusRes, error) {
-	out := new(ListReviseCorpusRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListReviseCorpus", in, out, opts...)
+func (c *corpusServiceClient) ListTransAudio(ctx context.Context, in *ListTransAudioReq, opts ...grpc.CallOption) (*ListTransAudioRes, error) {
+	out := new(ListTransAudioRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListTransAudio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) AddExperiment(ctx context.Context, in *AddExperimentReq, opts ...grpc.CallOption) (*AddExperimentRes, error) {
-	out := new(AddExperimentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddExperiment", in, out, opts...)
+func (c *corpusServiceClient) GetKeyWord(ctx context.Context, in *GetKeyWordReq, opts ...grpc.CallOption) (*GetKeyWordRes, error) {
+	out := new(GetKeyWordRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/GetKeyWord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) DelExperiment(ctx context.Context, in *DelExperimentReq, opts ...grpc.CallOption) (*DelExperimentRes, error) {
-	out := new(DelExperimentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelExperiment", in, out, opts...)
+func (c *corpusServiceClient) Evaluation(ctx context.Context, in *EvaluationReq, opts ...grpc.CallOption) (*EvaluationRes, error) {
+	out := new(EvaluationRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/Evaluation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) ListExperiment(ctx context.Context, in *ListExperimentReq, opts ...grpc.CallOption) (*ListExperimentRes, error) {
-	out := new(ListExperimentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListExperiment", in, out, opts...)
+func (c *corpusServiceClient) RecognizeImage(ctx context.Context, in *RecognizeImageReq, opts ...grpc.CallOption) (*RecognizeImageRes, error) {
+	out := new(RecognizeImageRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/RecognizeImage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) ListExperimentResult(ctx context.Context, in *ListExperimentResultReq, opts ...grpc.CallOption) (*ListExperimentResultRes, error) {
-	out := new(ListExperimentResultRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListExperimentResult", in, out, opts...)
+func (c *corpusServiceClient) TransAudioToText(ctx context.Context, in *TransAudioToTextReq, opts ...grpc.CallOption) (*TransAudioToTextRes, error) {
+	out := new(TransAudioToTextRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/TransAudioToText", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *corpusServiceClient) AddExperimentComment(ctx context.Context, in *AddExperimentCommentReq, opts ...grpc.CallOption) (*AddExperimentCommentRes, error) {
-	out := new(AddExperimentCommentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddExperimentComment", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) UpdateExperimentComment(ctx context.Context, in *UpdateExperimentCommentReq, opts ...grpc.CallOption) (*UpdateExperimentCommentRes, error) {
-	out := new(UpdateExperimentCommentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/UpdateExperimentComment", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) AddCorpusToCollection(ctx context.Context, in *AddCorpusToCollectionReq, opts ...grpc.CallOption) (*AddCorpusToCollectionRes, error) {
-	out := new(AddCorpusToCollectionRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddCorpusToCollection", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) DelCorpusFromCollection(ctx context.Context, in *DelCorpusFromCollectionReq, opts ...grpc.CallOption) (*DelCorpusFromCollectionRes, error) {
-	out := new(DelCorpusFromCollectionRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelCorpusFromCollection", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) AddCollection(ctx context.Context, in *AddCollectionReq, opts ...grpc.CallOption) (*AddCollectionRes, error) {
-	out := new(AddCollectionRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddCollection", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) UpdateCollection(ctx context.Context, in *UpdateCollectionReq, opts ...grpc.CallOption) (*UpdateCollectionRes, error) {
-	out := new(UpdateCollectionRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/UpdateCollection", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) DelCollection(ctx context.Context, in *DelCollectionReq, opts ...grpc.CallOption) (*DelCollectionRes, error) {
-	out := new(DelCollectionRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelCollection", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) ListCollections(ctx context.Context, in *ListCollectionsReq, opts ...grpc.CallOption) (*ListCollectionsRes, error) {
-	out := new(ListCollectionsRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListCollections", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) ListCorpusDocument(ctx context.Context, in *ListCorpusDocumentReq, opts ...grpc.CallOption) (*ListCorpusDocumentRes, error) {
-	out := new(ListCorpusDocumentRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListCorpusDocument", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) AddPhonemeInfo(ctx context.Context, in *AddPhonemeInfoReq, opts ...grpc.CallOption) (*AddPhonemeInfoRes, error) {
-	out := new(AddPhonemeInfoRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/AddPhonemeInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) UpdatePhonemeInfo(ctx context.Context, in *UpdatePhonemeInfoReq, opts ...grpc.CallOption) (*UpdatePhonemeInfoRes, error) {
-	out := new(UpdatePhonemeInfoRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/UpdatePhonemeInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) DelPhonemeInfo(ctx context.Context, in *DelPhonemeInfoReq, opts ...grpc.CallOption) (*DelPhonemeInfoRes, error) {
-	out := new(DelPhonemeInfoRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/DelPhonemeInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *corpusServiceClient) ListPhonemeInfo(ctx context.Context, in *ListPhonemeInfoReq, opts ...grpc.CallOption) (*ListPhonemeInfoRes, error) {
-	out := new(ListPhonemeInfoRes)
-	err := c.cc.Invoke(ctx, "/corpus.CorpusService/ListPhonemeInfo", in, out, opts...)
+func (c *corpusServiceClient) RecognizeAge(ctx context.Context, in *RecognizeAgeReq, opts ...grpc.CallOption) (*RecognizeAgeRes, error) {
+	out := new(RecognizeAgeRes)
+	err := c.cc.Invoke(ctx, "/corpus.CorpusService/RecognizeAge", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4956,541 +2479,283 @@ func (c *corpusServiceClient) ListPhonemeInfo(ctx context.Context, in *ListPhone
 // CorpusServiceServer is the server API for CorpusService service.
 type CorpusServiceServer interface {
 	//该行下的接口正式使用
-	AddCorpus(context.Context, *AddCorpusReq) (*AddCorpusRes, error)
-	DelCorpus(context.Context, *DelCorpusReq) (*DelCorpusRes, error)
-	ListCorpus(context.Context, *ListCorpusReq) (*ListCorpusRes, error)
-	AddReviseCorpus(context.Context, *AddReviseCorpusReq) (*AddReviseCorpusRes, error)
-	UpdateReviseCorpus(context.Context, *UpdateReviseCorpusReq) (*UpdateReviseCorpusRes, error)
-	DelReviseCorpus(context.Context, *DelReviseCorpusReq) (*DelReviseCorpusRes, error)
-	ListReviseCorpus(context.Context, *ListReviseCorpusReq) (*ListReviseCorpusRes, error)
-	AddExperiment(context.Context, *AddExperimentReq) (*AddExperimentRes, error)
-	DelExperiment(context.Context, *DelExperimentReq) (*DelExperimentRes, error)
-	ListExperiment(context.Context, *ListExperimentReq) (*ListExperimentRes, error)
-	ListExperimentResult(context.Context, *ListExperimentResultReq) (*ListExperimentResultRes, error)
-	AddExperimentComment(context.Context, *AddExperimentCommentReq) (*AddExperimentCommentRes, error)
-	UpdateExperimentComment(context.Context, *UpdateExperimentCommentReq) (*UpdateExperimentCommentRes, error)
-	AddCorpusToCollection(context.Context, *AddCorpusToCollectionReq) (*AddCorpusToCollectionRes, error)
-	DelCorpusFromCollection(context.Context, *DelCorpusFromCollectionReq) (*DelCorpusFromCollectionRes, error)
-	AddCollection(context.Context, *AddCollectionReq) (*AddCollectionRes, error)
-	UpdateCollection(context.Context, *UpdateCollectionReq) (*UpdateCollectionRes, error)
-	DelCollection(context.Context, *DelCollectionReq) (*DelCollectionRes, error)
-	ListCollections(context.Context, *ListCollectionsReq) (*ListCollectionsRes, error)
-	ListCorpusDocument(context.Context, *ListCorpusDocumentReq) (*ListCorpusDocumentRes, error)
-	AddPhonemeInfo(context.Context, *AddPhonemeInfoReq) (*AddPhonemeInfoRes, error)
-	UpdatePhonemeInfo(context.Context, *UpdatePhonemeInfoReq) (*UpdatePhonemeInfoRes, error)
-	DelPhonemeInfo(context.Context, *DelPhonemeInfoReq) (*DelPhonemeInfoRes, error)
-	ListPhonemeInfo(context.Context, *ListPhonemeInfoReq) (*ListPhonemeInfoRes, error)
+	//用户相关
+	LoginUser(context.Context, *LoginUserReq) (*LoginUserRes, error)
+	UpdateUserInfo(context.Context, *UpdateUserInfoReq) (*UpdateUserInfoRes, error)
+	DelUserInfo(context.Context, *DelUserInfoReq) (*DelUserInfoRes, error)
+	ListUserInfo(context.Context, *ListUserInfoReq) (*ListUserInfoRes, error)
+	//转码
+	AddTransAudio(context.Context, *AddTransAudioReq) (*AddTransAudioRes, error)
+	DelTransAudio(context.Context, *DelTransAudioReq) (*DelTransAudioRes, error)
+	ListTransAudio(context.Context, *ListTransAudioReq) (*ListTransAudioRes, error)
+	//关键字
+	GetKeyWord(context.Context, *GetKeyWordReq) (*GetKeyWordRes, error)
+	//打分
+	Evaluation(context.Context, *EvaluationReq) (*EvaluationRes, error)
+	//手写文字识别和语音转文本
+	RecognizeImage(context.Context, *RecognizeImageReq) (*RecognizeImageRes, error)
+	TransAudioToText(context.Context, *TransAudioToTextReq) (*TransAudioToTextRes, error)
+	//年龄识别
+	RecognizeAge(context.Context, *RecognizeAgeReq) (*RecognizeAgeRes, error)
 }
 
 // UnimplementedCorpusServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedCorpusServiceServer struct {
 }
 
-func (*UnimplementedCorpusServiceServer) AddCorpus(ctx context.Context, req *AddCorpusReq) (*AddCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) LoginUser(ctx context.Context, req *LoginUserReq) (*LoginUserRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
 }
-func (*UnimplementedCorpusServiceServer) DelCorpus(ctx context.Context, req *DelCorpusReq) (*DelCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) UpdateUserInfo(ctx context.Context, req *UpdateUserInfoReq) (*UpdateUserInfoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserInfo not implemented")
 }
-func (*UnimplementedCorpusServiceServer) ListCorpus(ctx context.Context, req *ListCorpusReq) (*ListCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) DelUserInfo(ctx context.Context, req *DelUserInfoReq) (*DelUserInfoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelUserInfo not implemented")
 }
-func (*UnimplementedCorpusServiceServer) AddReviseCorpus(ctx context.Context, req *AddReviseCorpusReq) (*AddReviseCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddReviseCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) ListUserInfo(ctx context.Context, req *ListUserInfoReq) (*ListUserInfoRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserInfo not implemented")
 }
-func (*UnimplementedCorpusServiceServer) UpdateReviseCorpus(ctx context.Context, req *UpdateReviseCorpusReq) (*UpdateReviseCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateReviseCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) AddTransAudio(ctx context.Context, req *AddTransAudioReq) (*AddTransAudioRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTransAudio not implemented")
 }
-func (*UnimplementedCorpusServiceServer) DelReviseCorpus(ctx context.Context, req *DelReviseCorpusReq) (*DelReviseCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelReviseCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) DelTransAudio(ctx context.Context, req *DelTransAudioReq) (*DelTransAudioRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelTransAudio not implemented")
 }
-func (*UnimplementedCorpusServiceServer) ListReviseCorpus(ctx context.Context, req *ListReviseCorpusReq) (*ListReviseCorpusRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListReviseCorpus not implemented")
+func (*UnimplementedCorpusServiceServer) ListTransAudio(ctx context.Context, req *ListTransAudioReq) (*ListTransAudioRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTransAudio not implemented")
 }
-func (*UnimplementedCorpusServiceServer) AddExperiment(ctx context.Context, req *AddExperimentReq) (*AddExperimentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddExperiment not implemented")
+func (*UnimplementedCorpusServiceServer) GetKeyWord(ctx context.Context, req *GetKeyWordReq) (*GetKeyWordRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKeyWord not implemented")
 }
-func (*UnimplementedCorpusServiceServer) DelExperiment(ctx context.Context, req *DelExperimentReq) (*DelExperimentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelExperiment not implemented")
+func (*UnimplementedCorpusServiceServer) Evaluation(ctx context.Context, req *EvaluationReq) (*EvaluationRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Evaluation not implemented")
 }
-func (*UnimplementedCorpusServiceServer) ListExperiment(ctx context.Context, req *ListExperimentReq) (*ListExperimentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListExperiment not implemented")
+func (*UnimplementedCorpusServiceServer) RecognizeImage(ctx context.Context, req *RecognizeImageReq) (*RecognizeImageRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecognizeImage not implemented")
 }
-func (*UnimplementedCorpusServiceServer) ListExperimentResult(ctx context.Context, req *ListExperimentResultReq) (*ListExperimentResultRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListExperimentResult not implemented")
+func (*UnimplementedCorpusServiceServer) TransAudioToText(ctx context.Context, req *TransAudioToTextReq) (*TransAudioToTextRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransAudioToText not implemented")
 }
-func (*UnimplementedCorpusServiceServer) AddExperimentComment(ctx context.Context, req *AddExperimentCommentReq) (*AddExperimentCommentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddExperimentComment not implemented")
-}
-func (*UnimplementedCorpusServiceServer) UpdateExperimentComment(ctx context.Context, req *UpdateExperimentCommentReq) (*UpdateExperimentCommentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateExperimentComment not implemented")
-}
-func (*UnimplementedCorpusServiceServer) AddCorpusToCollection(ctx context.Context, req *AddCorpusToCollectionReq) (*AddCorpusToCollectionRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCorpusToCollection not implemented")
-}
-func (*UnimplementedCorpusServiceServer) DelCorpusFromCollection(ctx context.Context, req *DelCorpusFromCollectionReq) (*DelCorpusFromCollectionRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelCorpusFromCollection not implemented")
-}
-func (*UnimplementedCorpusServiceServer) AddCollection(ctx context.Context, req *AddCollectionReq) (*AddCollectionRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCollection not implemented")
-}
-func (*UnimplementedCorpusServiceServer) UpdateCollection(ctx context.Context, req *UpdateCollectionReq) (*UpdateCollectionRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCollection not implemented")
-}
-func (*UnimplementedCorpusServiceServer) DelCollection(ctx context.Context, req *DelCollectionReq) (*DelCollectionRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelCollection not implemented")
-}
-func (*UnimplementedCorpusServiceServer) ListCollections(ctx context.Context, req *ListCollectionsReq) (*ListCollectionsRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCollections not implemented")
-}
-func (*UnimplementedCorpusServiceServer) ListCorpusDocument(ctx context.Context, req *ListCorpusDocumentReq) (*ListCorpusDocumentRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCorpusDocument not implemented")
-}
-func (*UnimplementedCorpusServiceServer) AddPhonemeInfo(ctx context.Context, req *AddPhonemeInfoReq) (*AddPhonemeInfoRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddPhonemeInfo not implemented")
-}
-func (*UnimplementedCorpusServiceServer) UpdatePhonemeInfo(ctx context.Context, req *UpdatePhonemeInfoReq) (*UpdatePhonemeInfoRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePhonemeInfo not implemented")
-}
-func (*UnimplementedCorpusServiceServer) DelPhonemeInfo(ctx context.Context, req *DelPhonemeInfoReq) (*DelPhonemeInfoRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelPhonemeInfo not implemented")
-}
-func (*UnimplementedCorpusServiceServer) ListPhonemeInfo(ctx context.Context, req *ListPhonemeInfoReq) (*ListPhonemeInfoRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPhonemeInfo not implemented")
+func (*UnimplementedCorpusServiceServer) RecognizeAge(ctx context.Context, req *RecognizeAgeReq) (*RecognizeAgeRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecognizeAge not implemented")
 }
 
 func RegisterCorpusServiceServer(s *grpc.Server, srv CorpusServiceServer) {
 	s.RegisterService(&_CorpusService_serviceDesc, srv)
 }
 
-func _CorpusService_AddCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCorpusReq)
+func _CorpusService_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginUserReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddCorpus(ctx, in)
+		return srv.(CorpusServiceServer).LoginUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddCorpus",
+		FullMethod: "/corpus.CorpusService/LoginUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddCorpus(ctx, req.(*AddCorpusReq))
+		return srv.(CorpusServiceServer).LoginUser(ctx, req.(*LoginUserReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_DelCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelCorpusReq)
+func _CorpusService_UpdateUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelCorpus(ctx, in)
+		return srv.(CorpusServiceServer).UpdateUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelCorpus",
+		FullMethod: "/corpus.CorpusService/UpdateUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelCorpus(ctx, req.(*DelCorpusReq))
+		return srv.(CorpusServiceServer).UpdateUserInfo(ctx, req.(*UpdateUserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_ListCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCorpusReq)
+func _CorpusService_DelUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListCorpus(ctx, in)
+		return srv.(CorpusServiceServer).DelUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListCorpus",
+		FullMethod: "/corpus.CorpusService/DelUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListCorpus(ctx, req.(*ListCorpusReq))
+		return srv.(CorpusServiceServer).DelUserInfo(ctx, req.(*DelUserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_AddReviseCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddReviseCorpusReq)
+func _CorpusService_ListUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddReviseCorpus(ctx, in)
+		return srv.(CorpusServiceServer).ListUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddReviseCorpus",
+		FullMethod: "/corpus.CorpusService/ListUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddReviseCorpus(ctx, req.(*AddReviseCorpusReq))
+		return srv.(CorpusServiceServer).ListUserInfo(ctx, req.(*ListUserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_UpdateReviseCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateReviseCorpusReq)
+func _CorpusService_AddTransAudio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTransAudioReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).UpdateReviseCorpus(ctx, in)
+		return srv.(CorpusServiceServer).AddTransAudio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/UpdateReviseCorpus",
+		FullMethod: "/corpus.CorpusService/AddTransAudio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).UpdateReviseCorpus(ctx, req.(*UpdateReviseCorpusReq))
+		return srv.(CorpusServiceServer).AddTransAudio(ctx, req.(*AddTransAudioReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_DelReviseCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelReviseCorpusReq)
+func _CorpusService_DelTransAudio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelTransAudioReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelReviseCorpus(ctx, in)
+		return srv.(CorpusServiceServer).DelTransAudio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelReviseCorpus",
+		FullMethod: "/corpus.CorpusService/DelTransAudio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelReviseCorpus(ctx, req.(*DelReviseCorpusReq))
+		return srv.(CorpusServiceServer).DelTransAudio(ctx, req.(*DelTransAudioReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_ListReviseCorpus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReviseCorpusReq)
+func _CorpusService_ListTransAudio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTransAudioReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListReviseCorpus(ctx, in)
+		return srv.(CorpusServiceServer).ListTransAudio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListReviseCorpus",
+		FullMethod: "/corpus.CorpusService/ListTransAudio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListReviseCorpus(ctx, req.(*ListReviseCorpusReq))
+		return srv.(CorpusServiceServer).ListTransAudio(ctx, req.(*ListTransAudioReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_AddExperiment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddExperimentReq)
+func _CorpusService_GetKeyWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKeyWordReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddExperiment(ctx, in)
+		return srv.(CorpusServiceServer).GetKeyWord(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddExperiment",
+		FullMethod: "/corpus.CorpusService/GetKeyWord",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddExperiment(ctx, req.(*AddExperimentReq))
+		return srv.(CorpusServiceServer).GetKeyWord(ctx, req.(*GetKeyWordReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_DelExperiment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelExperimentReq)
+func _CorpusService_Evaluation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EvaluationReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelExperiment(ctx, in)
+		return srv.(CorpusServiceServer).Evaluation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelExperiment",
+		FullMethod: "/corpus.CorpusService/Evaluation",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelExperiment(ctx, req.(*DelExperimentReq))
+		return srv.(CorpusServiceServer).Evaluation(ctx, req.(*EvaluationReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_ListExperiment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListExperimentReq)
+func _CorpusService_RecognizeImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecognizeImageReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListExperiment(ctx, in)
+		return srv.(CorpusServiceServer).RecognizeImage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListExperiment",
+		FullMethod: "/corpus.CorpusService/RecognizeImage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListExperiment(ctx, req.(*ListExperimentReq))
+		return srv.(CorpusServiceServer).RecognizeImage(ctx, req.(*RecognizeImageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_ListExperimentResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListExperimentResultReq)
+func _CorpusService_TransAudioToText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransAudioToTextReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListExperimentResult(ctx, in)
+		return srv.(CorpusServiceServer).TransAudioToText(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListExperimentResult",
+		FullMethod: "/corpus.CorpusService/TransAudioToText",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListExperimentResult(ctx, req.(*ListExperimentResultReq))
+		return srv.(CorpusServiceServer).TransAudioToText(ctx, req.(*TransAudioToTextReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CorpusService_AddExperimentComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddExperimentCommentReq)
+func _CorpusService_RecognizeAge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecognizeAgeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddExperimentComment(ctx, in)
+		return srv.(CorpusServiceServer).RecognizeAge(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddExperimentComment",
+		FullMethod: "/corpus.CorpusService/RecognizeAge",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddExperimentComment(ctx, req.(*AddExperimentCommentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_UpdateExperimentComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateExperimentCommentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).UpdateExperimentComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/UpdateExperimentComment",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).UpdateExperimentComment(ctx, req.(*UpdateExperimentCommentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_AddCorpusToCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCorpusToCollectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddCorpusToCollection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddCorpusToCollection",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddCorpusToCollection(ctx, req.(*AddCorpusToCollectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_DelCorpusFromCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelCorpusFromCollectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelCorpusFromCollection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelCorpusFromCollection",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelCorpusFromCollection(ctx, req.(*DelCorpusFromCollectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_AddCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCollectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddCollection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddCollection",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddCollection(ctx, req.(*AddCollectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_UpdateCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCollectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).UpdateCollection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/UpdateCollection",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).UpdateCollection(ctx, req.(*UpdateCollectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_DelCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelCollectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelCollection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelCollection",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelCollection(ctx, req.(*DelCollectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_ListCollections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCollectionsReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListCollections(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListCollections",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListCollections(ctx, req.(*ListCollectionsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_ListCorpusDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCorpusDocumentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListCorpusDocument(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListCorpusDocument",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListCorpusDocument(ctx, req.(*ListCorpusDocumentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_AddPhonemeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddPhonemeInfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).AddPhonemeInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/AddPhonemeInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).AddPhonemeInfo(ctx, req.(*AddPhonemeInfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_UpdatePhonemeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePhonemeInfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).UpdatePhonemeInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/UpdatePhonemeInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).UpdatePhonemeInfo(ctx, req.(*UpdatePhonemeInfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_DelPhonemeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelPhonemeInfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).DelPhonemeInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/DelPhonemeInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).DelPhonemeInfo(ctx, req.(*DelPhonemeInfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CorpusService_ListPhonemeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPhonemeInfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CorpusServiceServer).ListPhonemeInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/corpus.CorpusService/ListPhonemeInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CorpusServiceServer).ListPhonemeInfo(ctx, req.(*ListPhonemeInfoReq))
+		return srv.(CorpusServiceServer).RecognizeAge(ctx, req.(*RecognizeAgeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5500,100 +2765,52 @@ var _CorpusService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*CorpusServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddCorpus",
-			Handler:    _CorpusService_AddCorpus_Handler,
+			MethodName: "LoginUser",
+			Handler:    _CorpusService_LoginUser_Handler,
 		},
 		{
-			MethodName: "DelCorpus",
-			Handler:    _CorpusService_DelCorpus_Handler,
+			MethodName: "UpdateUserInfo",
+			Handler:    _CorpusService_UpdateUserInfo_Handler,
 		},
 		{
-			MethodName: "ListCorpus",
-			Handler:    _CorpusService_ListCorpus_Handler,
+			MethodName: "DelUserInfo",
+			Handler:    _CorpusService_DelUserInfo_Handler,
 		},
 		{
-			MethodName: "AddReviseCorpus",
-			Handler:    _CorpusService_AddReviseCorpus_Handler,
+			MethodName: "ListUserInfo",
+			Handler:    _CorpusService_ListUserInfo_Handler,
 		},
 		{
-			MethodName: "UpdateReviseCorpus",
-			Handler:    _CorpusService_UpdateReviseCorpus_Handler,
+			MethodName: "AddTransAudio",
+			Handler:    _CorpusService_AddTransAudio_Handler,
 		},
 		{
-			MethodName: "DelReviseCorpus",
-			Handler:    _CorpusService_DelReviseCorpus_Handler,
+			MethodName: "DelTransAudio",
+			Handler:    _CorpusService_DelTransAudio_Handler,
 		},
 		{
-			MethodName: "ListReviseCorpus",
-			Handler:    _CorpusService_ListReviseCorpus_Handler,
+			MethodName: "ListTransAudio",
+			Handler:    _CorpusService_ListTransAudio_Handler,
 		},
 		{
-			MethodName: "AddExperiment",
-			Handler:    _CorpusService_AddExperiment_Handler,
+			MethodName: "GetKeyWord",
+			Handler:    _CorpusService_GetKeyWord_Handler,
 		},
 		{
-			MethodName: "DelExperiment",
-			Handler:    _CorpusService_DelExperiment_Handler,
+			MethodName: "Evaluation",
+			Handler:    _CorpusService_Evaluation_Handler,
 		},
 		{
-			MethodName: "ListExperiment",
-			Handler:    _CorpusService_ListExperiment_Handler,
+			MethodName: "RecognizeImage",
+			Handler:    _CorpusService_RecognizeImage_Handler,
 		},
 		{
-			MethodName: "ListExperimentResult",
-			Handler:    _CorpusService_ListExperimentResult_Handler,
+			MethodName: "TransAudioToText",
+			Handler:    _CorpusService_TransAudioToText_Handler,
 		},
 		{
-			MethodName: "AddExperimentComment",
-			Handler:    _CorpusService_AddExperimentComment_Handler,
-		},
-		{
-			MethodName: "UpdateExperimentComment",
-			Handler:    _CorpusService_UpdateExperimentComment_Handler,
-		},
-		{
-			MethodName: "AddCorpusToCollection",
-			Handler:    _CorpusService_AddCorpusToCollection_Handler,
-		},
-		{
-			MethodName: "DelCorpusFromCollection",
-			Handler:    _CorpusService_DelCorpusFromCollection_Handler,
-		},
-		{
-			MethodName: "AddCollection",
-			Handler:    _CorpusService_AddCollection_Handler,
-		},
-		{
-			MethodName: "UpdateCollection",
-			Handler:    _CorpusService_UpdateCollection_Handler,
-		},
-		{
-			MethodName: "DelCollection",
-			Handler:    _CorpusService_DelCollection_Handler,
-		},
-		{
-			MethodName: "ListCollections",
-			Handler:    _CorpusService_ListCollections_Handler,
-		},
-		{
-			MethodName: "ListCorpusDocument",
-			Handler:    _CorpusService_ListCorpusDocument_Handler,
-		},
-		{
-			MethodName: "AddPhonemeInfo",
-			Handler:    _CorpusService_AddPhonemeInfo_Handler,
-		},
-		{
-			MethodName: "UpdatePhonemeInfo",
-			Handler:    _CorpusService_UpdatePhonemeInfo_Handler,
-		},
-		{
-			MethodName: "DelPhonemeInfo",
-			Handler:    _CorpusService_DelPhonemeInfo_Handler,
-		},
-		{
-			MethodName: "ListPhonemeInfo",
-			Handler:    _CorpusService_ListPhonemeInfo_Handler,
+			MethodName: "RecognizeAge",
+			Handler:    _CorpusService_RecognizeAge_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

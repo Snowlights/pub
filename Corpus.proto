@@ -1,533 +1,248 @@
 syntax = "proto3";
 
 package corpus;
-enum EngineType {
-	enginetype  = 0;
-	chivox = 1; //驰声
-	shengtong = 2; //声通
-	unisound = 3; //云知声
-}
-
-enum EvaluateType {
-	evaluatetype = 0;
-	word = 1;
-	sentence = 2;
-	paragraph = 3;
-}
-
-enum CorpusType{
-	corpustype = 0;
-	interface = 1;
-	human = 2;
-}
 
 message ErrorInfo{
     sint64 ret = 1;
     string msg = 2;
 }
 
-message Corpus {
-	sint64 corpus_id = 1;
-	string corpus_text = 2; //打分文本
-	string audio_url = 3; //音频url
-	EngineType engine_type = 4; //引擎类型
-	EvaluateType evaluate_type = 5; //打分类型
-	int32 corpus_score = 6; //分数
-	sint64 ct = 7; //该次打分时间
-	CorpusType corpus_type = 8; //预料来源类型
+enum LoginType{
+    login_type = 0;
+    e_mail = 1;
+    code = 2;
 }
 
-message ReviseCorpus {
-	sint64 revise_corpus_id = 1;
-	sint64 corpus_id= 2; //指向coupus的id
-	sint64 revise_score = 3; //修订分数
-	string revise_operator = 4; //修订者
-	sint64 ct = 5; //修订时间
+enum UserType{
+    user_type = 0;
+    normal = 1;
+    vip = 2;
 }
 
-//打分服务添加语音记录
-message AddCorpusReq {
-	string corpus_text = 1; //打分文本
-	string audio_url = 2; //音频url
-	EngineType engine_type = 3; //引擎类型
-	EvaluateType evaluate_type = 4; //打分类型
-	int32 corpus_score = 5; //分数
-	sint64 ct = 6; //该次打分时间
-	string op_user_name = 7;
-	string corpus_original_data = 8; //原始语料数据
-	string corpus_trans_data = 9; //转换后语料数据
-	CorpusType corpus_type = 10; //预料来源类型 1针对于打分服务 2人工添加
+message UserInfo{
+    sint64 user_id = 1;
+    string user_name = 2;
+    string phone = 3;
+    string e_mail = 4;
 }
 
-message AddCorpusData {
-	bool is_success = 1;
+message LoginUserReq{
+    string e_mail = 1;//方式两种 账号和短信
+    string user_password = 2;
+    string phone = 3;
+    sint64 code = 4;
+    string cookie = 5;
 }
-
-message AddCorpusRes {
-	ErrorInfo errinfo = 1;
-	AddCorpusData data = 2;
-}
-//删除该条记录
-message DelCorpusReq {
-	sint64 corpus_id = 1;
-	string op_user_name = 2;
-}
-
-message DelCorpusData {
-	bool is_success = 1;
-}
-
-message DelCorpusRes {
-	ErrorInfo errinfo = 1;
-	DelCorpusData data = 2;
-}
-
-//查询列表
-message ListCorpusReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	EvaluateType evaluate_type = 3;
-	EngineType engine_type = 4;
-	sint64 score_start = 5; //区间
-	sint64 score_end = 6; //区间
-	string corpus_text = 7; //文本匹配
-	sint64 corpus_id = 8; //id
-	string op_user_name = 9;
-	CorpusType corpus_type = 10; //语料添加类型 1通过打分接口添加 2人工添加
-}
-
-message ListCorpusData {
-	repeated Corpus items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
-}
-
-message ListCorpusRes {
-	ErrorInfo errinfo = 1;
-	ListCorpusData data = 2;
-}
-//添加revise
-message AddReviseCorpusReq {
-	sint64 corpus_id = 1; //指向的Corpus的id
-	int32 revise_score = 2; //修订分数
-	string revise_operator = 3; //修订者
-	string op_user_name = 4;
-}
-
-message AddReviseCorpusData {
-	bool is_success = 1;
-}
-
-message AddReviseCorpusRes {
-	ErrorInfo errinfo = 1;
-	AddReviseCorpusData data = 2;
-}
-//修改revise
-message UpdateReviseCorpusReq {
-	sint64 revise_corpus_id = 1;
-	int32 revise_score = 2; //修订分数
-	string revise_operator = 3; //修订者
-	string op_user_name = 4;
-}
-
-message UpdateReviseCorpusData {
-	bool is_success = 1;
-}
-
-message UpdateReviseCorpusRes {
-	ErrorInfo errinfo = 1;
-	UpdateReviseCorpusData data = 2;
-}
-//删除revise
-message DelReviseCorpusReq {
-	sint64 revise_corpus_id = 1;
-	string op_user_name = 2;
-}
-
-message DelReviseCorpusData {
-	bool is_success = 1;
-}
-
-message DelReviseCorpusRes {
-	ErrorInfo errinfo = 1;
-	DelReviseCorpusData data = 2;
-}
-//查询revise列表
-message ListReviseCorpusReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	int32 revise_score_start = 3; //修订分数开始
-	int32 revise_score_end = 4; //修订分数结束
-	string revise_operator = 5; //修订者
-	string op_user_name = 6;
-	sint64 corpus_id = 7; //指向语料id
-}
-
-message ListReviseCorpusData {
-	repeated ReviseCorpus items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
-}
-
-message ListReviseCorpusRes {
-	ErrorInfo errinfo = 1;
-	ListReviseCorpusData data = 2;
-}
-//集合相关
-message CorpusCollection {
-	sint64 corpus_collection_id = 1; //集合id
-	string name = 2; //集合名字
-	string description = 3; //集合描述
-	sint64 ct = 4; //集合创建时间
-}
-
-message AddCollectionReq {
-	string name = 1; //集合名字
-	string description = 2; //集合描述
-	string op_user_name = 3;
-}
-
-message AddCollectionData {
-	bool is_success = 1;
-}
-
-message AddCollectionRes {
-	ErrorInfo errinfo = 1;
-	AddCollectionData data = 2;
+message LoginUserData{
 }
-
-message UpdateCollectionReq {
-	sint64 corpus_collection_id = 1; //集合id
-	string name = 2; //集合名字
-	string description = 3; //集合描述
-	string op_user_name = 4;
-}
-
-message UpdateCollectionData {
-	bool is_success = 1;
-}
-
-message UpdateCollectionRes {
-	ErrorInfo errinfo = 1;
-	UpdateCollectionData data = 2;
-}
-
-message DelCollectionReq {
-	sint64 corpus_collection_id = 1; //集合id
-	string op_user_name = 2;
-}
-
-message DelCollectionData {
-	bool is_success = 1;
-}
-
-message DelCollectionRes {
-	ErrorInfo errinfo = 1;
-	DelCollectionData data = 2;
-}
-
-//将根据创建时间倒序排序
-message ListCollectionsReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	string name = 3; //名字检索
-	sint64 corpus_collection_id = 4; //id检索
-	string op_user_name = 5;
-}
-
-message ListCollectionData {
-	repeated CorpusCollection items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
+message LoginUserRes{
+    ErrorInfo errinfo = 1;
+    LoginUserData data = 2;
 }
 
-message ListCollectionsRes {
-	ErrorInfo errinfo = 1;
-	ListCollectionData data = 2;
+message UpdateUserInfoReq{
+    sint64 user_id = 1;
+    string user_name = 2;
+    string phone = 3; //更改电话
+    string e_mail = 4; //更改邮箱
+    string description = 5;
+    string cookie = 6;
 }
+message UpdateUserInfoData{
 
-message AddCorpusToCollectionReq {
-	repeated sint64 corpus_id_list = 1;
-	sint64 corpus_collection_id = 2;
-	string op_user_name = 3;
 }
-
-message AddCorpusToCollectionData {
-	bool is_success = 1;
-}
-
-message AddCorpusToCollectionRes {
-	ErrorInfo errinfo = 1;
-	AddCorpusToCollectionData data = 2;
-}
-
-message DelCorpusFromCollectionReq {
-	repeated sint64 corpus_id_list = 1;
-	sint64 corpus_collection_id = 2;
-	string op_user_name = 3;
+message UpdateUserInfoRes{
+    ErrorInfo errinfo = 1;
+    UpdateUserInfoData data = 2;
 }
 
-message DelCorpusFromCollectionData {
-	bool is_success = 1;
+message DelUserInfoReq{
+    sint64 user_id = 1;
+    string cookie = 2;
 }
-
-message DelCorpusFromCollectionRes {
-	ErrorInfo errinfo = 1;
-	DelCorpusFromCollectionData data = 2;
+message DelUserInfoData{
 }
-
-//选择是在外面选择 还是在里面选择 EngineType
-message Experiment {
-	sint64 experiment_id = 1;
-	sint64 ct = 2; //测试时间
-	string comment = 3; //测试评论
-	EngineType engine_type = 4; //测试的引擎类型
-	sint64 corpus_collection_id = 6; //指向的测试集合id
-	string collection_name = 7; //指向的测试集合名字
+message DelUserInfoRes{
+    ErrorInfo errinfo = 1;
+    DelUserInfoData data = 2;
 }
 
-message ExperimentResult {
-	sint64 experiment_result_id = 1;
-	sint64 experiment_id = 2;//指向的测试id
-	string corpus_text = 3; //打分文本
-	string audio_url = 4; //音频url
-	EngineType current_engine_type = 5; //引擎类型
-	EvaluateType current_evaluate_type = 6; //打分类型
-	int32 current_corpus_score = 7; //分数
-	sint64 current_ct = 8; //该次打分时间
-	EngineType original_engine_type = 9; //原始引擎类型
-	EvaluateType original_evaluate_type = 10; //原始打分类型
-	int32 original_corpus_score = 11; //原始分数
-	sint64 original_ct = 12; //原始打分时间
-	int32 origin_revise_score = 13; //最终修订分数  最后结算先不思考
+message ListUserInfoReq{
+    sint64 offset = 1;
+    sint64 limit = 2;
+    string e_mail = 3;
+    string user_name = 4;
+    string phone = 5;
+    string cookie = 6;
 }
-//添加测试
-message AddExperimentReq {
-	sint64 corpus_collection_id = 1;
-	EngineType engine_type = 2;
-	string op_user_name = 3;
+message ListUserInfoData{
+    repeated UserInfo items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
 }
-
-message AddExperimentData {
-	bool is_success = 1;
+message ListUserInfoRes{
+    ErrorInfo errinfo = 1;
+    ListUserInfoData data = 2;
 }
 
-message AddExperimentRes {
-	ErrorInfo errinfo = 1;
-	AddExperimentData data = 2;
+enum AudioType{
+    audio_type = 0;
+    Mp3 = 1;
+    ACC = 2;
+    WAV = 3;
 }
 
-message DelExperimentReq {
-    sint64 experiment_id = 1;
-    string op_user_name = 2;
+message Audio{
+    sint64 audio_id = 1;
+    string origin_audio = 2;
+    string trans_audio = 3;
+    AudioType audio_type = 4;
 }
 
-message DelExperimentData {
-    bool is_success = 1;
+message AddTransAudioReq{
+    string origin_audio = 1;
+    string trans_audio = 2;
+    string cookie = 3;
 }
-
-message DelExperimentRes {
-	ErrorInfo errinfo = 1;
-	DelExperimentData data = 2;
+message AddTransAudioData{
 }
-
-//评价
-message AddExperimentCommentReq {
-	sint64 experiment_id = 1;
-	string comment = 2;
-	string op_user_name = 3;
+message AddTransAudioRes{
+     ErrorInfo errinfo = 1;
+     AddTransAudioData data = 2;
 }
 
-message AddExperimentCommentData {
-	bool is_success = 1;
+message DelTransAudioReq{
+    sint64 audio_id = 1;
+    string cookie = 2;
 }
-
-message AddExperimentCommentRes {
-	ErrorInfo errinfo = 1;
-	AddExperimentCommentData data = 2;
+message DelTransAudioData{
 }
-
-message UpdateExperimentCommentReq {
-	sint64 experiment_id = 1;
-	string comment = 2;
-	string op_user_name = 3;
+message DelTransAudioRes{
+     ErrorInfo errinfo = 1;
+     DelTransAudioData data = 2;
 }
 
-message UpdateExperimentCommentData {
-	bool is_success = 1;
+message ListTransAudioReq{
+    sint64 offset = 1;
+    sint64 limit = 2;
+    AudioType audio_type = 3;
 }
-
-message UpdateExperimentCommentRes {
-	ErrorInfo errinfo = 1;
-	UpdateExperimentCommentData data = 2;
+message ListTransAudioData{
+    repeated Audio items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
 }
-// 查看测试列表
-message ListExperimentReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	EngineType engine_type = 3;
-	string op_user_name = 4;
-	sint64 experiment_id = 5; //测试id定向检索
+message ListTransAudioRes{
+     ErrorInfo errinfo = 1;
+     ListTransAudioData data = 2;
 }
 
-message ListExperimentData {
-	repeated Experiment items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
+message KeyWord{
+    string text = 1;
+    float score = 2;
 }
 
-message ListExperimentRes {
-	ErrorInfo errinfo = 1;
-	ListExperimentData data =2;
+message GetKeyWordReq{
+    string text = 1;
+    string cookie = 2;
 }
-//查看测试结果
-message ListExperimentResultReq {
-	sint64 experiment_id = 1;
-	sint64 offset = 2;
-	sint64 limit = 3;
-	string op_user_name = 4;
+message GetKeyWordData{
+    repeated KeyWord items = 1;
+    sint64 total = 2;
 }
-
-message ListExperimentResultData {
-	repeated ExperimentResult items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
+message GetKeyWordRes{
+     ErrorInfo errinfo = 1;
+     GetKeyWordData data = 2;
 }
 
-message ListExperimentResultRes {
-	ErrorInfo errinfo = 1;
-	ListExperimentResultData data = 2;
-}
-//音素信息
-message PhonemeInfo {
-	string chivox_phoneme = 1;//驰声标准
-	string ipa66_phoneme = 2;//ipa66
-	string ipa88_phoneme = 3;//ipa88
-	string kk_phoneme = 4;//kk
+message Word{
+    string content = 1;
+    float score = 2;
 }
-//添加音素 管理员添加  从apollo拉取
-message AddPhonemeInfoReq {
-	string chivox_phoneme = 1;
-	string ipa66_phoneme = 2;
-	string ipa88_phoneme = 3;
-	string kk_phoneme = 4;
-	string op_user_name = 5;
+message EvaluationReq{
+    string audio = 1;
+    string text = 2;
+    string cookie = 3;
 }
-
-message AddPhonemeInfoData {
-	bool is_success = 1;
-}
-
-message AddPhonemeInfoRes {
-	ErrorInfo errinfo = 1;
-	AddPhonemeInfoData data = 2;
+message EvaluationData{
+    repeated Word items = 1;
+    sint64 total_number = 2;
+    sint64 total_score = 3;
 }
-
-//修改音素 管理员
-message UpdatePhonemeInfoReq {
-	string chivox_phoneme = 1;
-	string ipa66_phoneme = 2;
-	string ipa88_phoneme = 3;
-	string kk_phoneme = 4;
-	string op_user_name = 5;
+message EvaluationRes{
+     ErrorInfo errinfo = 1;
+     EvaluationData data = 2;
 }
 
-message UpdatePhonemeInfoData {
-	bool is_success = 1;
+message RecognizeImageReq{
+    string file = 1;
+    string cookie = 2;
 }
-
-message UpdatePhonemeInfoRes {
-	ErrorInfo errinfo = 1;
-	UpdatePhonemeInfoData data = 2;
+message RecognizeImageData{
+    string text = 1;
 }
-//删除音素 管理员
-message DelPhonemeInfoReq {
-	string chivox_phoneme = 1;
-	string op_user_name = 2;
+message RecognizeImageRes{
+     ErrorInfo errinfo = 1;
+     RecognizeImageData data = 2;
 }
 
-message DelPhonemeInfoData {
-	bool is_success = 1;
+enum AgeType{
+    middle = 0; // 12-40
+    child = 2; // <12
+    old = 3; // >40
 }
 
-message DelPhonemeInfoRes {
-	ErrorInfo errinfo = 1;
-	DelPhonemeInfoData data = 2;
+message RecognizeAgeReq{
+    string audio = 1;
+    string cookie = 2;
 }
-
-//查看因素 管理员
-message ListPhonemeInfoReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	string op_user_name = 3;
+message RecognizeAgeData{
+    string age_child = 1;
+    string age_middle = 2;
+    string age_old = 3;
+    string gender = 4;
+    string gender_male = 5;
+    string gender_female = 6;
 }
-
-message ListPhonemeInfoData {
-	repeated PhonemeInfo items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
+message RecognizeAgeRes{
+     ErrorInfo errinfo = 1;
+     RecognizeAgeData data = 2;
 }
 
-message ListPhonemeInfoRes {
-	ErrorInfo errinfo = 1;
-	ListPhonemeInfoData data = 2;
+message TransAudioToTextReq{
+    string audio = 1;
+    string cookie = 2;
 }
-
-message ListCorpusDocumentReq {
-	sint64 offset = 1;
-	sint64 limit = 2;
-	sint64 collection_id = 3;
-	string op_user_name = 4;
+message TransAudioToTextData{
+    string text = 1;
 }
-
-message ListCorpusDocumentData {
-	repeated Corpus items = 1;
-	sint64 total = 2;
-	sint64 offset = 3;
-	bool more = 4;
+message TransAudioToTextRes{
+     ErrorInfo errinfo = 1;
+     TransAudioToTextData data = 2;
 }
 
-message ListCorpusDocumentRes {
-	ErrorInfo errinfo = 1;
-	ListCorpusDocumentData data = 2;
-}
 
- //请把Testgen改成自己的服务名称首字母大写
+ //自己的服务名称首字母大写
 service CorpusService {
     //该行下的接口正式使用
-	rpc AddCorpus(AddCorpusReq) returns (AddCorpusRes);
-	rpc DelCorpus(DelCorpusReq) returns (DelCorpusRes);
-	rpc ListCorpus(ListCorpusReq) returns (ListCorpusRes);
-
-	rpc AddReviseCorpus(AddReviseCorpusReq) returns (AddReviseCorpusRes);
-	rpc UpdateReviseCorpus(UpdateReviseCorpusReq) returns (UpdateReviseCorpusRes);
-	rpc DelReviseCorpus(DelReviseCorpusReq) returns (DelReviseCorpusRes);
-	rpc ListReviseCorpus(ListReviseCorpusReq) returns (ListReviseCorpusRes);
-
-	rpc AddExperiment(AddExperimentReq) returns (AddExperimentRes);
-	rpc DelExperiment(DelExperimentReq) returns (DelExperimentRes);
-	rpc ListExperiment(ListExperimentReq) returns (ListExperimentRes);
-	rpc ListExperimentResult(ListExperimentResultReq) returns (ListExperimentResultRes);
-	rpc AddExperimentComment(AddExperimentCommentReq) returns (AddExperimentCommentRes);
-	rpc UpdateExperimentComment(UpdateExperimentCommentReq) returns (UpdateExperimentCommentRes);
-
-	rpc AddCorpusToCollection(AddCorpusToCollectionReq) returns (AddCorpusToCollectionRes);
-	rpc DelCorpusFromCollection(DelCorpusFromCollectionReq) returns (DelCorpusFromCollectionRes);
-	rpc AddCollection(AddCollectionReq) returns (AddCollectionRes);
-	rpc UpdateCollection(UpdateCollectionReq) returns (UpdateCollectionRes);
-	rpc DelCollection(DelCollectionReq) returns (DelCollectionRes);
-	rpc ListCollections(ListCollectionsReq) returns (ListCollectionsRes);
-	rpc ListCorpusDocument(ListCorpusDocumentReq) returns (ListCorpusDocumentRes);
-
-	rpc AddPhonemeInfo(AddPhonemeInfoReq) returns (AddPhonemeInfoRes);
-	rpc UpdatePhonemeInfo(UpdatePhonemeInfoReq) returns (UpdatePhonemeInfoRes);
-	rpc DelPhonemeInfo(DelPhonemeInfoReq) returns (DelPhonemeInfoRes);
-	rpc ListPhonemeInfo(ListPhonemeInfoReq) returns (ListPhonemeInfoRes);
-
+    //用户相关
+    rpc LoginUser(LoginUserReq) returns (LoginUserRes);
+    rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoRes);
+    rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
+    rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
+    //转码
+    rpc AddTransAudio(AddTransAudioReq) returns (AddTransAudioRes);
+    rpc DelTransAudio(DelTransAudioReq) returns (DelTransAudioRes);
+    rpc ListTransAudio(ListTransAudioReq) returns (ListTransAudioRes);
+    //关键字
+    rpc GetKeyWord(GetKeyWordReq) returns (GetKeyWordRes);
+    //打分
+    rpc Evaluation(EvaluationReq) returns (EvaluationRes);
+    //手写文字识别和语音转文本
+    rpc RecognizeImage(RecognizeImageReq) returns (RecognizeImageRes);
+    rpc TransAudioToText(TransAudioToTextReq) returns (TransAudioToTextRes);
+    //年龄识别
+    rpc RecognizeAge(RecognizeAgeReq) returns (RecognizeAgeRes);
 }
