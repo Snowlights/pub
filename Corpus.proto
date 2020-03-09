@@ -31,9 +31,9 @@ message LoginUserReq{
     string user_password = 2;
     string phone = 3;
     sint64 code = 4;
-    string cookie = 5;
 }
 message LoginUserData{
+    string cookie = 1;
 }
 message LoginUserRes{
     ErrorInfo errinfo = 1;
@@ -65,6 +65,17 @@ message DelUserInfoData{
 message DelUserInfoRes{
     ErrorInfo errinfo = 1;
     DelUserInfoData data = 2;
+}
+
+message LogoutUserInfoReq{
+    string cookie = 1;
+}
+message LogoutUserInfoData{
+    bool is_success = 1;
+}
+message LogoutUserInfoRes{
+    ErrorInfo errinfo = 1;
+    LogoutUserInfoData data = 2;
 }
 
 message ListUserInfoReq{
@@ -229,6 +240,7 @@ service CorpusService {
     //该行下的接口正式使用
     //用户相关
     rpc LoginUser(LoginUserReq) returns (LoginUserRes);
+    rpc LogoutUserInfo(LogoutUserInfoReq) returns (LogoutUserInfoRes);
     rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoRes);
     rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
