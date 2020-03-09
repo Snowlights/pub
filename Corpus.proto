@@ -78,6 +78,17 @@ message LogoutUserInfoRes{
     LogoutUserInfoData data = 2;
 }
 
+message SendMessageReq{
+    string phone = 1;
+}
+message SendMessageData{
+    string code = 1;
+}
+message SendMessageRes{
+    ErrorInfo errinfo = 1;
+    SendMessageData data = 2;
+}
+
 message ListUserInfoReq{
     sint64 offset = 1;
     sint64 limit = 2;
@@ -241,6 +252,7 @@ service CorpusService {
     //用户相关
     rpc LoginUser(LoginUserReq) returns (LoginUserRes);
     rpc LogoutUserInfo(LogoutUserInfoReq) returns (LogoutUserInfoRes);
+    rpc SendMessage(SendMessageReq) returns (SendMessageRes);
     rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoRes);
     rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
