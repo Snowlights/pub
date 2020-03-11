@@ -108,6 +108,123 @@ message ListUserInfoRes{
     ListUserInfoData data = 2;
 }
 
+message AddAdminUserReq{
+    sint64 user_id = 1;
+    string cookie = 2;
+}
+
+message AddAdminUserData{
+
+}
+
+message AddAdminUserRes{
+    ErrorInfo errinfo = 1;
+    AddAdminUserData data = 2;
+}
+
+message AuthInfo{
+    sint64 id = 1;
+    string auth_name = 2;
+    string auth_description = 3;
+    string service_name = 4;
+}
+
+message AddAuthReq{
+    string auth_code = 1;
+    string auth_description = 2;
+    string service_name = 3;
+    string cookie = 4;
+}
+message AddAuthData{
+}
+message AddAuthRes{
+    ErrorInfo errinfo = 1;
+    AddAuthData data = 2;
+}
+
+message UpdateAuthReq{
+    sint64 id = 1;
+    string auth_code = 2;
+    string auth_description = 3;
+    string service_name = 4;
+    string cookie = 5;
+}
+message UpdateAuthData{
+}
+message UpdateAuthRes{
+    ErrorInfo errinfo = 1;
+    UpdateAuthData data = 2;
+}
+
+message DelAuthReq{
+    sint64 id = 1;
+    string auth_code = 2;
+     string cookie = 3;
+}
+message DelAuthData{
+}
+message DelAuthRes{
+    ErrorInfo errinfo = 1;
+    DelAuthData data = 2;
+}
+
+message ListAuthReq{
+    sint64 offset = 1;
+    sint64 limit = 2;
+}
+message ListAuthData{
+    repeated AuthInfo items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
+}
+message ListAuthRes{
+    ErrorInfo errinfo = 1;
+    ListAuthData data = 2;
+}
+
+message AddUserAuthReq{
+    sint64 user_id = 1;
+    string auth_code = 2;
+    string cookie = 3;
+}
+message AddUserAuthData{
+}
+message AddUserAuthRes{
+    ErrorInfo errinfo = 1;
+    AddUserAuthData data = 2;
+}
+
+message DelUserAuthReq{
+    sint64 user_id = 1;
+    string auth_code = 2;
+    string cookie = 3;
+}
+message DelUserAuthData{
+}
+message DelUserAuthRes{
+    ErrorInfo errinfo = 1;
+    DelUserAuthData data = 2;
+}
+
+message ListUserAuthReq{
+    sint64 user_id = 1;
+    sint64 limit = 2;
+    sint64 offset = 3;
+    string cookie = 4;
+}
+message ListUserAuthData{
+    repeated AuthInfo items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
+}
+message ListUserAuthRes{
+    ErrorInfo errinfo = 1;
+    ListUserAuthData data = 2;
+}
+
+
 enum AudioType{
     audio_type = 0;
     Mp3 = 1;
@@ -256,6 +373,17 @@ service CorpusService {
     rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoRes);
     rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
+    //管理员
+    rpc AddAdminUser(AddAdminUserReq) returns (AddAdminUserReq);
+    //权限 服务相关
+    rpc AddAuth(AddAuthReq) returns (AddAuthRes);
+    rpc UpdateAuth(UpdateAuthReq) returns (UpdateAuthRes);
+    rpc DelAuth(DelAuthReq) returns (DelAuthRes);
+    rpc ListAuth(ListAuthReq) returns (ListAuthRes);
+
+    rpc AddUserAuth(AddUserAuthReq) returns (AddUserAuthRes);
+    rpc DelUserAuth(DelUserAuthReq) returns (DelUserAuthRes);
+    rpc ListUserAuth(ListUserAuthReq) returns (ListUserAuthRes);
     //转码
     rpc AddTransAudio(AddTransAudioReq) returns (AddTransAudioRes);
     rpc DelTransAudio(DelTransAudioReq) returns (DelTransAudioRes);
