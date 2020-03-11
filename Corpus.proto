@@ -122,6 +122,36 @@ message AddAdminUserRes{
     AddAdminUserData data = 2;
 }
 
+message DelAdminUserReq{
+    sint64 user_id = 1;
+    string cookie = 2;
+}
+message DelAdminUserData{
+
+}
+message DelAdminUserRes{
+    ErrorInfo errinfo = 1;
+    DelAdminUserData data = 2;
+}
+
+message ListAdminUserReq{
+    sint64 offset = 1;
+    sint64 limit = 2;
+    string cookie = 3;
+}
+
+message ListAdminUserData{
+    repeated UserInfo items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
+}
+message ListAdminUserRes{
+    ErrorInfo errinfo = 1;
+    ListAdminUserData data = 2;
+}
+
+
 message AuthInfo{
     sint64 id = 1;
     string auth_name = 2;
@@ -375,6 +405,8 @@ service CorpusService {
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
     //管理员
     rpc AddAdminUser(AddAdminUserReq) returns (AddAdminUserRes);
+    rpc DelAdminUser(DelAdminUserReq) returns (DelAdminUserRes);
+    rpc ListAdminUser(ListAdminUserReq) returns (ListAdminUserRes);
     //权限 服务相关
     rpc AddAuth(AddAuthReq) returns (AddAuthRes);
     rpc UpdateAuth(UpdateAuthReq) returns (UpdateAuthRes);
