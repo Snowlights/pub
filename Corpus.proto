@@ -374,7 +374,7 @@ service CorpusService {
     rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
     //管理员
-    rpc AddAdminUser(AddAdminUserReq) returns (AddAdminUserReq);
+    rpc AddAdminUser(AddAdminUserReq) returns (AddAdminUserRes);
     //权限 服务相关
     rpc AddAuth(AddAuthReq) returns (AddAuthRes);
     rpc UpdateAuth(UpdateAuthReq) returns (UpdateAuthRes);
