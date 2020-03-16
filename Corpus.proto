@@ -271,7 +271,7 @@ message Audio{
 
 message AddTransAudioReq{
     string origin_audio = 1;
-    string trans_audio = 2;
+    AudioType audio_type = 2;
     string cookie = 3;
 }
 message AddTransAudioData{
