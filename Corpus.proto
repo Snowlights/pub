@@ -43,8 +43,8 @@ message LoginUserRes{
 message UpdateUserInfoReq{
     sint64 user_id = 1;
     string user_name = 2;
-    string phone = 3; //更改电话
-    string e_mail = 4; //更改邮箱
+    string e_mail = 3; //更改邮箱
+    string password = 4;
     string description = 5;
     string cookie = 6;
 }
@@ -54,6 +54,19 @@ message UpdateUserInfoData{
 message UpdateUserInfoRes{
     ErrorInfo errinfo = 1;
     UpdateUserInfoData data = 2;
+}
+
+message UpdateUserPhoneReq{
+    string phone = 1;
+    string code = 2;
+    string cookie = 3;
+}
+message UpdateUserPhoneData{
+    string phone = 1;
+}
+message UpdateUserPhoneRes{
+    ErrorInfo errinfo = 1;
+    UpdateUserPhoneData data = 2;
 }
 
 message DelUserInfoReq{
@@ -403,6 +416,7 @@ service CorpusService {
     rpc UpdateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoRes);
     rpc DelUserInfo(DelUserInfoReq) returns (DelUserInfoRes);
     rpc ListUserInfo(ListUserInfoReq) returns (ListUserInfoRes);
+    rpc UpdateUserPhone(UpdateUserPhoneReq) returns (UpdateUserPhoneRes);
     //管理员
     rpc AddAdminUser(AddAdminUserReq) returns (AddAdminUserRes);
     rpc DelAdminUser(DelAdminUserReq) returns (DelAdminUserRes);
