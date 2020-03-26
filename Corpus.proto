@@ -24,6 +24,7 @@ message UserInfo{
     string user_name = 2;
     string phone = 3;
     string e_mail = 4;
+    string user_description = 5;
 }
 
 message LoginUserReq{
