@@ -583,7 +583,7 @@ func RecognizeImage(ctx context.Context,req *corpus.RecognizeImageReq)(res *corp
 	return
 }
 
-func TreansAudioToText(ctx context.Context,req *corpus.TransAudioToTextReq)(res *corpus.TransAudioToTextRes){
+func TransAudioToText(ctx context.Context,req *corpus.TransAudioToTextReq)(res *corpus.TransAudioToTextRes){
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.TransAudioToText(ctx,req)
@@ -613,6 +613,29 @@ func RecognizeAge(ctx context.Context,req *corpus.RecognizeAgeReq)(res *corpus.R
 	log.Printf("%v success %v",ctx,res)
 	if err != nil{
 		res = &corpus.RecognizeAgeRes{
+			Errinfo:              &corpus.ErrorInfo{
+				Ret:                  -1,
+				Msg:                  err.Error(),
+				XXX_NoUnkeyedLiteral: struct{}{},
+				XXX_unrecognized:     nil,
+				XXX_sizecache:        0,
+			},
+			Data:                 nil,
+			XXX_NoUnkeyedLiteral: struct{}{},
+			XXX_unrecognized:     nil,
+			XXX_sizecache:        0,
+		}
+	}
+	return
+}
+
+func ListImageByUserCookie(ctx context.Context,req *corpus.ListImageByUserCookieReq)(res *corpus.ListImageByUserCookieRes){
+	routeKey := getHashKey(ctx)
+	log.Printf("%v routekey ",routeKey)
+	res, err := client.ListImageByUserCookie(ctx,req)
+	log.Printf("%v success %v",ctx,res)
+	if err != nil{
+		res = &corpus.ListImageByUserCookieRes{
 			Errinfo:              &corpus.ErrorInfo{
 				Ret:                  -1,
 				Msg:                  err.Error(),

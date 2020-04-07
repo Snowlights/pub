@@ -406,6 +406,21 @@ message TransAudioToTextRes{
      TransAudioToTextData data = 2;
 }
 
+message ListImageByUserCookieReq{
+    string cookie = 1;
+    sint64 limit = 2;
+    sint64 offset = 3;
+}
+message ListImageByUserCookieData{
+    repeated string items = 1;
+    sint64 total = 2;
+    sint64 offset = 3;
+    bool more = 4 ;
+}
+message ListImageByUserCookieRes{
+     ErrorInfo errinfo = 1;
+     ListImageByUserCookieData data = 2;
+}
 
  //自己的服务名称首字母大写
 service CorpusService {
@@ -441,6 +456,7 @@ service CorpusService {
     rpc Evaluation(EvaluationReq) returns (EvaluationRes);
     //手写文字识别和语音转文本
     rpc RecognizeImage(RecognizeImageReq) returns (RecognizeImageRes);
+    rpc ListImageByUserCookie(ListImageByUserCookieReq) returns (ListImageByUserCookieRes);
     rpc TransAudioToText(TransAudioToTextReq) returns (TransAudioToTextRes);
     //年龄识别
     rpc RecognizeAge(RecognizeAgeReq) returns (RecognizeAgeRes);
