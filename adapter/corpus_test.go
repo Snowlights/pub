@@ -370,3 +370,18 @@ func TestGetKeyWord(t *testing.T) {
 		fmt.Printf("%v\n",res.Errinfo.Msg)
 	}
 }
+
+func TestListImageByUserCookie(t *testing.T) {
+	initLogic()
+	ctx := context.Background()
+	req := &corpus.ListImageByUserCookieReq{
+		Cookie:               "",
+		Limit:                0,
+		Offset:               0,
+	}
+	res := ListImageByUserCookie(ctx,req)
+	fmt.Printf("%v",res)
+	if res.Errinfo != nil{
+		fmt.Printf("%v\n",res.Errinfo.Msg)
+	}
+}

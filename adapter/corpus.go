@@ -10,9 +10,10 @@ import (
 )
 
 const (
-	address     = "localhost:50051"
+	address     = "120.26.176.181:50051"
 	defaultName = "corpus"
-)
+	)
+
 var client corpus.CorpusServiceClient
 
 func initLogic(){
@@ -48,6 +49,7 @@ func getHashKey(ctx context.Context) string {
 }
 
 func LoginUser(ctx context.Context,req *corpus.LoginUserReq) (res *corpus.LoginUserRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.LoginUser(ctx,req)
@@ -72,6 +74,7 @@ func LoginUser(ctx context.Context,req *corpus.LoginUserReq) (res *corpus.LoginU
 }
 
 func LogoutUserInfo(ctx context.Context,req *corpus.LogoutUserInfoReq) (res *corpus.LogoutUserInfoRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.LogoutUserInfo(ctx,req)
@@ -95,6 +98,7 @@ func LogoutUserInfo(ctx context.Context,req *corpus.LogoutUserInfoReq) (res *cor
 }
 
 func UpdateUserPhone(ctx context.Context,req *corpus.UpdateUserPhoneReq) (res *corpus.UpdateUserPhoneRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.UpdateUserPhone(ctx,req)
@@ -119,6 +123,7 @@ func UpdateUserPhone(ctx context.Context,req *corpus.UpdateUserPhoneReq) (res *c
 
 
 func SendMessage(ctx context.Context,req *corpus.SendMessageReq) (res *corpus.SendMessageRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.SendMessage(ctx,req)
@@ -142,6 +147,7 @@ func SendMessage(ctx context.Context,req *corpus.SendMessageReq) (res *corpus.Se
 }
 
 func UpdateUserInfo(ctx context.Context,req *corpus.UpdateUserInfoReq)(res *corpus.UpdateUserInfoRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.UpdateUserInfo(ctx,req)
@@ -165,6 +171,7 @@ func UpdateUserInfo(ctx context.Context,req *corpus.UpdateUserInfoReq)(res *corp
 }
 
 func DelUserInfo(ctx context.Context,req *corpus.DelUserInfoReq)(res *corpus.DelUserInfoRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.DelUserInfo(ctx,req)
@@ -188,6 +195,7 @@ func DelUserInfo(ctx context.Context,req *corpus.DelUserInfoReq)(res *corpus.Del
 }
 
 func ListUserInfo(ctx context.Context,req *corpus.ListUserInfoReq) (res *corpus.ListUserInfoRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 
@@ -213,6 +221,7 @@ func ListUserInfo(ctx context.Context,req *corpus.ListUserInfoReq) (res *corpus.
 }
 
 func AddAdminUser(ctx context.Context,req *corpus.AddAdminUserReq)(res *corpus.AddAdminUserRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.AddAdminUser(ctx,req)
@@ -236,6 +245,7 @@ func AddAdminUser(ctx context.Context,req *corpus.AddAdminUserReq)(res *corpus.A
 }
 
 func DelAdminUser(ctx context.Context,req *corpus.DelAdminUserReq)(res *corpus.DelAdminUserRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.DelAdminUser(ctx,req)
@@ -260,6 +270,7 @@ func DelAdminUser(ctx context.Context,req *corpus.DelAdminUserReq)(res *corpus.D
 }
 
 func ListAdminUser(ctx context.Context,req *corpus.ListAdminUserReq)(res *corpus.ListAdminUserRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.ListAdminUser(ctx,req)
@@ -283,6 +294,7 @@ func ListAdminUser(ctx context.Context,req *corpus.ListAdminUserReq)(res *corpus
 }
 
 func AddAuth(ctx context.Context,req *corpus.AddAuthReq)(res *corpus.AddAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.AddAuth(ctx,req)
@@ -306,6 +318,7 @@ func AddAuth(ctx context.Context,req *corpus.AddAuthReq)(res *corpus.AddAuthRes)
 }
 
 func UpdateAuth(ctx context.Context,req *corpus.UpdateAuthReq)(res *corpus.UpdateAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.UpdateAuth(ctx,req)
@@ -329,6 +342,7 @@ func UpdateAuth(ctx context.Context,req *corpus.UpdateAuthReq)(res *corpus.Updat
 }
 
 func DelAuth(ctx context.Context,req *corpus.DelAuthReq) (res *corpus.DelAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.DelAuth(ctx,req)
@@ -352,6 +366,7 @@ func DelAuth(ctx context.Context,req *corpus.DelAuthReq) (res *corpus.DelAuthRes
 }
 
 func ListAuth(ctx context.Context,req *corpus.ListAuthReq)(res *corpus.ListAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.ListAuth(ctx,req)
@@ -375,6 +390,7 @@ func ListAuth(ctx context.Context,req *corpus.ListAuthReq)(res *corpus.ListAuthR
 }
 
 func AddUserAuth(ctx context.Context,req *corpus.AddUserAuthReq) (res *corpus.AddUserAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.AddUserAuth(ctx,req)
@@ -398,6 +414,7 @@ func AddUserAuth(ctx context.Context,req *corpus.AddUserAuthReq) (res *corpus.Ad
 }
 
 func DelUserAuth(ctx context.Context,req *corpus.DelUserAuthReq)(res *corpus.DelUserAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.DelUserAuth(ctx,req)
@@ -421,6 +438,7 @@ func DelUserAuth(ctx context.Context,req *corpus.DelUserAuthReq)(res *corpus.Del
 }
 
 func ListUserAuth(ctx context.Context,req *corpus.ListUserAuthReq)(res *corpus.ListUserAuthRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.ListUserAuth(ctx,req)
@@ -444,6 +462,7 @@ func ListUserAuth(ctx context.Context,req *corpus.ListUserAuthReq)(res *corpus.L
 }
 
 func AddTransAudio(ctx context.Context,req *corpus.AddTransAudioReq)(res *corpus.AddTransAudioRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.AddTransAudio(ctx,req)
@@ -467,6 +486,7 @@ func AddTransAudio(ctx context.Context,req *corpus.AddTransAudioReq)(res *corpus
 }
 
 func DelTransAudio(ctx context.Context,req *corpus.DelTransAudioReq)(res *corpus.DelTransAudioRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.DelTransAudio(ctx,req)
@@ -490,6 +510,7 @@ func DelTransAudio(ctx context.Context,req *corpus.DelTransAudioReq)(res *corpus
 }
 
 func ListTransAudio(ctx context.Context,req *corpus.ListTransAudioReq)(res* corpus.ListTransAudioRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.ListTransAudio(ctx,req)
@@ -513,6 +534,7 @@ func ListTransAudio(ctx context.Context,req *corpus.ListTransAudioReq)(res* corp
 }
 
 func GetKeyWord(ctx context.Context,req *corpus.GetKeyWordReq)(res *corpus.GetKeyWordRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.GetKeyWord(ctx,req)
@@ -536,6 +558,7 @@ func GetKeyWord(ctx context.Context,req *corpus.GetKeyWordReq)(res *corpus.GetKe
 }
 
 func Evaluation(ctx context.Context,req *corpus.EvaluationReq)(res *corpus.EvaluationRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	conn := initConnect(ctx)
@@ -561,6 +584,7 @@ func Evaluation(ctx context.Context,req *corpus.EvaluationReq)(res *corpus.Evalu
 }
 
 func RecognizeImage(ctx context.Context,req *corpus.RecognizeImageReq)(res *corpus.RecognizeImageRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.RecognizeImage(ctx,req)
@@ -584,6 +608,7 @@ func RecognizeImage(ctx context.Context,req *corpus.RecognizeImageReq)(res *corp
 }
 
 func TransAudioToText(ctx context.Context,req *corpus.TransAudioToTextReq)(res *corpus.TransAudioToTextRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.TransAudioToText(ctx,req)
@@ -607,6 +632,7 @@ func TransAudioToText(ctx context.Context,req *corpus.TransAudioToTextReq)(res *
 }
 
 func RecognizeAge(ctx context.Context,req *corpus.RecognizeAgeReq)(res *corpus.RecognizeAgeRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.RecognizeAge(ctx,req)
@@ -630,6 +656,7 @@ func RecognizeAge(ctx context.Context,req *corpus.RecognizeAgeReq)(res *corpus.R
 }
 
 func ListImageByUserCookie(ctx context.Context,req *corpus.ListImageByUserCookieReq)(res *corpus.ListImageByUserCookieRes){
+	initLogic()
 	routeKey := getHashKey(ctx)
 	log.Printf("%v routekey ",routeKey)
 	res, err := client.ListImageByUserCookie(ctx,req)
